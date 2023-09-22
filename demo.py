@@ -1,14 +1,13 @@
 import psycopg2
 
 # Define the connection parameters
-db_params = {
-    'database': 'your_database_name',
-    'user': 'your_username',
-    'password': 'your_password',
-    'host': 'localhost',  # Replace with the IP or hostname of your Raspberry Pi
-    'port': '5432',       # Default PostgreSQL port
-}
-
+connection = psycopg2.connect(
+        host="172.24.0.2",
+        port="5432",
+        database="postgres",
+        user="postgres",
+        password="computer"
+        )
 # Establish a connection
 try:
     connection = psycopg2.connect(**db_params)
