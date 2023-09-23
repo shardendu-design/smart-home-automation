@@ -87,7 +87,7 @@ def awair_api_call():
     while True:
         List2 = []
         
-        Url = 'http://192.168.1.103/air-data/latest' # api url path
+        Url = 'http://192.168.0.102/air-data/latest' # api url path
         request1 = requests.request("GET", Url,timeout=30)
         
             

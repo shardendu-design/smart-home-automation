@@ -10,7 +10,7 @@ connection = psycopg2.connect(
         )
 # Establish a connection
 try:
-    connection = psycopg2.connect(**db_params)
+    connection = psycopg2.connect(postgres)
     cursor = connection.cursor()
 
     # Now you can execute SQL queries and store data in PostgreSQL
