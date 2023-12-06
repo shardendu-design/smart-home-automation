@@ -14,14 +14,19 @@ import os
 # to stop caffeinate press "Ctrl+C"
 # Created a function in which connection is established
 
+# host = os.environ.get('CONTAINER_IP')
+# port = os.environ.get('PORT')
+# database = os.environ.get('DATABASE')
+# user = os.environ.get('USER')
+# password = os.environ.get('PASSWORD')
 def awair_api_call():
 
     conn1 = psycopg2.connect(
-        host="172.24.0.2",
-        port="5432",
-        database="postgres",
-        user="postgres",
-        password="computer"
+        host='172.24.0.3',
+        port='5432',
+        database='postgres',
+        user='postgres',
+        password='computer'
         )
 
     # conn1 = psycopg2.connect("postgresql://postgres:computer@localhost/postgres")
@@ -38,11 +43,11 @@ def awair_api_call():
 
     try:
         conn = psycopg2.connect(
-        host="172.24.0.2",
-        port="5432",
-        database="awair",
-        user="postgres",
-        password="computer"
+        host='172.24.0.3',
+        port='5432',
+        database='postgres',
+        user='postgres',
+        password='computer'
         )
 
         # conn = psycopg2.connect("postgresql://postgres:computer@localhost/awair")
@@ -87,7 +92,7 @@ def awair_api_call():
     while True:
         List2 = []
         
-        Url = 'http://192.168.0.102/air-data/latest' # api url path
+        Url = 'http://192.168.0.104/air-data/latest' # api url path
         request1 = requests.request("GET", Url,timeout=30)
         
             
@@ -99,6 +104,7 @@ def awair_api_call():
         data1.update(add_new_col)
 
         List2.append(data1)
+        
         time.sleep(300)# call every 5 min
         
         

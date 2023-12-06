@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:latest
     environment:
-      POSTGRES_PASSWORD: computer
+      - POSTGRES_PASSWORD:computer
     volumes:
       - postgres_data:/var/lib/postgresql/data
     
