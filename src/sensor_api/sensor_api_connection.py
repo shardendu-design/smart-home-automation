@@ -32,7 +32,6 @@ def awair_api_call():
         password=password
         )
 
-    # conn1 = psycopg2.connect("postgresql://postgres:computer@localhost/postgres")
     conn1.autocommit=True
 
     cur1 = conn1.cursor()
