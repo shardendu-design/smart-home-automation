@@ -1,16 +1,3 @@
-import pyowm
-owm = pyowm.OWM('29139e44afaa3ce82a43eb2e2b06d033')
-weather_mgr = owm.weather_manager()
-place = 'Vantaa, FI'
-observation = weather_mgr.weather_at_place(place)
-temperature = observation.weather.temperature("celsius")["temp"]
-humidity = observation.weather.humidity
-wind = observation.weather.wind()
-print(f'Temperature: {temperature}°C')
-print(f'Humidity: {humidity}%')
-print(f'Wind Speed: {wind["speed"]} m/s')
-
-
 import requests
 
 # Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
@@ -31,7 +18,9 @@ if response.status_code == 200:
     data = response.json()
 
     # Print the full current weather data
-    print(data)
+    # print(data)
+    for item in data.items():
+        print(item)
 
 else:
     print(f"Error fetching weather data. Status code: {response.status_code}")

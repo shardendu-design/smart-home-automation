@@ -125,8 +125,7 @@ def awair_api_call():
         
         csv_file = os.environ.get('CSV_FILE')
         path = os.environ.get('CSV_PATH')
-        # csv_file = csv_file # "/media/shardendujha/backup1/Awair_Data/awair_data.csv"
-        # path = csv_path # "/media/shardendujha/backup1/Awair_Data/awair_data.csv"
+        
         
         if os.path.exists(path):
             with open(csv_file, "a+") as add_obj:
@@ -149,8 +148,7 @@ def awair_api_call():
         #save data as json file.
         json_file = os.environ.get('JSON_FILE')
         path = os.environ.get('JSON_PATH')
-        # json_file = json_file # "/media/shardendujha/backup1/Awair_Data/awair_data.json"
-        # path = json_path # "/media/shardendujha/backup1/Awair_Data/awair_data.json"
+        
         if os.path.exists(path):
             with open(json_file) as s_file:
                 existing_records = json.load(s_file)
@@ -169,6 +167,6 @@ def awair_api_call():
 
                 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    awair_api_call()
+#     awair_api_call()
