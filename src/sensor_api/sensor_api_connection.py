@@ -150,10 +150,11 @@ def awair_api_call():
         path = os.environ.get('JSON_PATH')
         
         if os.path.exists(path):
-            with open(json_file) as s_file:
-                existing_records = json.load(s_file)
-
-                    # all_records = existing_records
+            with open(json_file, 'r') as s_file:
+                try:
+                    existing_records = json.load(s_file)
+                except json.decoder.JSONDecodeError:
+                    existing_records = []
 
             for record in List2:
                 existing_records.append(record)
@@ -164,9 +165,10 @@ def awair_api_call():
         else:
             with open(json_file, "w") as f:
                 json.dump(List2, f, sort_keys=True, indent=4)
+        print(List2)
 
                 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 
-#     awair_api_call()
+    awair_api_call()
