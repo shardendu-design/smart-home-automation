@@ -14,10 +14,12 @@ def data_preprocessing():
            
             awair_csv_data = pd.read_csv("/media/shardendujha/backup1/Awair_Data/awair_data.csv")
             
+            
 
             selected_required_columns = awair_csv_data[['temp', 'humid', 'co2', 'voc', 'pm25']]
             selected_required_columns = selected_required_columns.dropna()
             selected_required_columns = selected_required_columns.drop_duplicates()
+            
             
             
             
@@ -41,6 +43,7 @@ def data_preprocessing():
                     selected_required_columns.to_csv(csv_file, header=True, index=False)
                 except ValueError:
                     print("I/O error")
+            
             time.sleep(300)
 
 

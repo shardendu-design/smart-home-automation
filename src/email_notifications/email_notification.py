@@ -7,7 +7,7 @@ import bcrypt
 def send_email_notification_turn_on():
 
             email_sender = 'appujha0@gmail.com'
-            email_password = 'Computer@520192' 
+            email_password = 'ffiopfdlubnbzkih'
 
             email_receiver = 'appujha0@gmail.com'
 
@@ -38,7 +38,7 @@ def send_email_notification_turn_on():
 def send_email_notification_turn_off():
 
     email_sender = 'appujha0@gmail.com'
-    email_password = 'Computer@520192' 
+    email_password = 'ffiopfdlubnbzkih' 
     email_receiver = 'appujha0@gmail.com'
 
     subject = 'Awair sensor notification'

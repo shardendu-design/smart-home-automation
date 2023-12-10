@@ -165,10 +165,10 @@ def awair_api_call():
         else:
             with open(json_file, "w") as f:
                 json.dump(List2, f, sort_keys=True, indent=4)
-        print(List2)
+        # print(List2)
 
                 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    awair_api_call()
+#     awair_api_call()
