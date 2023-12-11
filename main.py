@@ -1,5 +1,4 @@
 from src.sensor_api import sensor_api_connection
-# from src.sensor_api import sensor_api_connection
 from src.models import model_test_with_live_data
 from src.data_loader import data_loader
 import concurrent.futures
@@ -12,6 +11,8 @@ import os
 from src.air_cooler_integration import air_cooler
 import pandas as pd
 from src.WiFi_Socket import tapo_info
+from tabulate import tabulate
+import datetime
 
 host = os.environ.get('CONTAINER_IP')
 port = os.environ.get('PORT')
@@ -47,8 +48,15 @@ def model_execution_with_live_data():
         predicted_values = model_test_with_live_data.predicted_data
         
         
+        
         pred_temp_value = predicted_values[2]
         pred_temp_humid = predicted_values[5]
+        pred_temp_co2 = predicted_values[7]
+        
+        pred_temp_voc = predicted_values[9]
+        
+        pred_temp_pm25 = predicted_values[11]
+        
         
         pred_temp_value_only = []
         for k,temp in pred_temp_value.items():
@@ -59,9 +67,33 @@ def model_execution_with_live_data():
         for k,humid in pred_temp_humid.items():
             pred_humid_value_only.append(humid)
 
-        print(temp,humid)
-       
+        pred_co2_value_only = []
 
+        for k,co2 in pred_temp_co2.items():
+            pred_co2_value_only.append(co2)
+
+        pred_voc_value_only = []
+
+        for k,voc in pred_temp_voc.items():
+            pred_voc_value_only.append(voc)
+
+        pred_temp_pm25_value_only = []
+
+        for k,pm25 in pred_temp_pm25.items():
+            pred_temp_pm25_value_only.append(pm25)
+
+        
+
+        headers = ['Predicted_Temp','Predicted_Humid','Predicted_Co2','Predicted_Voc','Predicted_pm25']
+        data = list(zip(pred_temp_value_only, pred_humid_value_only,pred_co2_value_only,pred_voc_value_only,pred_temp_pm25_value_only))
+        
+        time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print("                                       Predicted Values:")
+        print("                                       Date and Time:", time_now)
+        print("*" * 245)
+        print(tabulate(data, headers, tablefmt='pretty'))
+
+        
         air_cooler.air_coller_integration(temp,humid)
         
           

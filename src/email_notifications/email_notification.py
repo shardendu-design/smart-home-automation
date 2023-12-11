@@ -13,13 +13,13 @@ def send_email_notification_turn_on():
 
             subject = 'Awair sensor notification'
             body = """
-            Subject: Awair sensor temperature notification!
+                    Subject: Awair sensor temperature notification!
 
-            Your room temperature has exceeded the threshold, and the air cooler has turned on successfully.
+                    Your room temperature has exceeded the threshold, and the air cooler has turned on successfully.
 
-            Regards,
-            Test Company,
-            Vantaa, Finland
+                    Regards,
+                    Test Company,
+                    Vantaa, Finland
             """
 
             em = EmailMessage()
@@ -43,13 +43,13 @@ def send_email_notification_turn_off():
 
     subject = 'Awair sensor notification'
     body = """
-    Subject: Awair sensor temperature notification!
+            Subject: Awair sensor temperature notification!
 
-    Your room temperature has exceeded the threshold, and the air cooler has turned off successfully.
+            Your room temperature has exceeded the threshold, and the air cooler has turned off successfully.
 
-    Regards,
-    Test Company,
-    Vantaa, Finland
+            Regards,
+            Test Company,
+            Vantaa, Finland
     """
 
     em = EmailMessage()
