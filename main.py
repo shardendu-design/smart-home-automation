@@ -6,13 +6,13 @@ import threading
 import time
 import psycopg2
 import csv
-import json
 import os
 from src.air_cooler_integration import air_cooler
 import pandas as pd
 from src.WiFi_Socket import tapo_info
 from tabulate import tabulate
 import datetime
+
 
 host = os.environ.get('CONTAINER_IP')
 port = os.environ.get('PORT')
@@ -34,7 +34,7 @@ def data_preprocess():
 
 def model_execution_with_live_data():
     while True:
-        
+
         model_test_with_live_data.temp_test_prediction()
         
         model_test_with_live_data.humid_test_prediction()
@@ -44,19 +44,13 @@ def model_execution_with_live_data():
         model_test_with_live_data.voc_test_prediction()
         
         model_test_with_live_data.pm25_test_prediction()
+        
+        
 
         predicted_values = model_test_with_live_data.predicted_data
         
-        
-        
         pred_temp_value = predicted_values[2]
         pred_temp_humid = predicted_values[5]
-        pred_temp_co2 = predicted_values[7]
-        
-        pred_temp_voc = predicted_values[9]
-        
-        pred_temp_pm25 = predicted_values[11]
-        
         
         pred_temp_value_only = []
         for k,temp in pred_temp_value.items():
@@ -67,31 +61,7 @@ def model_execution_with_live_data():
         for k,humid in pred_temp_humid.items():
             pred_humid_value_only.append(humid)
 
-        pred_co2_value_only = []
-
-        for k,co2 in pred_temp_co2.items():
-            pred_co2_value_only.append(co2)
-
-        pred_voc_value_only = []
-
-        for k,voc in pred_temp_voc.items():
-            pred_voc_value_only.append(voc)
-
-        pred_temp_pm25_value_only = []
-
-        for k,pm25 in pred_temp_pm25.items():
-            pred_temp_pm25_value_only.append(pm25)
-
-        
-
-        headers = ['Predicted_Temp','Predicted_Humid','Predicted_Co2','Predicted_Voc','Predicted_pm25']
-        data = list(zip(pred_temp_value_only, pred_humid_value_only,pred_co2_value_only,pred_voc_value_only,pred_temp_pm25_value_only))
-        
-        time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        print("                                       Predicted Values:")
-        print("                                       Date and Time:", time_now)
-        print("*" * 245)
-        print(tabulate(data, headers, tablefmt='pretty'))
+        print(temp,humid)
 
         
         air_cooler.air_coller_integration(temp,humid)
@@ -179,7 +149,7 @@ def model_execution_with_live_data():
 
         # save data as csv file
         
-        csv_file = "/media/shardendujha/backup1/predicted_data/prediceted_data.csv" 
+        csv_file = "data/predicted_data/prediceted_data.csv" 
         # Merge dictionaries into a single dictionary
         merged_data = {}
         for item in predicted_values:
@@ -202,7 +172,6 @@ def energy_consumption():
     
 if __name__ == '__main__':
     
-
     # Create a ThreadPoolExecutor to run the functions concurrently
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Submit both functions for execution
@@ -213,7 +182,7 @@ if __name__ == '__main__':
        
         
         # Wait for both functions to complete
-        concurrent.futures.wait([api_row_data,future_data,future_model,energy_data])
+        concurrent.futures.wait([future_model,energy_data,api_row_data,future_data])
        
 
     

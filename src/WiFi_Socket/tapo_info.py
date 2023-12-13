@@ -69,8 +69,8 @@ def energy_time_calculation():
         if switch_status == "on":
             start_on_timestamp = switch_timestamp
             start_times.append(start_on_timestamp)
-            csv_file = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
-            path = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
+            csv_file = "data/energy_cal_data/start_time_data.csv"
+            path = "data/energy_cal_data/start_time_data.csv"
             
 
             if os.path.exists(path):
@@ -96,8 +96,8 @@ def energy_time_calculation():
         elif switch_status == "off":
             start_of_timestamp = switch_timestamp
             end_times.append(start_of_timestamp)
-            csv_file = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
-            path = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
+            csv_file = "data/energy_cal_data/end_time_data.csv"
+            path = "data/energy_cal_data/end_time_data.csv"
            
 
             if os.path.exists(path):
@@ -125,8 +125,8 @@ def energy_time_calculation():
 
         
         
-        csv_file = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
-        path = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
+        csv_file = "data/energy_cal_data/end_time_data.csv"
+        path = "data/energy_cal_data/end_time_data.csv"
 
         merged_data = []
 
@@ -137,8 +137,8 @@ def energy_time_calculation():
                 for row in reader:
                     merged_data.append(row)
 
-        csv_file = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
-        path = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
+        csv_file = "data/energy_cal_data/start_time_data.csv"
+        path = "data/energy_cal_data/start_time_data.csv"
 
         if os.path.exists(path):
             with open(csv_file, 'r') as readfile:
@@ -187,8 +187,8 @@ def energy_time_calculation():
             column_name  = ["Start_time", "End_time", "Used_time_hrs", "Price_per_kwh_cents",
                             "Transfer_per_kwh", "Tax_per_kwh", "Total_cost_euro"]
             
-            csv_file = "/media/shardendujha/backup1/electricity_cost_analysis_data/cost_analysis_data.csv"
-            path = "/media/shardendujha/backup1/electricity_cost_analysis_data/cost_analysis_data.csv"
+            csv_file = "data/electricity_cost_analysis_data/cost_analysis_data.csv"
+            path = "data/electricity_cost_analysis_data/cost_analysis_data.csv"
 
             if os.path.exists(path):
                 with open(csv_file, 'a+') as addfile:

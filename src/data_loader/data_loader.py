@@ -12,7 +12,7 @@ def data_preprocessing():
             # Load the collected data into a DataFrame
             
            
-            awair_csv_data = pd.read_csv("/media/shardendujha/backup1/Awair_Data/awair_data.csv")
+            awair_csv_data = pd.read_csv("data/row_data/awair_data.csv")
             
             
 
@@ -24,7 +24,7 @@ def data_preprocessing():
             
             
 
-            csv_file = "/media/shardendujha/backup1/processed_data/processed_data.csv" 
+            csv_file = "data/processed_data/processed_data.csv" 
             if os.path.isfile(csv_file):
                 # Load the existing data to check for duplicates
                 existing_data = pd.read_csv(csv_file)

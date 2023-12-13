@@ -1,0 +1,2 @@
+DateTime,Temperature_Test_Score,Temperature_Predicted_Value,Humidity_Test_Score,Humidity_Predicted_Value,Co2_Test_Score,Co2_Predicted_Value,VOC_Test_Score,VOC_Predicted_Value,Pm25_Test_Score,Pm25_Predicted_Value
+2023-12-13 20:36:41,0.5110978415994267,21.86609576560211,0.500236350282045,38.27798683848006,1892.263396230404,680.4,16707.142305220008,200.89,270.2008151864596,12.08
