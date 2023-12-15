@@ -1,7 +1,6 @@
 from src.sensor_api import sensor_api_connection
 from src.models import model_test_with_live_data
 from src.data_loader import data_loader
-import concurrent.futures
 import threading
 import time
 import psycopg2
@@ -10,8 +9,8 @@ import os
 from src.air_cooler_integration import air_cooler
 import pandas as pd
 from src.WiFi_Socket import tapo_info
-from tabulate import tabulate
 import datetime
+
 
 
 host = os.environ.get('CONTAINER_IP')
@@ -19,6 +18,7 @@ port = os.environ.get('PORT')
 database = os.environ.get('DATABASE')
 user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
+
 
 
 def awair_row_data():
@@ -45,8 +45,6 @@ def model_execution_with_live_data():
         
         model_test_with_live_data.pm25_test_prediction()
         
-        
-
         predicted_values = model_test_with_live_data.predicted_data
         
         pred_temp_value = predicted_values[2]
@@ -60,13 +58,12 @@ def model_execution_with_live_data():
 
         for k,humid in pred_temp_humid.items():
             pred_humid_value_only.append(humid)
-
         print(temp,humid)
 
-        
+
         air_cooler.air_coller_integration(temp,humid)
+
         
-          
         conn1 = psycopg2.connect(
             host=host,
             port=port,
@@ -172,17 +169,26 @@ def energy_consumption():
     
 if __name__ == '__main__':
     
-    # Create a ThreadPoolExecutor to run the functions concurrently
+    import concurrent.futures
+    import warnings
+
+    def suppress_warnings():
+        warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn')
+
+    # Call suppress_warnings() before executing the functions that trigger the warnings
+    suppress_warnings()
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Submit both functions for execution
+        # current_weather = executor.submit(outside_weather_now)
         api_row_data = executor.submit(awair_row_data)
         future_data = executor.submit(data_preprocess)
         future_model = executor.submit(model_execution_with_live_data)
         energy_data = executor.submit(energy_consumption)
        
-        
         # Wait for both functions to complete
-        concurrent.futures.wait([future_model,energy_data,api_row_data,future_data])
+        concurrent.futures.wait([future_model, energy_data, api_row_data, future_data])
+        
        
 
     
