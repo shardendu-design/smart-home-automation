@@ -7,7 +7,7 @@ import pandas as pd
 
 def plot_temp_prediction():
      # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("data/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
     selected_required_columns = awair_csv_data
     # Split the data into input features (X) and target variable (y)
     X = selected_required_columns.drop('temp', axis=1)
@@ -40,7 +40,7 @@ def plot_temp_prediction():
 def plot_humid_prediction():
     
     # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("data/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
     selected_required_columns = awair_csv_data
 
     # Split the data into input features (X) and target variable (y)
@@ -75,7 +75,7 @@ def plot_humid_prediction():
 def plot_co2_prediction():
 
     # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("data/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
     selected_required_columns = awair_csv_data
     
     # Split the data into input features (X) and target variable (y)
@@ -110,7 +110,7 @@ def plot_co2_prediction():
 
 def plot_voc_prediction():
     # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("data/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
     selected_required_columns = awair_csv_data
 
     # Split the data into input features (X) and target variable (y)
@@ -144,7 +144,7 @@ def plot_voc_prediction():
 def plot_pm25_prediction():
 
     # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("data/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
     selected_required_columns = awair_csv_data
     
     # Split the data into input features (X) and target variable (y)

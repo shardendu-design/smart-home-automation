@@ -3,6 +3,13 @@ import requests
 import time
 import os
 import csv 
+import psycopg2
+
+host = os.environ.get('CONTAINER_IP')
+port = os.environ.get('PORT')
+database = os.environ.get('DATABASE')
+user = os.environ.get('USER')
+password = os.environ.get('PASS_WORD')
 
 def check_device_status(access_token, device_id):
     api_url = 'https://api.smartthings.com'
@@ -69,8 +76,8 @@ def energy_time_calculation():
         if switch_status == "on":
             start_on_timestamp = switch_timestamp
             start_times.append(start_on_timestamp)
-            csv_file = "data/energy_cal_data/start_time_data.csv"
-            path = "data/energy_cal_data/start_time_data.csv"
+            csv_file = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
+            path = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
             
 
             if os.path.exists(path):
@@ -91,13 +98,68 @@ def energy_time_calculation():
                             
                 except ValueError:
                     print("I/O error")
+            print(start_times)
+            conn1 = psycopg2.connect(
+                host=host,
+                port=port,
+                database=database,
+                user=user,
+                password=password
+                )
+
+            conn1.autocommit=True
+
+            cur1 = conn1.cursor()
+            cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
+            exists = cur1.fetchone()
+
+            if not exists:
+                cur1.execute("CREATE DATABASE awair")
+            
+            conn1.set_session(autocommit=True)
+
+            try:
+                conn = psycopg2.connect(
+                    host=host,
+                    port=port,
+                    database=database,
+                    user=user,
+                    password=password
+                )
+                
+
+            except psycopg2.Error as e:
+                print(e)
+            
+            try:
+                cur = conn.cursor()
+            except psycopg2.Error as e:
+                print("Error: Could not get the crusor to the database")
+                print(e)
+            
+            conn.set_session(autocommit=True)
+            
+
+            try:
+            
+                cur.execute("CREATE TABLE IF NOT EXISTS start_time_data(id BIGSERIAL PRIMARY KEY,start_time timestamp);")
+            except psycopg2.Error as e:
+                print("Error: Issue creating table")
+                print(e)
+
+                
+            for timestamp_value in start_times:
+                sql = "INSERT INTO start_time_data (start_time) VALUES (%s)"
+                cur.execute(sql, (timestamp_value,))
+
+
 
             
         elif switch_status == "off":
             start_of_timestamp = switch_timestamp
             end_times.append(start_of_timestamp)
-            csv_file = "data/energy_cal_data/end_time_data.csv"
-            path = "data/energy_cal_data/end_time_data.csv"
+            csv_file = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
+            path = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
            
 
             if os.path.exists(path):
@@ -125,8 +187,8 @@ def energy_time_calculation():
 
         
         
-        csv_file = "data/energy_cal_data/end_time_data.csv"
-        path = "data/energy_cal_data/end_time_data.csv"
+        csv_file = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
+        path = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
 
         merged_data = []
 
@@ -137,8 +199,8 @@ def energy_time_calculation():
                 for row in reader:
                     merged_data.append(row)
 
-        csv_file = "data/energy_cal_data/start_time_data.csv"
-        path = "data/energy_cal_data/start_time_data.csv"
+        csv_file = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
+        path = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
 
         if os.path.exists(path):
             with open(csv_file, 'r') as readfile:
@@ -187,8 +249,8 @@ def energy_time_calculation():
             column_name  = ["Start_time", "End_time", "Used_time_hrs", "Price_per_kwh_cents",
                             "Transfer_per_kwh", "Tax_per_kwh", "Total_cost_euro"]
             
-            csv_file = "data/electricity_cost_analysis_data/cost_analysis_data.csv"
-            path = "data/electricity_cost_analysis_data/cost_analysis_data.csv"
+            csv_file = "/media/shardendujha/backup1/electricity_cost_analysis_data/cost_analysis_data.csv"
+            path = "/media/shardendujha/backup1/electricity_cost_analysis_data/cost_analysis_data.csv"
 
             if os.path.exists(path):
                 with open(csv_file, 'a+') as addfile:
@@ -220,4 +282,4 @@ def energy_time_calculation():
         time.sleep(10)
         
 
-# energy_time_calculation()     
+energy_time_calculation()     
