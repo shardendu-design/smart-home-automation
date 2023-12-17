@@ -98,7 +98,7 @@ def energy_time_calculation():
                             
                 except ValueError:
                     print("I/O error")
-            print(start_times)
+            
             conn1 = psycopg2.connect(
                 host=host,
                 port=port,
@@ -184,6 +184,59 @@ def energy_time_calculation():
                     print("I/O error")
         else:
             print("Invalid timestamp")
+        
+        conn1 = psycopg2.connect(
+                    host=host,
+                    port=port,
+                    database=database,
+                    user=user,
+                    password=password
+                )
+
+        conn1.autocommit=True
+
+        cur1 = conn1.cursor()
+        cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
+        exists = cur1.fetchone()
+
+        if not exists:
+            cur1.execute("CREATE DATABASE awair")
+        
+        conn1.set_session(autocommit=True)
+
+        try:
+            conn = psycopg2.connect(
+                host=host,
+                port=port,
+                database=database,
+                user=user,
+                password=password
+            )
+            
+
+        except psycopg2.Error as e:
+            print(e)
+        
+        try:
+            cur = conn.cursor()
+        except psycopg2.Error as e:
+            print("Error: Could not get the crusor to the database")
+            print(e)
+        
+        conn.set_session(autocommit=True)
+        
+
+        try:
+        
+            cur.execute("CREATE TABLE IF NOT EXISTS end_time_data(id BIGSERIAL PRIMARY KEY,end_time timestamp);")
+        except psycopg2.Error as e:
+            print("Error: Issue creating table")
+            print(e)
+
+            
+        for timestamp_value in end_times:
+            sql = "INSERT INTO end_time_data (end_time) VALUES (%s)"
+            cur.execute(sql, (timestamp_value,))
 
         
         
