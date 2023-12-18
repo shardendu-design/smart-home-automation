@@ -98,7 +98,9 @@ def energy_time_calculation():
                             
                 except ValueError:
                     print("I/O error")
-            
+
+            print(start_times)
+
             conn1 = psycopg2.connect(
                 host=host,
                 port=port,
@@ -142,18 +144,20 @@ def energy_time_calculation():
 
             try:
             
-                cur.execute("CREATE TABLE IF NOT EXISTS start_time_data(id BIGSERIAL PRIMARY KEY,start_time timestamp);")
+                cur.execute("CREATE TABLE IF NOT EXISTS start_time_data(id BIGSERIAL PRIMARY KEY,start_time timestamp,\
+                        CONSTRAINT unique_start_time UNIQUE (start_time));")
             except psycopg2.Error as e:
                 print("Error: Issue creating table")
                 print(e)
 
                 
             for timestamp_value in start_times:
-                sql = "INSERT INTO start_time_data (start_time) VALUES (%s)"
+                sql = "INSERT INTO start_time_data(start_time) VALUES (%s) ON CONFLICT DO NOTHING;"
+
                 cur.execute(sql, (timestamp_value,))
 
 
-
+            
             
         elif switch_status == "off":
             start_of_timestamp = switch_timestamp
@@ -184,7 +188,7 @@ def energy_time_calculation():
                     print("I/O error")
         else:
             print("Invalid timestamp")
-        
+       
         conn1 = psycopg2.connect(
                     host=host,
                     port=port,
@@ -228,14 +232,15 @@ def energy_time_calculation():
 
         try:
         
-            cur.execute("CREATE TABLE IF NOT EXISTS end_time_data(id BIGSERIAL PRIMARY KEY,end_time timestamp);")
+            cur.execute("CREATE TABLE IF NOT EXISTS end_time_data(id BIGSERIAL PRIMARY KEY,end_time timestamp,\
+                        CONSTRAINT unique_end_time UNIQUE (end_time));")
         except psycopg2.Error as e:
             print("Error: Issue creating table")
             print(e)
 
             
         for timestamp_value in end_times:
-            sql = "INSERT INTO end_time_data (end_time) VALUES (%s)"
+            sql = "INSERT INTO end_time_data (end_time) VALUES (%s) ON CONFLICT DO NOTHING;"
             cur.execute(sql, (timestamp_value,))
 
         
