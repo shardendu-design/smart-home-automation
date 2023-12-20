@@ -99,7 +99,7 @@ def energy_time_calculation():
                 except ValueError:
                     print("I/O error")
 
-            print(start_times)
+            # print(start_times)
 
             conn1 = psycopg2.connect(
                 host=host,
@@ -334,10 +334,109 @@ def energy_time_calculation():
                     print("I/O error")
 
 
+            conn1 = psycopg2.connect(
+                    host=host,
+                    port=port,
+                    database=database,
+                    user=user,
+                    password=password
+                )
+
+            conn1.autocommit=True
+
+            cur1 = conn1.cursor()
+            cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
+            exists = cur1.fetchone()
+
+            if not exists:
+                cur1.execute("CREATE DATABASE awair")
+            
+            conn1.set_session(autocommit=True)
+
+            try:
+                conn = psycopg2.connect(
+                    host=host,
+                    port=port,
+                    database=database,
+                    user=user,
+                    password=password
+                )
+                
+
+            except psycopg2.Error as e:
+                print(e)
+            
+            try:
+                cur = conn.cursor()
+            except psycopg2.Error as e:
+                print("Error: Could not get the crusor to the database")
+                print(e)
+            
+            conn.set_session(autocommit=True)
+            
+
+            try:
+            
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS cost_analysis_data (
+                        id BIGSERIAL PRIMARY KEY,
+                        start_time TIMESTAMP,
+                        end_time TIMESTAMP,
+                        used_time_hrs NUMERIC,
+                        price_per_kwh_cents NUMERIC,
+                        transfer_per_kwh NUMERIC,
+                        tax_per_kwh NUMERIC,
+                        total_cost_euro NUMERIC,
+                        CONSTRAINT unique_cost_analysis_data UNIQUE (id)
+                    );
+                """)
+            except psycopg2.Error as e:
+                print("Error: Issue creating table")
+                print(e)
+
+               
+            
+            check_sql = """
+                SELECT COUNT(*) FROM cost_analysis_data
+                WHERE Start_time = %s AND End_time = %s
+            """
+
+            # Insert data into the PostgreSQL database
+            for data in electricity_cost_data:
+                # Check if data exists in the table
+                cur.execute(check_sql, (data['Start_time'], data['End_time']))
+                result = cur.fetchone()[0]
+                
+                # If data doesn't exist, insert it
+                if result == 0:
+                    sql = """
+                        INSERT INTO cost_analysis_data (
+                            Start_time, End_time, Used_time_hrs, Price_per_kwh_cents,
+                            Transfer_per_kwh, Tax_per_kwh, Total_cost_euro
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        ON CONFLICT DO NOTHING;
+                    """
+
+                    values = (
+                        data['Start_time'],
+                        data['End_time'],
+                        data['Used_time_hrs'],
+                        data['Price_per_kwh_cents'],
+                        data['Transfer_per_kwh'],
+                        data['Tax_per_kwh'],
+                        data['Total_cost_euro']
+                    )
+
+                    cur.execute(sql, values)
+
+                
+            
+
+
             # print(electricity_cost_data)
-            # print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
+                # print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
         
-        time.sleep(10)
+        time.sleep(300)
         
 
 energy_time_calculation()     
