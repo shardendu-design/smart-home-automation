@@ -1,6 +1,14 @@
 import json
 import requests
 import pandas as pd 
+import psycopg2
+import os
+
+host = os.environ.get('CONTAINER_IP')
+port = os.environ.get('PORT')
+database = os.environ.get('DATABASE')
+user = os.environ.get('USER')
+password = os.environ.get('PASS_WORD')
 
 api_url = 'https://api.smartthings.com'
 access_token = '6b887913-d689-4c1d-bb66-92a8734973c3'
@@ -148,6 +156,7 @@ def check_device_status(access_token, device_id):
 
     if response.status_code == 200:
         device_status = response.json()
+        
         return device_status
     else:
         print(f"Failed to get device status. Status code: {response.status_code}")
@@ -167,6 +176,69 @@ def is_air_cooler_power_on():
 
     # Accessing switch status value
     switch_status = status['components']['main']['switch']['switch']['value']
+    print(switch_status)
+
+    conn1 = psycopg2.connect(
+                host=host,
+                port=port,
+                database=database,
+                user=user,
+                password=password
+                )
+
+    conn1.autocommit=True
+
+    cur1 = conn1.cursor()
+    cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
+    exists = cur1.fetchone()
+
+    if not exists:
+        cur1.execute("CREATE DATABASE awair")
+    
+    conn1.set_session(autocommit=True)
+
+    try:
+        conn = psycopg2.connect(
+            host=host,
+            port=port,
+            database=database,
+            user=user,
+            password=password
+        )
+        
+
+    except psycopg2.Error as e:
+        print(e)
+    
+    try:
+        cur = conn.cursor()
+    except psycopg2.Error as e:
+        print("Error: Could not get the crusor to the database")
+        print(e)
+    
+    conn.set_session(autocommit=True)
+    
+
+    try:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS device_status (
+                id BIGSERIAL PRIMARY KEY,
+                status VARCHAR,
+                CONSTRAINT unique_device_status UNIQUE (status)
+            );
+        """)
+    except psycopg2.Error as e:
+        print("Error: Issue creating table")
+        print(e)
+
+    sql = "INSERT INTO device_status(status) VALUES (%s) ON CONFLICT DO NOTHING;"
+
+    try:
+        cur.execute(sql, (switch_status,))
+    except psycopg2.Error as e:
+        print("Error: Issue inserting data")
+        print(e)
+
 
     # Printing the switch status
     # print("Switch status:", switch_status)
@@ -175,7 +247,6 @@ def is_air_cooler_power_on():
         return True
     else:
         return False
-
-
-
+    
+    
 
