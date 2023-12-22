@@ -1,6 +1,18 @@
 import requests
 from tabulate import tabulate
 import time
+import os
+import csv
+import psycopg2
+import datetime
+
+host = os.environ.get('CONTAINER_IP')
+port = os.environ.get('PORT')
+database = os.environ.get('DATABASE')
+user = os.environ.get('USER')
+password = os.environ.get('PASS_WORD')
+url = os.environ.get('API_LINK')
+
 def outdoor_weather():
     while True:
 
@@ -22,6 +34,8 @@ def outdoor_weather():
             data = response.json()
 
             # Check if the required fields exist before accessing them
+            current_time = datetime.datetime.now()
+            formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
             weather_main = data['weather'][0].get('main', '-')
             main_temp = data['main'].get('temp', '-')
             main_feels_like = data['main'].get('feels_like', '-')
@@ -33,16 +47,124 @@ def outdoor_weather():
             city_name = data.get('name', '-')
             country_code = data['sys'].get('country', '-')
 
-            headers = ['Temperature', 'Feels like', 'Pressure', 'Humidity',
+            # print(data)
+        
+
+            headers = ['Timestamp','Temperature', 'Feels like', 'Pressure', 'Humidity',
                     'Visibility', 'Wind Speed', 'Snowfall', 'City Name', 'Country Code']
 
             zip_data = [
                 (
-                    main_temp, main_feels_like, main_pressure, main_humidity,
+                    formatted_time,main_temp, main_feels_like, main_pressure, main_humidity,
                     visibility, wind_speed, snowfall, city_name, country_code
                 )
             ]
+
+            weather_data = []
+            result_dict = dict(zip(headers, zip_data[0]))
+            weather_data.append(result_dict)
+            # print(weather_data)
             print('')
             print('                              Current Weather Outside')
             print(tabulate(zip_data, headers, tablefmt='pretty'))
-            time.sleep(300)
+
+            column = ['Timestamp','Temperature', 'Feels like', 'Pressure', 'Humidity',
+                    'Visibility', 'Wind Speed', 'Snowfall', 'City Name', 'Country Code']
+            csv_file = "/media/shardendujha/backup1/current_weather/current_weather.csv"
+            path = "/media/shardendujha/backup1/current_weather/current_weather.csv"
+
+            if os.path.exists(path):
+                with open(csv_file, "a+") as add_file:
+                    writer = csv.DictWriter(add_file, fieldnames=column)
+                    
+
+                    for data in weather_data:
+                        writer.writerow(data)
+
+            else:
+                try:
+                    with open(csv_file, "w") as write_file:
+                        writer = csv.DictWriter(write_file, fieldnames=column)
+                        writer.writeheader()
+
+                        for data in weather_data:
+                            writer.writerow(data)
+                except ValueError:
+                    print("I/O error")
+
+            conn1 = psycopg2.connect(
+                host = host,
+                port = port,
+                user = user,
+                database = database,
+                password = password
+            )
+            conn1.autocommit=True
+            cur1 = conn1.cursor()
+            cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
+            exists = cur1.fetchone()
+
+            if not exists:
+                cur1.execute("CREATE DATABASE awair")
+            conn1.set_session(autocommit=True)
+
+            try:
+                conn = psycopg2.connect(
+                    host=host,
+                    port=port,
+                    user=user,
+                    database=database,
+                    password=password
+                )
+
+            except psycopg2.Error as e:
+                print(e)
+
+            try:
+                cur =conn.cursor()
+            except psycopg2.Error as e:
+                print("Error: Could not get the crusor to the database")
+                print(e)
+
+            conn.set_session(autocommit=True)
+
+            try:
+                cur.execute("CREATE TABLE IF NOT EXISTS current_weather(id BIGSERIAL PRIMARY KEY, \
+                            Timestamp timestamp,Temperature NUMERIC,\
+                            Feelslike NUMERIC, Pressure NUMERIC, Humidity NUMERIC,\
+                            Visibility NUMERIC, WindSpeed NUMERIC,Snowfall NUMERIC, CityName VARCHAR,\
+                             CountryCode VARCHAR, CONSTRAINT unique_current_weather UNIQUE (Timestamp)) ")
+                
+            except psycopg2.Error as e:
+                print("Error: Issue creating table")
+                print(e)
+            
+            
+
+            sql = "INSERT INTO current_weather(Timestamp,Temperature, Feelslike, Pressure, Humidity, \
+                Visibility, WindSpeed,Snowfall,CityName,CountryCode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) \
+                ON CONFLICT DO NOTHING;"
+
+            try:
+                for data in weather_data:
+                    
+                    values = (
+                        data['Timestamp'],
+                        data['Temperature'],
+                        data['Feels like'],
+                        data['Pressure'],
+                        data['Humidity'],
+                        data['Visibility'],
+                        data['Wind Speed'],
+                        data['Snowfall'],
+                        data['City Name'],
+                        data['Country Code']
+                    )
+                    cur.execute(sql,values)
+
+            except psycopg2.Error as e:
+                print("Error: Issue inserting data")
+                print(e)
+
+            time.sleep(600)
+

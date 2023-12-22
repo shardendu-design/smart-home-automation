@@ -1,14 +1,15 @@
 from src.sensor_api import sensor_api_connection
 from src.models import model_test_with_live_data
 from src.data_loader import data_loader
+from src.air_cooler_integration import air_cooler
+from src.WiFi_Socket import tapo_info
+from src.current_weather_outdoor import current_weather_outside
 import threading
 import time
 import psycopg2
 import csv
 import os
-from src.air_cooler_integration import air_cooler
 import pandas as pd
-from src.WiFi_Socket import tapo_info
 import datetime
 
 
@@ -19,7 +20,9 @@ database = os.environ.get('DATABASE')
 user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
 
-
+def outside_weather_now():
+    while True:
+        current_weather_outside.outdoor_weather()
 
 def awair_row_data():
     while True:
@@ -146,7 +149,7 @@ def model_execution_with_live_data():
 
         # save data as csv file
         
-        csv_file = "data/predicted_data/prediceted_data.csv" 
+        csv_file = "/media/shardendujha/backup1/predicted_data/prediceted_data.csv" 
         # Merge dictionaries into a single dictionary
         merged_data = {}
         for item in predicted_values:
@@ -180,7 +183,7 @@ if __name__ == '__main__':
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Submit both functions for execution
-        # current_weather = executor.submit(outside_weather_now)
+        current_weather = executor.submit(outside_weather_now)
         api_row_data = executor.submit(awair_row_data)
         future_data = executor.submit(data_preprocess)
         future_model = executor.submit(model_execution_with_live_data)

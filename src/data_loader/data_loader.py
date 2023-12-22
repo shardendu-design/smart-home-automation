@@ -13,7 +13,7 @@ def data_preprocessing():
             # Load the collected data into a DataFrame
             
            
-            awair_csv_data = pd.read_csv("/media/shardendujha/backup1/awair_data.csv")
+            awair_csv_data = pd.read_csv("/media/shardendujha/backup1/Awair_Data/awair_data.csv")
             
             
 
