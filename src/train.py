@@ -3,12 +3,14 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import RandomForestRegressor
+import os
 
+load_processed_data_model = os.environ.get("load_processed_data")
 
 def temp_pred_model():
             
             # Load the collected data into a DataFrame
-            awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
+            awair_csv_data = pd.read_csv(load_processed_data_model)
             selected_required_columns = awair_csv_data
             # Split the data into input features (X) and target variable (y)
             X = selected_required_columns.drop('temp', axis=1)
@@ -40,7 +42,7 @@ def temp_pred_model():
 def humid_pred_model():
 
             # Load the collected data into a DataFrame
-            awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
+            awair_csv_data = pd.read_csv(load_processed_data_model)
             selected_required_columns = awair_csv_data
 
             # Split the data into input features (X) and target variable (y)
@@ -73,7 +75,7 @@ def humid_pred_model():
 def co2_pred_model():
 
     # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv(load_processed_data_model)
     selected_required_columns = awair_csv_data
     
     # Split the data into input features (X) and target variable (y)
@@ -105,7 +107,7 @@ def co2_pred_model():
 
 def voc_pred_model():
     # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv(load_processed_data_model)
     selected_required_columns = awair_csv_data
 
     # Split the data into input features (X) and target variable (y)
@@ -136,7 +138,7 @@ def voc_pred_model():
 
 def pm25_pred_model():
     # Load the collected data into a DataFrame
-    awair_csv_data = pd.read_csv("/media/shardendujha/backup1/processed_data/processed_data.csv")
+    awair_csv_data = pd.read_csv(load_processed_data_model)
     selected_required_columns = awair_csv_data
     
     # Split the data into input features (X) and target variable (y)

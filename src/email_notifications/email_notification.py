@@ -4,12 +4,15 @@ from email.message import EmailMessage # for email notification
 import ssl # for security
 import bcrypt
 
+email_notification = os.environ.get('email')
+email_notification_password = os.environ.get('email_password')
+
 def send_email_notification_turn_on():
 
-            email_sender = 'appujha0@gmail.com'
-            email_password = 'ffiopfdlubnbzkih'
+            email_sender = email_notification
+            email_password = email_notification_password
 
-            email_receiver = 'appujha0@gmail.com'
+            email_receiver = email_notification
 
             subject = 'Awair sensor notification'
             body = """
@@ -37,9 +40,9 @@ def send_email_notification_turn_on():
 
 def send_email_notification_turn_off():
 
-    email_sender = 'appujha0@gmail.com'
-    email_password = 'ffiopfdlubnbzkih' 
-    email_receiver = 'appujha0@gmail.com'
+    email_sender = email_notification
+    email_password = email_notification_password 
+    email_receiver = email_notification
 
     subject = 'Awair sensor notification'
     body = """

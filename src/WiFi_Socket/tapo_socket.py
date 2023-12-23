@@ -10,11 +10,16 @@ database = os.environ.get('DATABASE')
 user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
 
-api_url = 'https://api.smartthings.com'
-access_token = '6b887913-d689-4c1d-bb66-92a8734973c3'
+smartthings_url = os.environ.get('smart_things_url')
+accesstoken_smarttings = os.environ.get('access_token_smartthings')
+deviceendpoint_smartthings = os.environ.get('device_endpoint_smartthings')
+deviceid = os.environ.get('device_id')
+
+api_url = smartthings_url
+access_token = accesstoken_smarttings
 
 # Example endpoint to get devices
-devices_endpoint = '/v1/devices'
+devices_endpoint = deviceendpoint_smartthings
 
 headers = {
     'Authorization': f'Bearer {access_token}',
@@ -76,12 +81,12 @@ else:
 
 def air_cooler_power_turn_on():
 
-    api_url = 'https://api.smartthings.com'
-    access_token = '6b887913-d689-4c1d-bb66-92a8734973c3'
+    api_url = smartthings_url
+    access_token = accesstoken_smarttings
 
     # Example endpoint to control a device (replace with the actual device ID)
-    device_id = 'ffc95bcc-c1b0-49ff-9a8f-bdbfd919dedc'
-    control_endpoint = f'/v1/devices/{device_id}/commands'
+    device_id = deviceid
+    control_endpoint = f'deviceendpoint_smartthings/{device_id}/commands'
 
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -111,12 +116,12 @@ def air_cooler_power_turn_on():
 
 def air_cooler_power_turn_off():
 
-    api_url = 'https://api.smartthings.com'
-    access_token = '6b887913-d689-4c1d-bb66-92a8734973c3'
+    api_url = smartthings_url
+    access_token = accesstoken_smarttings
 
     # Example endpoint to control a device (replace with the actual device ID)
-    device_id = 'ffc95bcc-c1b0-49ff-9a8f-bdbfd919dedc'
-    control_endpoint = f'/v1/devices/{device_id}/commands'
+    device_id = deviceid
+    control_endpoint = f'deviceendpoint_smartthings/{device_id}/commands'
 
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -143,8 +148,8 @@ def air_cooler_power_turn_off():
         print(f"Failed to turn off the device. Status code: {response.status_code}")
 
 def check_device_status(access_token, device_id):
-    api_url = 'https://api.smartthings.com'
-    status_endpoint = f'/v1/devices/{device_id}/status'
+    api_url = smartthings_url
+    status_endpoint = f'deviceendpoint_smartthings/{device_id}/status'
 
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -166,8 +171,8 @@ def check_device_status(access_token, device_id):
 def is_air_cooler_power_on():
 
     # Usage: Call the function with your access token and device ID to check the status
-    access_token = '6b887913-d689-4c1d-bb66-92a8734973c3'
-    device_id = 'ffc95bcc-c1b0-49ff-9a8f-bdbfd919dedc'
+    access_token = accesstoken_smarttings
+    device_id = deviceid
 
     status = check_device_status(access_token, device_id)
     if status is not None:

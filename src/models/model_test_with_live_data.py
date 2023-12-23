@@ -9,14 +9,16 @@ import requests
 import csv
 import numpy as np
 from sklearn.impute import SimpleImputer
+import os
 
+url = os.environ.get('API_LINK')
 
 predicted_data = []
 
 def live_sensor_data():
 
     sensor_data = []
-    Url = 'http://192.168.0.104/air-data/latest' # api url path
+    Url = url # api url path
     request = requests.request("GET", Url)
     data = request.json()
     add_new_col = {'location':'Janonhanta1,Vantaa,Finland'}

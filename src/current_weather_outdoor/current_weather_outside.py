@@ -13,11 +13,14 @@ user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
 url = os.environ.get('API_LINK')
 
+weather_apikey = os.environ.get('weather_api_key')
+weathercsv_data = os.environ.get('weather_csv_data')
+
 def outdoor_weather():
     while True:
 
         # Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
-        api_key = '29139e44afaa3ce82a43eb2e2b06d033'
+        api_key = weather_apikey
 
         # Replace 'New York' with the desired location for weather data
         location = 'Vantaa'
@@ -70,8 +73,8 @@ def outdoor_weather():
 
             column = ['Timestamp','Temperature', 'Feels like', 'Pressure', 'Humidity',
                     'Visibility', 'Wind Speed', 'Snowfall', 'City Name', 'Country Code']
-            csv_file = "/media/shardendujha/backup1/current_weather/current_weather.csv"
-            path = "/media/shardendujha/backup1/current_weather/current_weather.csv"
+            csv_file = weathercsv_data
+            path = weathercsv_data
 
             if os.path.exists(path):
                 with open(csv_file, "a+") as add_file:

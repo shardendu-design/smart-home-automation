@@ -11,9 +11,17 @@ database = os.environ.get('DATABASE')
 user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
 
+smartthings_url = os.environ.get('smart_things_url')
+deviceendpoint_smartthings = os.environ.get('device_endpoint_smartthings')
+accesstoken_smarttings = os.environ.get('access_token_smartthings')
+deviceid = os.environ.get('device_id')
+energy_cal_starttime = os.environ.get('energy_cal_start_time')
+energy_cal_endtime = os.environ.get('energy_cal_end_time')
+electricity_cal_cost = os.environ.get('electricity_cost')
+
 def check_device_status(access_token, device_id):
-    api_url = 'https://api.smartthings.com'
-    status_endpoint = f'/v1/devices/{device_id}/status'
+    api_url = smartthings_url
+    status_endpoint = f'deviceendpoint_smartthings/{device_id}/status'
 
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -54,8 +62,8 @@ def energy_time_calculation():
 
 
         # Usage: Call the function with your access token and device ID to check the status
-        access_token = '6b887913-d689-4c1d-bb66-92a8734973c3'
-        device_id = 'ffc95bcc-c1b0-49ff-9a8f-bdbfd919dedc'
+        access_token = accesstoken_smarttings
+        device_id = deviceid
 
         status = check_device_status(access_token, device_id)
         if status is not None:
@@ -76,8 +84,8 @@ def energy_time_calculation():
         if switch_status == "on":
             start_on_timestamp = switch_timestamp
             start_times.append(start_on_timestamp)
-            csv_file = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
-            path = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
+            csv_file = energy_cal_starttime
+            path = energy_cal_starttime
             
 
             if os.path.exists(path):
@@ -162,8 +170,8 @@ def energy_time_calculation():
         elif switch_status == "off":
             start_of_timestamp = switch_timestamp
             end_times.append(start_of_timestamp)
-            csv_file = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
-            path = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
+            csv_file = energy_cal_endtime
+            path = energy_cal_endtime
            
 
             if os.path.exists(path):
@@ -245,8 +253,8 @@ def energy_time_calculation():
 
         
         
-        csv_file = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
-        path = "/media/shardendujha/backup1/energy_cal_data/end_time_data.csv"
+        csv_file = energy_cal_endtime
+        path = energy_cal_endtime
 
         merged_data = []
 
@@ -257,8 +265,8 @@ def energy_time_calculation():
                 for row in reader:
                     merged_data.append(row)
 
-        csv_file = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
-        path = "/media/shardendujha/backup1/energy_cal_data/start_time_data.csv"
+        csv_file = energy_cal_starttime
+        path = energy_cal_starttime
 
         if os.path.exists(path):
             with open(csv_file, 'r') as readfile:
@@ -307,8 +315,8 @@ def energy_time_calculation():
             column_name  = ["Start_time", "End_time", "Used_time_hrs", "Price_per_kwh_cents",
                             "Transfer_per_kwh", "Tax_per_kwh", "Total_cost_euro"]
             
-            csv_file = "/media/shardendujha/backup1/electricity_cost_analysis_data/cost_analysis_data.csv"
-            path = "/media/shardendujha/backup1/electricity_cost_analysis_data/cost_analysis_data.csv"
+            csv_file = electricity_cal_cost
+            path = electricity_cal_cost
 
             if os.path.exists(path):
                 with open(csv_file, 'a+') as addfile:

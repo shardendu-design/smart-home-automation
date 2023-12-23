@@ -11,7 +11,7 @@ import csv
 import os
 import pandas as pd
 import datetime
-
+from tabulate import tabulate
 
 
 host = os.environ.get('CONTAINER_IP')
@@ -19,6 +19,8 @@ port = os.environ.get('PORT')
 database = os.environ.get('DATABASE')
 user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
+
+predicted_csv = os.environ.get('predicted_data')
 
 def outside_weather_now():
     while True:
@@ -52,6 +54,9 @@ def model_execution_with_live_data():
         
         pred_temp_value = predicted_values[2]
         pred_temp_humid = predicted_values[5]
+        pred_temp_co2 = predicted_values[8]
+        pred_temp_voc = predicted_values[11]
+        predicted_temp_pm25 = predicted_values[14]
         
         pred_temp_value_only = []
         for k,temp in pred_temp_value.items():
@@ -61,7 +66,27 @@ def model_execution_with_live_data():
 
         for k,humid in pred_temp_humid.items():
             pred_humid_value_only.append(humid)
-        print(temp,humid)
+
+        pred_co2_value_only = []
+
+        for k,co2 in pred_temp_co2.items():
+            pred_co2_value_only.append(co2)
+        
+        pred_voc_value_only = []
+        for k,voc in pred_temp_voc.items():
+            pred_voc_value_only.append(voc)
+
+        pred_pm25_value_only = []
+
+        for k,pm25 in predicted_temp_pm25.items():
+            pred_pm25_value_only.append(pm25)
+
+        headers = ['Predicted Temperature','Predicted Himidity','Predicted Co2','Predicted Voc','Predicted Pm25']
+        zipped_values = list(zip(pred_temp_value_only,pred_humid_value_only,pred_co2_value_only,pred_voc_value_only,pred_pm25_value_only))
+        print('')
+        print('                                     Predicted Parameters')
+        print(tabulate(zipped_values , headers=headers, tablefmt='pretty'))
+        # print(temp,humid)
 
 
         air_cooler.air_coller_integration(temp,humid)
@@ -149,7 +174,7 @@ def model_execution_with_live_data():
 
         # save data as csv file
         
-        csv_file = "/media/shardendujha/backup1/predicted_data/prediceted_data.csv" 
+        csv_file = predicted_csv 
         # Merge dictionaries into a single dictionary
         merged_data = {}
         for item in predicted_values:
@@ -164,7 +189,7 @@ def model_execution_with_live_data():
         
         
         
-        time.sleep(300)
+        time.sleep(600)
                 
 def energy_consumption():
     while True:

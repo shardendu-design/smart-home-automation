@@ -6,6 +6,8 @@ import csv
 import time
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
+row_data = os.environ.get('CSV_FILE')
+processed_data = os.environ.get('load_processed_data')
 
 def data_preprocessing():
         while True:
@@ -13,7 +15,7 @@ def data_preprocessing():
             # Load the collected data into a DataFrame
             
            
-            awair_csv_data = pd.read_csv("/media/shardendujha/backup1/Awair_Data/awair_data.csv")
+            awair_csv_data = pd.read_csv(row_data)
             
             
 
@@ -25,7 +27,7 @@ def data_preprocessing():
             
             
 
-            csv_file = "/media/shardendujha/backup1/processed_data/processed_data.csv" 
+            csv_file = processed_data 
             if os.path.isfile(csv_file):
                 # Load the existing data to check for duplicates
                 existing_data = pd.read_csv(csv_file)
