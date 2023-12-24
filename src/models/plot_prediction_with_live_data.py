@@ -178,4 +178,3 @@ def plot_pm25_prediction():
     # Display the plot
     plt.show()
 
-plot_pm25_prediction()

@@ -150,7 +150,12 @@ def outdoor_weather():
 
             try:
                 for data in weather_data:
-                    
+                    snowfall = data['Snowfall']
+                    # Check if snowfall is numeric or '-' (non-numeric)
+                    if snowfall.replace('.', '', 1).isdigit():  # Assuming snowfall can be a float
+                        snowfall_value = float(snowfall)
+                    else:
+                        snowfall_value = None  # Replace non-numeric with None or any default value
                     values = (
                         data['Timestamp'],
                         data['Temperature'],
@@ -159,15 +164,16 @@ def outdoor_weather():
                         data['Humidity'],
                         data['Visibility'],
                         data['Wind Speed'],
-                        data['Snowfall'],
+                        snowfall_value,  # Use the checked and processed snowfall value
                         data['City Name'],
                         data['Country Code']
                     )
-                    cur.execute(sql,values)
+                    cur.execute(sql, values)
 
             except psycopg2.Error as e:
                 print("Error: Issue inserting data")
                 print(e)
+                
 
             time.sleep(600)
 

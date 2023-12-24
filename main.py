@@ -51,6 +51,7 @@ def model_execution_with_live_data():
         model_test_with_live_data.pm25_test_prediction()
         
         predicted_values = model_test_with_live_data.predicted_data
+
         
         pred_temp_value = predicted_values[2]
         pred_temp_humid = predicted_values[5]
@@ -60,12 +61,12 @@ def model_execution_with_live_data():
         
         pred_temp_value_only = []
         for k,temp in pred_temp_value.items():
-            pred_temp_value_only.append(temp)
+            pred_temp_value_only.append(round(temp, 2))
 
         pred_humid_value_only = []
 
         for k,humid in pred_temp_humid.items():
-            pred_humid_value_only.append(humid)
+            pred_humid_value_only.append(round(humid, 2))
 
         pred_co2_value_only = []
 
@@ -81,12 +82,12 @@ def model_execution_with_live_data():
         for k,pm25 in predicted_temp_pm25.items():
             pred_pm25_value_only.append(pm25)
 
-        headers = ['Predicted Temperature','Predicted Himidity','Predicted Co2','Predicted Voc','Predicted Pm25']
+        headers = ['Predicted Temperature','Predicted Humidity','Predicted Co2','Predicted Voc','Predicted Pm25']
         zipped_values = list(zip(pred_temp_value_only,pred_humid_value_only,pred_co2_value_only,pred_voc_value_only,pred_pm25_value_only))
         print('')
         print('                                     Predicted Parameters')
         print(tabulate(zipped_values , headers=headers, tablefmt='pretty'))
-        # print(temp,humid)
+        # # print(temp,humid)
 
 
         air_cooler.air_coller_integration(temp,humid)

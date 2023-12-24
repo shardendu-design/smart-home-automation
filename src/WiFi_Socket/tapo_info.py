@@ -12,7 +12,7 @@ user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
 
 smartthings_url = os.environ.get('smart_things_url')
-deviceendpoint_smartthings = os.environ.get('device_endpoint_smartthings')
+# deviceendpoint_smartthings = os.environ.get('device_endpoint_smartthings')
 accesstoken_smarttings = os.environ.get('access_token_smartthings')
 deviceid = os.environ.get('device_id')
 energy_cal_starttime = os.environ.get('energy_cal_start_time')
@@ -21,7 +21,7 @@ electricity_cal_cost = os.environ.get('electricity_cost')
 
 def check_device_status(access_token, device_id):
     api_url = smartthings_url
-    status_endpoint = f'deviceendpoint_smartthings/{device_id}/status'
+    status_endpoint = f'/v1/devices/{device_id}/status'
 
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -447,4 +447,4 @@ def energy_time_calculation():
         time.sleep(300)
         
 
-   
+# energy_time_calculation()

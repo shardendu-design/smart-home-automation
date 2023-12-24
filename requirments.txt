@@ -1,0 +1,8 @@
+pandas
+numpy
+psycopg2-binary
+secure-smtplib
+ssl
+smtplib
+-U scikit-learn
+-U matplotlib
