@@ -1,0 +1,43 @@
+body {
+    
+    /* background-color: #e5e5f7;
+    opacity: 0.8;
+    background-image: radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+    background-size: 10px 10px; */
+    background-image: url('http://isaacsuttell.com/img/justine.jpg');
+    /* background: url("https://res.cloudinary.com/finnhvman/image/upload/v1541930411/pattern.png"); */
+}
+	.login-form {
+		width: 340px;
+    	margin: 50px auto;
+        position: relative;
+        top: 120px;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    h1 {
+        text-align: center;
+    }
+    p {
+        text-align: center;
+    }
+    h2 {
+        text-align: center;
+    }
+  

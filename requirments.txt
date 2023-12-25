@@ -4,5 +4,6 @@ psycopg2-binary
 secure-smtplib
 ssl
 smtplib
+seaborn
 -U scikit-learn
 -U matplotlib

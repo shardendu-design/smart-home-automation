@@ -1,0 +1,36 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Drill & Practice</h1>
+
+<p class="my-custom-alert custom-frame">This application offers a 
+topic list and enables the creation of multiple-choice questions 
+within these topics. These questions are answered by both users 
+themselves and others. Moreover, the application displays fundamental 
+statistics, including the total count of available questions and answered 
+questions. Additionally, it provides an API for retrieving and answering random questions.</p>
+
+<p alert alert-info custom-frame>If new user, register with <a href="/auth/register">register</a>. Already users, start <a href="/auth/login">log in</a>
+
+<h1>Sensor Data</h1>
+<ul>
+  <% it.awairRow.forEach((row) => { %>
+    <li>
+      <ul>
+        <% for (const key in row) { %>
+          <li><strong><%= key %>:</strong> <%= row[key] %></li>
+        <% } %>
+      </ul>
+    </li>
+  <% }); %>
+</ul>
+
+
+<div class="container center-content">
+    <h2>statistics</h2>
+    <ul class="list-group">
+        <li class="list-group-item">Topics: <%= it.topics %></li>
+        <li class="list-group-item">Questions: <%= it.questions %></li>
+        <li class="list-group-item">Answers: <%= it.answers %></li>
+    </ul>
+</div>
+
