@@ -62,3 +62,34 @@ Here's a brief overview of how this structure can be used in a machine learning 
     * Document your project, explaining its purpose, how to set it up, and how to use it.
 * 		Main Script (main.py):
     * This script serves as the entry point of your project and can be used to kick off your machine learning pipeline or other project-specific tasks.
+
+
+project_directory/
+├── ...
+└── flask_app/
+    ├── static/
+    │   └── ...
+    ├── templates/
+    │   └── ...
+    ├── database/
+    │   ├── __init__.py       # Database connection initialization
+    │   └── db_operations.py  # Database operations, queries, etc.
+    ├── __init__.py           # Flask app initialization
+    ├── routes.py             # Route definitions
+    └── config.py             # Configuration settings
+Database Initialization (database/__init__.py):
+
+Set up your database connection here. This could involve importing necessary modules (like SQLAlchemy or any other database toolkit you're using) and establishing the connection within a function.
+Database Operations (database/db_operations.py):
+
+Define functions or classes responsible for performing database operations. This file can handle queries, inserts, updates, or any other interactions with your database.
+Flask App Initialization (__init__.py):
+
+Within this file, import the database connection initialization from the database/__init__.py file.
+Initialize your Flask app here and make the database connection available throughout the app's context.
+Routes and Views (routes.py):
+
+Define your routes and views within this file, utilizing the database operations defined in database/db_operations.py as needed.
+Configuration Settings (config.py):
+
+Store any relevant configuration settings, such as database credentials or other application settings, in this file.
