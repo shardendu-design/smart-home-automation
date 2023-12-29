@@ -1,0 +1,15 @@
+h2 {
+    text-align: center;
+}
+#edit_header {
+    color: rgb(7, 7, 7);
+}
+#delete_header {
+    color: rgb(10, 10, 10);
+}
+.thead-light  {
+    background-color: white;
+}
+body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  }
