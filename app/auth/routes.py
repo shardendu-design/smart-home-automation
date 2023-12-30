@@ -1,12 +1,12 @@
 # import all necessary libraries
 
-# from app.ToDo.routes import display_dashboard
+from app.BookAccounts.routes import display_dashboard
 from flask import render_template, redirect,request, flash, redirect, url_for
 from wtforms.widgets.core import CheckboxInput
-from fullstack_flask.auth.forms import RegistrationForm
-from fullstack_flask.auth.forms import UserloginForm
-from fullstack_flask.auth import authentication as at
-from fullstack_flask.auth.models import User
+from app.auth.forms import RegistrationForm
+from app.auth.forms import UserloginForm
+from app.auth import authentication as at
+from app.auth.models import User
 from flask_login import login_user,logout_user, login_required, current_user
 
 
@@ -46,7 +46,7 @@ def do_the_login():
             return redirect(url_for('authentication.do_the_login'))
 
         login_user(user, form.remember_me.data)
-        return redirect(url_for('main.create_todo'))
+        return redirect(url_for('main.display_dashboard'))
     return render_template('login.html', form=form)
 
 # route lagout page

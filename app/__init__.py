@@ -32,10 +32,10 @@ def create_app(config_type):  # dev, test, or prod
 
 # import app and register blueprint
 
-    # from app.ToDo import main
-    # app.register_blueprint(main)
+    from app.BookAccounts import main
+    app.register_blueprint(main)
 
-    from fullstack_flask.auth import authentication
+    from app.auth import authentication
     app.register_blueprint(authentication)
 
 

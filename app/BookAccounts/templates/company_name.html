@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+
+    {% block content %}
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"> -->
+
+        <div id="" class="container-fluid">
+          <br>
+
+            <h2 class="company_name_heading">COMPANY DETAILS</h2>
+          <br>
+            
+            <div class="table table-bordered">
+              
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">START DATE</th>
+                    <th scope="col">END DATE</th>
+                    <th scope="col">TYPE</th>
+                    <th scope="col">ADDRESS</th>
+                    <th scope="col">PHONE</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">URL</th>
+                    <th id="edit_header" scope="col">EDIT</th>
+                    <th id="delete_header" scope="col">DELETE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <!-- {% for company in company_names %} -->
+                       <tr>
+                         <td>{{company.id}}</td>
+                         <td>{{company.company_name}}</td>
+                         <td>{{company.start}}</td>
+                         <td>{{company.end}}</td>
+                         <td>{{company.company_type}}</td>
+                         <td>{{company.company_address}}</td>
+                         <td>{{company.company_phone}}</td>
+                         <td>{{company.company_email}}</td>
+                         <td>{{company.company_url}}</td>
+                         
+                         <td>
+                           <button class="btn btn-sm btn-primary" id="idDeleteButton">
+                            <a href="{{ url_for('main.edit_company',company_id=company.id) }}" style="color: rgb(237, 245, 239)">EDIT</a>
+                            <!-- <span class="label label-primary"><a href="{{ url_for('main.edit_company',company_id=company.id) }}" style="color: rgb(47, 209, 88)"> EDIT </a></span> -->
+
+                           </button>
+                          <!-- <span class="label label-primary"><a href="{{ url_for('main.edit_company',company_id=company.id) }}" style="color: rgb(47, 209, 88)"> edit </a></span> -->
+                          
+                         </td>
+                         
+                         <td>
+                      
+                           <button class="btn btn-sm btn-danger" id="idCancelButton">
+                            <a href="{{ url_for('main.delete_company', company_id=company.id) }}" style="color: rgb(243, 239, 239)">DELETE</a>
+                          
+                          </button>
+                          </td>
+                       </tr>
+                    <!-- {% endfor %} -->
+               </tbody>
+            
+              </table>
+            
+            </div>
+            
+            
+            </div>
+        
+      
+{% endblock %}

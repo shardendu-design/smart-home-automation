@@ -6,11 +6,7 @@ database = os.environ.get('DATABASE')
 user = os.environ.get('USER')
 password = os.environ.get('PASS_WORD')
 
-# host = os.environ.get('HOST') 
-# port = os.environ.get('PORT') 
-# database = os.environ.get('DATABASE') 
-# user = os.environ.get('USER') 
-# password = os.environ.get('PASSWORD') 
+
 
 DEBUG = True
 SECRET_KEY = password

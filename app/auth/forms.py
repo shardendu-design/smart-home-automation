@@ -1,4 +1,4 @@
-from fullstack_flask.auth.models import User
+from app.auth.models import User
 from flask_wtf import FlaskForm
 # from flask_wtf.recaptcha import validators
 from wtforms import StringField, SubmitField, PasswordField, BooleanField

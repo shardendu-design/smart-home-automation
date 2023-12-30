@@ -1,5 +1,5 @@
-from fullstack_flask.auth.models import User
-from fullstack_flask import create_app, db
+from app.auth.models import User
+from app import create_app, db
 
 if __name__ == '__main__':
     flask_app = create_app('dev')

@@ -2,8 +2,8 @@
 
 from datetime import datetime
 from operator import index
-from fullstack_flask import db, bcrypt   # app/__init__.py
-from fullstack_flask import login_manager
+from app import db, bcrypt   # app/__init__.py
+from app import login_manager
 from flask_login import UserMixin
 
 # create user database model using usermix
