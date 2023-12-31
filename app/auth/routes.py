@@ -1,6 +1,6 @@
 # import all necessary libraries
 
-from app.BookAccounts.routes import display_dashboard
+from app.Indoor_air_quality.routes import display_dashboard
 from flask import render_template, redirect,request, flash, redirect, url_for
 from wtforms.widgets.core import CheckboxInput
 from app.auth.forms import RegistrationForm

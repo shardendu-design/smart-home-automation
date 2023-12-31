@@ -25,7 +25,9 @@ predicted_csv = os.environ.get('predicted_data')
 def outside_weather_now():
     while True:
         current_weather_outside.outdoor_weather()
+        time.sleep(600)
 
+    
 def awair_row_data():
     while True:
 

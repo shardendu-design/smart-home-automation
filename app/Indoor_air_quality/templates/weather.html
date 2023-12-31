@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+
+    {% block content %}
+    <h1>Weather Data</h1>
+
+    <table id="weather-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Temperature</th>
+                <th>Feels like</th>
+                <th>Pressure</th>
+                <th>Humidity</th>
+                <th>Visibility</th>
+                <th>Wind Speed</th>
+                <th>Snowfall</th>
+                <th>City Name</th>
+                <th>Country Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in weather_data %}
+                <tr>
+                    <td>{{ data['Timestamp'] }}</td>
+                    <td>{{ data['Temperature'] }}</td>
+                    <td>{{ data['Feels like'] }}</td>
+                    <td>{{ data['Pressure'] }}</td>
+                    <td>{{ data['Humidity'] }}</td>
+                    <td>{{ data['Visibility'] }}</td>
+                    <td>{{ data['Wind Speed'] }}</td>
+                    <td>{{ data['Snowfall'] }}</td>
+                    <td>{{ data['City Name'] }}</td>
+                    <td>{{ data['Country Code'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

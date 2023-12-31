@@ -32,7 +32,7 @@ def create_app(config_type):  # dev, test, or prod
 
 # import app and register blueprint
 
-    from app.BookAccounts import main
+    from app.Indoor_air_quality import main
     app.register_blueprint(main)
 
     from app.auth import authentication

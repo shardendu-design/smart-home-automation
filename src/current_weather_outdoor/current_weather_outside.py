@@ -17,6 +17,7 @@ weather_apikey = os.environ.get('weather_api_key')
 weathercsv_data = os.environ.get('weather_csv_data')
 
 def outdoor_weather():
+    # weather_data = []
     while True:
 
         # Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
@@ -66,10 +67,11 @@ def outdoor_weather():
             weather_data = []
             result_dict = dict(zip(headers, zip_data[0]))
             weather_data.append(result_dict)
+           
             # print(weather_data)
-            print('')
-            print('                              Current Weather Outside')
-            print(tabulate(zip_data, headers, tablefmt='pretty'))
+            # print('')
+            # print('                              Current Weather Outside')
+            # print(tabulate(zip_data, headers, tablefmt='pretty'))
 
             column = ['Timestamp','Temperature', 'Feels like', 'Pressure', 'Humidity',
                     'Visibility', 'Wind Speed', 'Snowfall', 'City Name', 'Country Code']
@@ -174,6 +176,12 @@ def outdoor_weather():
                 print("Error: Issue inserting data")
                 print(e)
                 
+            
+            
+            return weather_data
+        
+     
 
-            time.sleep(600)
-
+   
+           
+        
