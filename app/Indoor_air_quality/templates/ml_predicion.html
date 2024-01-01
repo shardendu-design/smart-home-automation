@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+
+    {% block content %}
+    <h1>Predicted Values</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date Time</th>
+                <th>Temperature Predicted Value</th>
+                <th>Humidity Predicted Value</th>
+                <th>CO2 Predicted Value</th> 
+                <th>VOC Predicted Value</th>
+                <th>PM25 Predicted Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in predicted_value %}
+            <tr>
+                <td>{{ data['DateTime'] }}</td> 
+                <td>{{ data['Temperature_Predicted_Value'] }}</td> 
+                <td>{{ data['Humidity_Predicted_Value'] }}</td> 
+                <td>{{ data['Co2_Predicted_Value'] }}</td>
+                <td>{{ data['VOC_Predicted_Value'] }}</td>
+                <td>{{ data['Pm25_Predicted_Value'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

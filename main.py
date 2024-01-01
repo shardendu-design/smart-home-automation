@@ -14,6 +14,7 @@ import datetime
 from tabulate import tabulate
 
 
+
 host = os.environ.get('CONTAINER_IP')
 port = os.environ.get('PORT')
 database = os.environ.get('DATABASE')
@@ -32,6 +33,7 @@ def awair_row_data():
     while True:
 
         sensor_api_connection.awair_api_call()
+        time.sleep(600)
         
 
 def data_preprocess():
@@ -86,9 +88,10 @@ def model_execution_with_live_data():
 
         headers = ['Predicted Temperature','Predicted Humidity','Predicted Co2','Predicted Voc','Predicted Pm25']
         zipped_values = list(zip(pred_temp_value_only,pred_humid_value_only,pred_co2_value_only,pred_voc_value_only,pred_pm25_value_only))
-        print('')
-        print('                                     Predicted Parameters')
-        print(tabulate(zipped_values , headers=headers, tablefmt='pretty'))
+        
+        # print('')
+        # print('                                     Predicted Parameters')
+        # print(tabulate(zipped_values , headers=headers, tablefmt='pretty'))
         # # print(temp,humid)
 
 
@@ -190,13 +193,15 @@ def model_execution_with_live_data():
                 writer.writeheader()
             writer.writerow(merged_data)
         
-        
-        
         time.sleep(600)
+        return zipped_values
+        
                 
 def energy_consumption():
     while True:
         tapo_info.energy_time_calculation()
+
+
     
 if __name__ == '__main__':
     
@@ -215,6 +220,7 @@ if __name__ == '__main__':
         api_row_data = executor.submit(awair_row_data)
         future_data = executor.submit(data_preprocess)
         future_model = executor.submit(model_execution_with_live_data)
+       
         energy_data = executor.submit(energy_consumption)
        
         # Wait for both functions to complete

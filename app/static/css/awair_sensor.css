@@ -1,0 +1,24 @@
+
+/* Table Styles */
+#iaq-table {
+    border-collapse: collapse;
+    width: 89%; /* Adjust the width as needed */
+    margin: 20px auto; /* Centers the table */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    margin-right: 5px;
+  }
+  
+  #iaq-table th,
+  #iaq-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  #iaq-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  
+  

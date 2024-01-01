@@ -108,17 +108,18 @@ def awair_api_call():
         data1.update(add_new_col)
 
         List2.append(data1)
+        
 
         headers = ['timestamp','score','temp','humid','co2', \
                    'voc','pm25','pm10_est','location']
         table_data = []
         for row in List2:
             table_data.append([row.get(key, '') for key in headers])
-        print('')
-        print('                                     Live Sensor Parameters')
-        print(tabulate(table_data, headers=headers, tablefmt='pretty'))
+        # print('')
+        # print('                                     Live Sensor Parameters')
+        # print(tabulate(table_data, headers=headers, tablefmt='pretty'))
         
-        time.sleep(300)# call every 5 min
+        # time.sleep(300)# call every 5 min
         
         
         values = [v for k, v in List2[0].items()]
@@ -176,10 +177,13 @@ def awair_api_call():
             with open(json_file, "w") as f:
                 json.dump(List2, f, sort_keys=True, indent=4)
         
-
-   
+        return List2
+        
+# time.sleep(300)# call every 5 min
+        
                 
 
 # if __name__ == '__main__':
 
 #     awair_api_call()
+

@@ -1,15 +1,17 @@
 import time
 from src.current_weather_outdoor import current_weather_outside
-# Your outdoor_weather function remains unchanged
+from src.sensor_api import sensor_api_connection
+from src.models import model_test_with_live_data
+from shared_values import future_model
 
-# Function to fetch weather data and display it
-def fetch_and_display_weather():
-    weather_data =  current_weather_outside.outdoor_weather()
-    print(weather_data)  # For debugging or verification purposes
+# Now you can use future_model as needed
+
+
+
+def display_prediction():
+      
+      predicted_values = future_model
+      print(predicted_values)  # For debugging or verification purposes
     
-    # Insert code here to display or use the weather_data fetched
 
-# To test and display data, call the function in a loop
-while True:
-    fetch_and_display_weather()
-    time.sleep(600)  # Wait for 10 minutes before fetching data again
+display_prediction()
