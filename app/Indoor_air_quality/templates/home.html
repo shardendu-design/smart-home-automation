@@ -2,6 +2,105 @@
 
 
     {% block content %}
-    
-    
+    <h1>Weather Data</h1>
+
+    <table id="weather-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Temperature</th>
+                <th>Feels like</th>
+                <th>Pressure</th>
+                <th>Humidity</th>
+                <th>Visibility</th>
+                <th>Wind Speed</th>
+                <th>Snowfall</th>
+                <th>City Name</th>
+                <th>Country Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in weather_data %}
+                <tr>
+                    <td>{{ data['Timestamp'] }}</td>
+                    <td>{{ data['Temperature'] }}</td>
+                    <td>{{ data['Feels like'] }}</td>
+                    <td>{{ data['Pressure'] }}</td>
+                    <td>{{ data['Humidity'] }}</td>
+                    <td>{{ data['Visibility'] }}</td>
+                    <td>{{ data['Wind Speed'] }}</td>
+                    <td>{{ data['Snowfall'] }}</td>
+                    <td>{{ data['City Name'] }}</td>
+                    <td>{{ data['Country Code'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Indoor Air Quality Data</h1>
+
+<table id="iaq-table">
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Score</th>
+            <th>Dew Point</th>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>Absolute Humidity</th>
+            <th>CO2</th>
+            <th>CO2 Estimate</th>
+            <th>CO2 Estimate Baseline</th>
+            <th>VOC</th>
+            <th>VOC Baseline</th>
+            <th>VOC H2 Raw</th>
+            <th>VOC Ethanol Raw</th>
+            <th>PM2.5</th>
+            <th>PM10 Estimate</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in sensor_data %}
+        <tr>
+            <td>{{ data['timestamp'] }}</td>
+            <td>{{ data['score'] }}</td>
+            <td>{{ data['dew_point'] }}</td>
+            <td>{{ data['temp'] }}</td>
+            <td>{{ data['humid'] }}</td>
+            <td>{{ data['abs_humid'] }}</td>
+            <td>{{ data['co2'] }}</td>
+            <td>{{ data['co2_est'] }}</td>
+            <td>{{ data['co2_est_baseline'] }}</td>
+            <td>{{ data['voc'] }}</td>
+            <td>{{ data['voc_baseline'] }}</td>
+            <td>{{ data['voc_h2_raw'] }}</td>
+            <td>{{ data['voc_ethanol_raw'] }}</td>
+            <td>{{ data['pm25'] }}</td>
+            <td>{{ data['pm10_est'] }}</td>
+            <td>{{ data['location'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h1>Recent Row</h1>
+    <table id=prediction border="1">
+        <tr>
+            {% for header in headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for value in recent_row %}
+                {% if loop.index in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %}
+                    {% if value|float is defined %}
+                        <td>{{ '%.2f'|format(value|float) }}</td>
+                    {% else %}
+                        <td>{{ value }}</td>
+                    {% endif %}
+                {% else %}
+                    <td>{{ value }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
 {% endblock %}

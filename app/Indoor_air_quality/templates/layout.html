@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Sansita&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/awair_sensor.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/awair_sensor.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prediction.css') }}"> -->
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/msgBox.css') }}"> -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -72,9 +73,9 @@
             <div class="sidebar">
                 <a class="active" href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 <!-- <a href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-industry"></i> Company Name </a> -->
-                <a href="{{ url_for('main.weather_display')}}"><i class="fa fa-fw fa-graduation-cap"></i> Vantaa Weather</a>
-                <a href="{{ url_for('main.awair_sensor_data')}}"><i class="fa fa-fw fa-shopping-cart"></i> Home Air Quality</a>
-                <a href="{{ url_for('main.display_prediction')}}"><i class="fa fa-fw fa-product-hunt"></i> ML Prediction</a>
+                <a href=""><i class="fa fa-fw fa-graduation-cap"></i> Vantaa Weather</a>
+                <a href=""><i class="fa fa-fw fa-shopping-cart"></i> Home Air Quality</a>
+                <a href=""><i class="fa fa-fw fa-product-hunt"></i> ML Prediction</a>
             </div>
             {% endblock sidebar %}
             

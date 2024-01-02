@@ -2,52 +2,7 @@
 
 
     {% block content %}
-    <h1>Indoor Air Quality Data</h1>
-
-<table id="iaq-table">
-    <thead>
-        <tr>
-            <th>Timestamp</th>
-            <th>Score</th>
-            <th>Dew Point</th>
-            <th>Temperature</th>
-            <th>Humidity</th>
-            <th>Absolute Humidity</th>
-            <th>CO2</th>
-            <th>CO2 Estimate</th>
-            <th>CO2 Estimate Baseline</th>
-            <th>VOC</th>
-            <th>VOC Baseline</th>
-            <th>VOC H2 Raw</th>
-            <th>VOC Ethanol Raw</th>
-            <th>PM2.5</th>
-            <th>PM10 Estimate</th>
-            <th>Location</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for data in sensor_data %}
-        <tr>
-            <td>{{ data['timestamp'] }}</td>
-            <td>{{ data['score'] }}</td>
-            <td>{{ data['dew_point'] }}</td>
-            <td>{{ data['temp'] }}</td>
-            <td>{{ data['humid'] }}</td>
-            <td>{{ data['abs_humid'] }}</td>
-            <td>{{ data['co2'] }}</td>
-            <td>{{ data['co2_est'] }}</td>
-            <td>{{ data['co2_est_baseline'] }}</td>
-            <td>{{ data['voc'] }}</td>
-            <td>{{ data['voc_baseline'] }}</td>
-            <td>{{ data['voc_h2_raw'] }}</td>
-            <td>{{ data['voc_ethanol_raw'] }}</td>
-            <td>{{ data['pm25'] }}</td>
-            <td>{{ data['pm10_est'] }}</td>
-            <td>{{ data['location'] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    
 
     
 {% endblock %}

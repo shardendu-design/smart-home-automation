@@ -194,7 +194,7 @@ def model_execution_with_live_data():
             writer.writerow(merged_data)
         
         time.sleep(600)
-        return zipped_values
+        
         
                 
 def energy_consumption():
@@ -225,6 +225,7 @@ if __name__ == '__main__':
        
         # Wait for both functions to complete
         concurrent.futures.wait([future_model, energy_data, api_row_data, future_data])
+        
         
        
 
