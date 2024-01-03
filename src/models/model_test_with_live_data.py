@@ -60,12 +60,12 @@ def temp_test_prediction():
 
     # Load temperature prediction model
     model_temp, score = temp_pred_model()
-    predicted_data.append({"Temperature_Test_Score": score})
+    predicted_data.append({"Tempe_Test_S": score})
 
     # Make predictions
     prediction_temperature = model_temp.predict(selected_real_time_data_imputed)
     extracted_value = prediction_temperature[0]
-    predicted_data.append({"Temperature_Predicted_Value": extracted_value})
+    predicted_data.append({"Temp_Pred": extracted_value})
 
     return extracted_value
 
@@ -97,12 +97,12 @@ def humid_test_prediction():
 
     # Load humidity prediction model
     model_humid, score = humid_pred_model()
-    predicted_data.append({"Humidity_Test_Score": score})
+    predicted_data.append({"Humid_Test_S": score})
 
     # Make predictions
     prediction_humid = model_humid.predict(selected_real_time_data_humid_imputed)
     extracted_value = prediction_humid[0]
-    predicted_data.append({"Humidity_Predicted_Value": extracted_value})
+    predicted_data.append({"Humid_Pred": extracted_value})
 
     return extracted_value
 
@@ -134,12 +134,12 @@ def co2_test_prediction():
 
     # Load CO2 prediction model
     model_co2, mse = co2_pred_model()
-    predicted_data.append({"Co2_Test_Score": mse})
+    predicted_data.append({"Co2_Test_S": mse})
 
     # Make predictions
     prediction_co2 = model_co2.predict(selected_real_time_data_co2_imputed)
     extracted_value = prediction_co2[0]
-    predicted_data.append({"Co2_Predicted_Value": extracted_value})
+    predicted_data.append({"Co2_Pred": extracted_value})
 
     return extracted_value
 
@@ -167,7 +167,7 @@ def voc_test_prediction():
 
     # Load VOC prediction model
     model_voc, mse = voc_pred_model()
-    predicted_data.append({"VOC_Test_Score": mse})
+    predicted_data.append({"VOC_Test_S": mse})
 
     # Convert DataFrame to NumPy array after setting column names
     selected_real_time_data_voc_array = selected_real_time_data_voc.to_numpy()
@@ -175,7 +175,7 @@ def voc_test_prediction():
     # Make predictions using array without feature names
     prediction_voc = model_voc.predict(selected_real_time_data_voc_array)
     extracted_value = prediction_voc[0]
-    predicted_data.append({"VOC_Predicted_Value": extracted_value})
+    predicted_data.append({"VOC_Pred": extracted_value})
 
     return extracted_value
 
@@ -207,12 +207,12 @@ def pm25_test_prediction():
 
     # Load PM2.5 prediction model
     model_pm25, mse = pm25_pred_model()
-    predicted_data.append({"Pm25_Test_Score": mse})
+    predicted_data.append({"Pm25_Test_S": mse})
 
     # Make predictions
     prediction_pm25 = model_pm25.predict(selected_real_time_data_pm25_imputed)
     extracted_value = prediction_pm25[0]
-    predicted_data.append({"Pm25_Predicted_Value": extracted_value})
+    predicted_data.append({"Pm25_Pred": extracted_value})
 
     return extracted_value
 

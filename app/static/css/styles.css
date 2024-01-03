@@ -106,21 +106,29 @@ footer {
   }
 }
 
-/* styles.css */
-
-/* Style the table */
 #prediction {
   border-collapse: collapse;
-  width: auto; /* Set the table width to 80% of its container */
+  width: 100%;
   margin: 20px auto;
-  
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
 }
 
 /* Set the border and padding for table cells */
-#prediction th, td {
+#prediction th, #prediction td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0px;
+  white-space: nowrap; /* Prevent text wrapping in cells */
+  text-align: center; /* Center-align content */
 }
+
+/* Specify widths for each column */
+#prediction th:nth-child(1),
+#prediction td:nth-child(1) {
+  width: 10%; /* Adjust width for the first column */
+}
+
+/* Adjust widths for other columns as needed */
+/* Add similar styles for all columns */
 
 /* Alternate row colors */
 #prediction tr:nth-child(even) {
@@ -131,20 +139,25 @@ footer {
 #prediction th {
   background-color: #333;
   color: white;
+  
 }
 
 /* Style the table */
 #iaq-table {
   border-collapse: collapse;
-  width: 70%; /* Set the table width to 80% of its container */
+  width: 70%;
   margin: 20px auto;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  margin-right: 3px;
   
 }
 
 /* Set the border and padding for table cells */
 #iaq-table th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0px;
+  white-space: nowrap; /* Prevent text wrapping in cells */
+  text-align: center; /* Center-align content */
 }
 
 /* Alternate row colors */
@@ -164,12 +177,15 @@ footer {
   width: 70%; /* Set the table width to 80% of its container */
   margin: 20px auto;
   
+  
 }
 
 /* Set the border and padding for table cells */
 #weather-table th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0px;
+  white-space: nowrap; /* Prevent text wrapping in cells */
+  text-align: center; /* Center-align content */
 }
 
 /* Alternate row colors */

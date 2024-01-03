@@ -47,7 +47,7 @@ def outdoor_weather():
             main_humidity = data['main'].get('humidity', '-')
             visibility = data.get('visibility', '-')
             wind_speed = data['wind'].get('speed', '-')
-            snowfall = data.get('snow', {}).get('1h', '-')
+            # snowfall = data.get('snow', {}).get('1h', '-')
             city_name = data.get('name', '-')
             country_code = data['sys'].get('country', '-')
 
@@ -55,12 +55,12 @@ def outdoor_weather():
         
 
             headers = ['Timestamp','Temperature', 'Feels like', 'Pressure', 'Humidity',
-                    'Visibility', 'Wind Speed', 'Snowfall', 'City Name', 'Country Code']
+                    'Visibility', 'Wind Speed', 'City Name', 'Country Code']
 
             zip_data = [
                 (
                     formatted_time,main_temp, main_feels_like, main_pressure, main_humidity,
-                    visibility, wind_speed, snowfall, city_name, country_code
+                    visibility, wind_speed, city_name, country_code
                 )
             ]
 
@@ -74,7 +74,7 @@ def outdoor_weather():
             # print(tabulate(zip_data, headers, tablefmt='pretty'))
 
             column = ['Timestamp','Temperature', 'Feels like', 'Pressure', 'Humidity',
-                    'Visibility', 'Wind Speed', 'Snowfall', 'City Name', 'Country Code']
+                    'Visibility', 'Wind Speed', 'City Name', 'Country Code']
             csv_file = weathercsv_data
             path = weathercsv_data
 
@@ -137,7 +137,7 @@ def outdoor_weather():
                 cur.execute("CREATE TABLE IF NOT EXISTS current_weather(id BIGSERIAL PRIMARY KEY, \
                             Timestamp timestamp,Temperature NUMERIC,\
                             Feelslike NUMERIC, Pressure NUMERIC, Humidity NUMERIC,\
-                            Visibility NUMERIC, WindSpeed NUMERIC,Snowfall NUMERIC, CityName VARCHAR,\
+                            Visibility NUMERIC, WindSpeed NUMERIC, CityName VARCHAR,\
                              CountryCode VARCHAR, CONSTRAINT unique_current_weather UNIQUE (Timestamp)) ")
                 
             except psycopg2.Error as e:
@@ -147,17 +147,12 @@ def outdoor_weather():
             
 
             sql = "INSERT INTO current_weather(Timestamp,Temperature, Feelslike, Pressure, Humidity, \
-                Visibility, WindSpeed,Snowfall,CityName,CountryCode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) \
+                Visibility, WindSpeed,CityName,CountryCode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) \
                 ON CONFLICT DO NOTHING;"
 
             try:
                 for data in weather_data:
-                    snowfall = data['Snowfall']
-                    # Check if snowfall is numeric or '-' (non-numeric)
-                    if snowfall.replace('.', '', 1).isdigit():  # Assuming snowfall can be a float
-                        snowfall_value = float(snowfall)
-                    else:
-                        snowfall_value = None  # Replace non-numeric with None or any default value
+                    
                     values = (
                         data['Timestamp'],
                         data['Temperature'],
@@ -166,7 +161,6 @@ def outdoor_weather():
                         data['Humidity'],
                         data['Visibility'],
                         data['Wind Speed'],
-                        snowfall_value,  # Use the checked and processed snowfall value
                         data['City Name'],
                         data['Country Code']
                     )

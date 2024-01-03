@@ -140,19 +140,18 @@ def model_execution_with_live_data():
         conn.set_session(autocommit=True)
 
         try:
-    
             cur.execute("CREATE TABLE IF NOT EXISTS predicted_data (id SERIAL PRIMARY KEY,\
                                             DateTime TIMESTAMP,\
-                                            Temperature_Test_Score NUMERIC,\
-                                            Temperature_Predicted_Value NUMERIC,\
-                                            Humidity_Test_Score NUMERIC,\
-                                            Humidity_Predicted_Value NUMERIC,\
-                                            Co2_Test_Score NUMERIC,\
-                                            Co2_Predicted_Value NUMERIC,\
-                                            VOC_Test_Score NUMERIC,\
-                                            VOC_Predicted_Value NUMERIC,\
-                                            Pm25_Test_Score NUMERIC,\
-                                            Pm25_Predicted_Value NUMERIC);")
+                                            Tempe_Test_S NUMERIC,\
+                                            Temp_Pred NUMERIC,\
+                                            Humid_Test_S NUMERIC,\
+                                            Humid_Pred NUMERIC,\
+                                            Co2_Test_S NUMERIC,\
+                                            Co2_Pred NUMERIC,\
+                                            VOC_Test_S NUMERIC,\
+                                            VOC_Pred NUMERIC,\
+                                            Pm25_Test_S NUMERIC,\
+                                            Pm25_Pred NUMERIC);")
         
         except psycopg2.Error as e:
             print("Error: Issue creating table")

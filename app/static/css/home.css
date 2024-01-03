@@ -2,7 +2,12 @@ h2 {
     text-align: center;
 }
 h1 {
-  text-align: center;
+    text-align: center;
+    font-family: 'Arial', sans-serif; /* Example font family */
+    font-size: 32px; /* Example font size */
+    font-weight: bold; /* Example font weight */
+    color: #333; /* Example color */
+    /* Additional styles as needed */
 }
 #edit_header {
     color: rgb(7, 7, 7);

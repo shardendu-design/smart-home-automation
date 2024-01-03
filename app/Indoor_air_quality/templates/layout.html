@@ -44,7 +44,7 @@
                 
                 <div class="socialmedia">
                     <a class="active" href="{{ url_for('main.display_dashboard') }}">Home Automation System With Awair Element Air Quality Sensor</a>
-                    <a href="{{ url_for('authentication.signup') }}"><i class="fa fa-registered"></i> SignUp </a>
+                    <!-- <a href="{{ url_for('authentication.signup') }}"><i class="fa fa-registered"></i> SignUp </a> -->
                     {% if current_user.is_authenticated %}
 
                         <a href="{{ url_for('authentication.log_out_user')}}"><i class="fa fa-sign-in"></i> Sign Out </a>
@@ -54,7 +54,7 @@
 
                     <a href="">
                         {%  if current_user.is_authenticated %}
-                            LoggedIn as <b style="color: rgb(247, 242, 242)">{{ current_user.user_name.title() }}</b>
+                        Currently logged in as <b style="color: rgb(247, 242, 242)">{{ current_user.user_name.title() }}</b>
                         {% else %}
                             Not LoggedIn
                         {% endif %}
