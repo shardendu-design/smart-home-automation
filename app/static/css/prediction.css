@@ -1,27 +1,2 @@
-/* styles.css */
 
-/* Style the table */
-#prediction {
-    border-collapse: collapse;
-    width: 80%; /* Set the table width to 80% of its container */
-    margin: 20px auto;
-    margin-right: 4px;
-  }
-  
-  /* Set the border and padding for table cells */
-  #prediction th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  /* Alternate row colors */
-  #prediction tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  /* Style the table header */
-  #prediction th {
-    background-color: #333;
-    color: white;
-  }
-  
+   

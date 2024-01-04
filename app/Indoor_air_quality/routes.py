@@ -39,34 +39,6 @@ def display_dashboard():
 
     return render_template('home.html', weather_data=weather_data, sensor_data=sensor_data, headers=headers, recent_row=recent_row)
 
-# @main.route('/dashboard/weather')
-# @login_required
-# def weather_display():
-#     weather_data = current_weather_outside.outdoor_weather()
-#     # time.sleep(600)
-#     return render_template('weather.html', weather_data=weather_data)
-
-# @main.route('/dashboard/sensor-data')
-# @login_required
-# def awair_sensor_data():
-#     sensor_data = sensor_api_connection.awair_api_call()
-#     return render_template('awair_sensor.html', sensor_data=sensor_data)
-
-# @main.route('/dashboard/pred-data')
-# @login_required
-# def display_prediction():
-#     suppress_warnings()
-#     # Remove suppress_warnings() unless defined elsewhere
-
-#     # Replace model_execution_with_live_data with the appropriate code that executes the model
-#     predicted_values = model_execution_with_live_data()
-
-#     # Check if predicted_values is not empty or None
-#     if predicted_values is not None and len(predicted_values) > 0:
-#         return render_template('ml_predicion.html', predicted_values=predicted_values)
-#     else:
-#         # Handle the case when predicted_values is empty or None
-#         return "No prediction available."
 
 @main.app_errorhandler(404)
 def page_not_found(error):

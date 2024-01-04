@@ -108,9 +108,10 @@ footer {
 
 #prediction {
   border-collapse: collapse;
-  width: 100%;
+  width: 89%;
   margin: 20px auto;
   overflow-x: auto; /* Enable horizontal scrolling if needed */
+  margin-right: 9px;
 }
 
 /* Set the border and padding for table cells */
