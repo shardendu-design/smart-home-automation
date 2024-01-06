@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+
+    {% block content %}
+    <h1>Device Information</h1>
+    <h2>Device Info:</h2>
+    <ul class="status">
+        {% for item in device_info %}
+            <li>Label: {{ item.label }}</li>
+            <li>Manufacturer Name: {{ item.manufacturerName }}</li>
+            <li>Type: {{ item.type }}</li>
+            <li>Create Time: {{ item.createTime }}</li>
+            <!-- Add other details as needed -->
+        {% endfor %}
+    </ul>
+
+    <h2>Switch Status:</h2>
+    <p calss="p1">Switch Status: {{ switch_status }}</p>
+    <p class="p2">Switch Timestamp: {{ switch_timestamp }}</p>
+  
+{% endblock %}

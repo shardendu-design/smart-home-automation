@@ -4,6 +4,7 @@ from app.Indoor_air_quality import main  # Adjust the import based on your packa
 from src.current_weather_outdoor import current_weather_outside
 from src.sensor_api import sensor_api_connection
 from main import model_execution_with_live_data
+from seperate import process_device_info
 from flask_login import login_required
 import warnings
 import csv 
@@ -39,6 +40,11 @@ def display_dashboard():
 
     return render_template('home.html', weather_data=weather_data, sensor_data=sensor_data, headers=headers, recent_row=recent_row)
 
+@main.route('/dashboard/status')
+@login_required
+def display_device_info():
+    device_info, switch_status, switch_timestamp = process_device_info()
+    return render_template('device_info.html', device_info=device_info, switch_status=switch_status, switch_timestamp=switch_timestamp)
 
 @main.app_errorhandler(404)
 def page_not_found(error):
