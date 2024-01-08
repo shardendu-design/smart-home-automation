@@ -199,16 +199,43 @@ footer {
   background-color: #333;
   color: white;
 }
-.status {
-  text-align: center;
-}
-/* .p1 {
-  text-align: center;
-}
-.p2 {
-  text-align: center;
-} */
 
-p {
-  text-align: center;
+
+
+
+#device-info-table {
+  border-collapse: collapse;
+  width: 89%;
+  margin: 20px auto;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  margin-right: 9px;
+}
+
+/* Set the border and padding for table cells */
+#device-info-table th, #device-info-table td {
+  border: 1px solid #ddd;
+  padding: 0px;
+  white-space: nowrap; /* Prevent text wrapping in cells */
+  text-align: center; /* Center-align content */
+}
+
+/* Specify widths for each column */
+#device-info-table th:nth-child(1),
+#device-info-table td:nth-child(1) {
+  width: 10%; /* Adjust width for the first column */
+}
+
+/* Adjust widths for other columns as needed */
+/* Add similar styles for all columns */
+
+/* Alternate row colors */
+#device-info-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style the table header */
+#device-info-table th {
+  background-color: #333;
+  color: white;
+  
 }
