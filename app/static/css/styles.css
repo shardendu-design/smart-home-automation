@@ -143,23 +143,30 @@ footer {
   
 }
 
-/* Style the table */
 #iaq-table {
   border-collapse: collapse;
-  width: 70%;
+  width: 89%;
   margin: 20px auto;
   overflow-x: auto; /* Enable horizontal scrolling if needed */
-  margin-right: 3px;
-  
+  margin-right: 9px;
 }
 
 /* Set the border and padding for table cells */
-#iaq-table th, td {
+#iaq-table th, #prediction td {
   border: 1px solid #ddd;
   padding: 0px;
   white-space: nowrap; /* Prevent text wrapping in cells */
   text-align: center; /* Center-align content */
 }
+
+/* Specify widths for each column */
+#iaq-table th:nth-child(1),
+#iaq-table td:nth-child(1) {
+  width: 10%; /* Adjust width for the first column */
+}
+
+/* Adjust widths for other columns as needed */
+/* Add similar styles for all columns */
 
 /* Alternate row colors */
 #iaq-table tr:nth-child(even) {
@@ -170,14 +177,16 @@ footer {
 #iaq-table th {
   background-color: #333;
   color: white;
+  
 }
 
 /* Style the table */
 #weather-table {
   border-collapse: collapse;
-  width: 70%; /* Set the table width to 80% of its container */
+  width: 89%;
   margin: 20px auto;
-  
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  margin-right: 9px;
   
 }
 
