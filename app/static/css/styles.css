@@ -248,3 +248,16 @@ footer {
   color: white;
   
 }
+
+.graph-container {
+  width: 1500px; /* Fixed width */
+  height: 350px; /* Fixed height */
+  margin: auto; /* Centering horizontally */
+  margin-left: 230px; /* Left margin */
+  margin-right: 0px; /* Right margin */
+}
+
+#myChart {
+  max-width: 100%; /* Ensure the canvas doesn't exceed its container */
+  max-height: 100%;
+}

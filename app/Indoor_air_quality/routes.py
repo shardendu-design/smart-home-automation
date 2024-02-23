@@ -9,6 +9,10 @@ from flask_login import login_required
 import warnings
 import csv 
 import os
+from flask import jsonify
+import pandas as pd
+import csv
+import traceback
 
 predicted_csv = os.environ.get('predicted_data')
 
@@ -26,11 +30,14 @@ def display_dashboard():
     filename = predicted_csv
     headers = []  # Initialize headers variable
     recent_row = []  # Initialize recent_row variable
+    csv_data = []  # Initialize csv_data
 
     try:
         with open(filename, 'r') as csv_file:
             csv_reader = csv.reader(csv_file)
-            csv_data = list(csv_reader)  # Read all rows into csv_data
+            for row in csv_reader:
+                # Convert each row to string to ensure JSON serialization
+                csv_data.append([str(item) for item in row])
 
         if csv_data:
             headers = csv_data[0]  # Assuming the first row is headers
@@ -38,7 +45,7 @@ def display_dashboard():
     except FileNotFoundError:
         pass  # Handle the file not found error here if needed
 
-    return render_template('home.html', weather_data=weather_data, sensor_data=sensor_data, headers=headers, recent_row=recent_row)
+    return render_template('home.html', weather_data=weather_data, sensor_data=sensor_data, headers=headers, recent_row=recent_row, csv_data=csv_data)
 
 @main.route('/dashboard/status')
 @login_required
@@ -50,3 +57,24 @@ def display_device_info():
 def page_not_found(error):
     return render_template('404.html'), 404
 
+@main.route('/latest-data')
+@login_required
+def latest_data():
+    try:
+        # Replace with the actual path to your CSV file
+        df = pd.read_csv(predicted_csv, nrows=100)  # Reading last 100 rows
+        return jsonify(df.to_dict(orient='records'))
+    except FileNotFoundError:
+        return jsonify([])  # Return empty list if file not found
+
+
+  
+@main.route('/weather-data')
+@login_required
+def weather_data():
+    try:
+        weather_data_list = current_weather_outside.outdoor_weather()  # This is a list of dictionaries
+        return jsonify(weather_data_list)
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return jsonify([])  # Return empty list if any error occurs
