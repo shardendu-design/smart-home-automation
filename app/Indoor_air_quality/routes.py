@@ -62,7 +62,8 @@ def page_not_found(error):
 def latest_data():
     try:
         # Replace with the actual path to your CSV file
-        df = pd.read_csv(predicted_csv, nrows=100)  # Reading last 100 rows
+        df = pd.read_csv(predicted_csv)  # Read entire CSV file
+        df = df.tail(100)  # Get the last 100 rows
         return jsonify(df.to_dict(orient='records'))
     except FileNotFoundError:
         return jsonify([])  # Return empty list if file not found
