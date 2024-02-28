@@ -15,7 +15,7 @@ import csv
 import traceback
 
 predicted_csv = os.environ.get('predicted_data')
-
+weather_csv_data = os.environ.get('weather_csv_data')
 def suppress_warnings(): 
     warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn')
 
