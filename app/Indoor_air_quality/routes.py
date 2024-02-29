@@ -16,6 +16,8 @@ import traceback
 
 predicted_csv = os.environ.get('predicted_data')
 weather_csv_data = os.environ.get('weather_csv_data')
+CSV_FILE = os.environ.get('CSV_FILE')
+
 def suppress_warnings(): 
     warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn')
 
@@ -74,8 +76,20 @@ def latest_data():
 @login_required
 def weather_data():
     try:
-        weather_data_list = current_weather_outside.outdoor_weather()  # This is a list of dictionaries
-        return jsonify(weather_data_list)
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        return jsonify([])  # Return empty list if any error occurs
+        # Replace with the actual path to your CSV file
+        df = pd.read_csv(weather_csv_data)  # Read entire CSV file
+        df = df.tail(100)  # Get the last 100 rows
+        return jsonify(df.to_dict(orient='records'))
+    except FileNotFoundError:
+        return jsonify([])  # Return empty list if file not found
+
+@main.route('/sensor-data')
+@login_required
+def sensor_data():
+    try:
+        # Replace with the actual path to your CSV file
+        df = pd.read_csv(CSV_FILE)  # Read entire CSV file
+        df = df.tail(100)  # Get the last 100 rows
+        return jsonify(df.to_dict(orient='records'))
+    except FileNotFoundError:
+        return jsonify([])  # Return empty list if file not found
