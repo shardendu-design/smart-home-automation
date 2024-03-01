@@ -261,3 +261,13 @@ footer {
   max-width: 100%; /* Ensure the canvas doesn't exceed its container */
   max-height: 100%;
 }
+
+#iaqChart {
+  max-width: 100%; /* Ensure the canvas doesn't exceed its container */
+  max-height: 100%;
+}
+
+#weatherChart {
+  max-width: 100%; /* Ensure the canvas doesn't exceed its container */
+  max-height: 100%;
+}
