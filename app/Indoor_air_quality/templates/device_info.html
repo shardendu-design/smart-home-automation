@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h1>Device Information</h1>
+    <h1>Device Details</h1>
 
     <table id="device-info-table">
         <thead>
@@ -39,4 +39,28 @@
             </tr>
         </tbody>
     </table>
+    <h1>Device Information</h1>
+    <div class="flex-container">
+        <div class="tapo-smart-image">
+            <img src="https://static.tp-link.com/upload/image-line/01-1_pack_normal_20230815031857k.jpg" alt="Description of the image" width="500" height="400">
+        </div>
+        <div class="tapo-smart-info">
+            <p>
+                •	Model: Tapo P100
+                •	Current data: 230 V, 50 Hz, 10 A
+                •	Continuous switching power max. 2300 W (resistive load)
+                •	The power light indicates whether the socket is on/off.
+                •	A separate power switch enables operation without a smart device and control.
+                •	Wireless standard: Wi-Fi 802.11b/g/n (2.4GHz), Bluetooth 4.2 
+                    (only used during commissioning)
+                •	Amazon Alexa and Google Assistant compatible
+                •	The Tapo app can be downloaded for Android and iOS devices.
+                •	Dimensions: 51 x 72 x 40 mm
+                •	Operating temperature: +0°C ~ +35°C, for indoor use only
+    
+            </p>
+        </div>
+
+    </div>
+    
 {% endblock %}

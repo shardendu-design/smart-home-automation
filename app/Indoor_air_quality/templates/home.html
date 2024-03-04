@@ -32,7 +32,7 @@
             {% endfor %}
         </tbody>
     </table>
-    
+
     <div class="graph-container">
         <canvas id="weatherChart"></canvas>
     </div>
@@ -332,10 +332,10 @@
             updateIAQChart();
             updatePredictionChart();
 
-            // Periodic Updates (every 5 seconds)
-            setInterval(updateWeatherChart, 5000);
-            setInterval(updateIAQChart, 5000);
-            setInterval(updatePredictionChart, 5000)
+            // Periodic Updates (every 10 minutes)
+            setInterval(updateWeatherChart, 600000); // 10 minutes for weather chart
+            setInterval(updateIAQChart, 600000);      // 10 minutes for IAQ chart
+            setInterval(updatePredictionChart, 600000); // 10 minutes for prediction chart
         });
         
 

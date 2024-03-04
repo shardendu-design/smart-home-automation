@@ -254,3 +254,25 @@ def is_air_cooler_power_on():
         return False
     
     
+def device_status(access_token, device_id):
+
+    # Usage: Call the function with your access token and device ID to check the status
+    
+
+    # status = check_device_status(access_token, device_id)
+    try:
+        status = check_device_status(access_token, device_id)
+        if status:
+            switch_status = status['components']['main']['switch']['switch']['value']
+            return switch_status.lower() == 'on'
+        else:
+            return None
+    except Exception as e:
+        print(f"Error checking device status: {e}")
+        return None
+
+
+# access_token = accesstoken_smarttings
+# device_id = deviceid
+# is_on = device_status(access_token, device_id)
+# print("Air cooler is on:", is_on)

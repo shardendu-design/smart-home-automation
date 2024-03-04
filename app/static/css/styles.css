@@ -1,7 +1,13 @@
+
 /* Styling for the navigation bar */
 .topnav {
-  background-color: #4CAF50;
+  position: fixed;
+  background-color: #488A99;
   overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 .topnav a {
@@ -20,9 +26,9 @@
 
 
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color: #488A99;
   color: white;
-  padding-left: 200px;
+  padding-left: 15px;
 }
 
 .topnav .icon {
@@ -30,36 +36,67 @@
 }
 
 /* Styling for the sidebar */
+.right-sidebar {
+  right: 0;
+
+}
+
+.left-sidebar {
+  left: 0;
+}
 .sidebar {
-  height: 100%;
-  width: 200px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 150px; 
+  background-color: #CED2CC; 
+  padding-bottom: 50px;
+  
+  /* height: 100%;
+  width: 150px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
-  padding-top: 0px;
+  padding-top: 0px; */
 }
 
+.main-content {
+  margin-bottom: 50px; /* Same as the footer height */
+  /* Other styles for main content */
+}
+
+
 .sidebar a {
-  padding: 6px 8px 6px 16px;
+  padding: 10px 16px;
   text-decoration: none;
-  font-size: 18px;
-  color: #818181;
+  font-size: 17px;
+  color: white;
   display: block;
+  margin-top: 10px;
+  text-align: center;
+  background-color: #488A99;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .sidebar a:hover {
-  color: #f1f1f1;
+  background-color: #03323c;
+  box-shadow: 0 4px 8px rgba(227, 214, 214, 0.3);
 }
 
-.sidebar a.active {
+.right-sidebar {
+  margin-top: 53px;
+}
+/* .sidebar a.active {
   background-color: #4CAF50;
   color: white;
   padding-top: 12px;
   padding-bottom: 14px;
-}
+} */
 
 /* Styling for the footer */
 footer {
@@ -67,10 +104,11 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: #488A99;
+  color: #f6f4f4;
   text-align: center;
-  padding: 10px;
+  height: 60px;
+  
 }
 
 /* Media queries for responsive design */
@@ -108,10 +146,10 @@ footer {
 
 #prediction {
   border-collapse: collapse;
-  width: 89%;
+  width: 83%;
   margin: 20px auto;
   overflow-x: auto; /* Enable horizontal scrolling if needed */
-  margin-right: 9px;
+  margin-right: 160px;
 }
 
 /* Set the border and padding for table cells */
@@ -145,10 +183,10 @@ footer {
 
 #iaq-table {
   border-collapse: collapse;
-  width: 89%;
+  width: 83%;
   margin: 20px auto;
   overflow-x: auto; /* Enable horizontal scrolling if needed */
-  margin-right: 9px;
+  margin-right: 160px;
 }
 
 /* Set the border and padding for table cells */
@@ -183,10 +221,10 @@ footer {
 /* Style the table */
 #weather-table {
   border-collapse: collapse;
-  width: 89%;
+  width: 83%;
   margin: 20px auto;
   overflow-x: auto; /* Enable horizontal scrolling if needed */
-  margin-right: 9px;
+  margin-right: 160px;
   
 }
 
@@ -210,14 +248,12 @@ footer {
 }
 
 
-
-
 #device-info-table {
   border-collapse: collapse;
-  width: 89%;
+  width: 83%;
   margin: 20px auto;
   overflow-x: auto; /* Enable horizontal scrolling if needed */
-  margin-right: 9px;
+  margin-right: 160px;
 }
 
 /* Set the border and padding for table cells */
@@ -253,7 +289,7 @@ footer {
   width: 1500px; /* Fixed width */
   height: 350px; /* Fixed height */
   margin: auto; /* Centering horizontally */
-  margin-left: 230px; /* Left margin */
+  margin-left: 200px; /* Left margin */
   margin-right: 0px; /* Right margin */
 }
 
@@ -271,3 +307,62 @@ footer {
   max-width: 100%; /* Ensure the canvas doesn't exceed its container */
   max-height: 100%;
 }
+
+.sidebar .status-on {
+  color: green;
+}
+.sidebar .status-off {
+  color: red;
+}
+
+.device-status {
+  font-weight: bold;
+  margin-top: 25px;
+  text-align: center;
+
+}
+
+.device-status-text {
+
+  text-align: center;
+  font-family: 'Sansita', sans-serif; /* Continues to use the Google Font */
+  font-size: 22px; /* Reduced size for subtlety */
+  font-weight: bold;
+  color: #2c3e50; /* A dark, rich blue for elegance */
+  margin-top: 45px; /* Less space at the top for a tighter look */
+  padding: 5px 0; /* Less padding for a slimmer appearance */
+  border-bottom: 2px solid #7f8c8d; /* A solid line under the text for a touch of style */
+  width: max-content;
+  margin-left: auto; /* Center align the h1 */
+  margin-right: auto;
+}
+
+.flex-container {
+  display: flex; /* Enables flexbox layout */
+  justify-content: center; /* Center children horizontally */
+  align-items: center; /* Center children vertically */
+  gap: 20px; /* Space between the two elements */
+
+  /* Optional: if you want the container itself to be centered in the parent */
+  margin: 0 auto;
+}
+
+.tapo-smart-image, .tapo-smart-info {
+  border: 2px solid #000;
+  padding: 5px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  height: 300px;
+  width: 300px;
+}
+
+.tapo-smart-image img {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+/* If your flex container is not the direct child of the body or main container,
+ you may need to adjust the layout of the parent container as well. */

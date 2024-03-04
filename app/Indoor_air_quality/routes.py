@@ -13,6 +13,8 @@ from flask import jsonify
 import pandas as pd
 import csv
 import traceback
+from src.WiFi_Socket import tapo_socket
+
 
 predicted_csv = os.environ.get('predicted_data')
 weather_csv_data = os.environ.get('weather_csv_data')
@@ -26,9 +28,13 @@ def suppress_warnings():
 @main.route('/dashboard')
 @login_required
 def display_dashboard():
+
     weather_data = current_weather_outside.outdoor_weather()
     sensor_data = sensor_api_connection.awair_api_call()
-    
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+
     filename = predicted_csv
     headers = []  # Initialize headers variable
     recent_row = []  # Initialize recent_row variable
@@ -47,13 +53,19 @@ def display_dashboard():
     except FileNotFoundError:
         pass  # Handle the file not found error here if needed
 
-    return render_template('home.html', weather_data=weather_data, sensor_data=sensor_data, headers=headers, recent_row=recent_row, csv_data=csv_data)
+    return render_template('home.html', weather_data=weather_data, sensor_data=sensor_data, headers=headers, recent_row=recent_row, csv_data=csv_data,air_cooler_status=is_on)
 
 @main.route('/dashboard/status')
 @login_required
 def display_device_info():
+    weather_data = current_weather_outside.outdoor_weather()
+    sensor_data = sensor_api_connection.awair_api_call()
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+
     device_info, switch_status, switch_timestamp = process_device_info()
-    return render_template('device_info.html', device_info=device_info, switch_status=switch_status, switch_timestamp=switch_timestamp)
+    return render_template('device_info.html', device_info=device_info, switch_status=switch_status, switch_timestamp=switch_timestamp,air_cooler_status=is_on)
 
 @main.app_errorhandler(404)
 def page_not_found(error):
@@ -93,3 +105,4 @@ def sensor_data():
         return jsonify(df.to_dict(orient='records'))
     except FileNotFoundError:
         return jsonify([])  # Return empty list if file not found
+    

@@ -43,6 +43,7 @@
                 
                 
                 <div class="socialmedia">
+                    <a class="active" href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     <a class="active" href="{{ url_for('main.display_dashboard') }}">Home Automation System With Awair Element Air Quality Sensor</a>
                     <!-- <a href="{{ url_for('authentication.signup') }}"><i class="fa fa-registered"></i> SignUp </a> -->
                     {% if current_user.is_authenticated %}
@@ -59,6 +60,9 @@
                             Not LoggedIn
                         {% endif %}
                     </a>
+
+                   
+
                 </div>
 
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -70,22 +74,35 @@
             {% endblock navbar %}
 
             {% block sidebar %}
-            <div class="sidebar">
-                <a class="active" href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                <!-- <a href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-industry"></i> Company Name </a> -->
+            <div class="sidebar left-sidebar">
+                <!-- <a class="active" href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a> -->
                 <a href=""><i class=""></i> Weather Data</a>
                 <a href=""><i class=""></i> Sensor Data</a>
                 <a href=""><i class=""></i> Prediction Data</a>
                 <a href=""><i class=""></i> Energy Data</a>
-                <a href="{{ url_for('main.display_device_info')}}">Device Status</a>
+                <a href="{{ url_for('main.display_device_info')}}">Device Details</a>
             </div>
             {% endblock sidebar %}
-            
-    
-            {# empty block for custom content #}
-            {% block content %} {% endblock content %}
 
+        
             
+            <div class="main-content">
+                {# empty block for custom content #}
+                {% block content %} {% endblock content %}
+
+            </div>
+            <!-- Right Sidebar -->
+            <div class="sidebar right-sidebar">
+                <a href=""><i class=""></i> ML Models</a>
+                <a href=""><i class=""></i> Add New Device</a>
+                <h1 class="device-status-text">Device Status</h1>
+                <p class="device-status">
+                    
+                    Air Cooler: <span class="{{ 'status-on' if air_cooler_status else 'status-off' }}">
+                    {{ 'On' if air_cooler_status else 'Off' }}</span>
+                </p>
+                
+            </div> 
 
     
             {# footer #}
