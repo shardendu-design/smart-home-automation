@@ -77,20 +77,13 @@
             <div class="sidebar left-sidebar">
                 <!-- <a class="active" href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a> -->
                 <a href=""><i class=""></i> Weather Data</a>
-                <a href=""><i class=""></i> Sensor Data</a>
-                <a href=""><i class=""></i> Prediction Data</a>
-                <a href=""><i class=""></i> Energy Data</a>
+                <a href="{{ url_for('main.display_sensor_data')}}"><i class=""></i> Sensor Data</a>
+                <a href="{{ url_for('main.display_predicted_data')}}"><i class=""></i> Prediction Data</a>
+                <a href="{{ url_for('main.display_energy_data')}}"><i class=""></i> Energy Data</a>
                 <a href="{{ url_for('main.display_device_info')}}">Device Details</a>
             </div>
             {% endblock sidebar %}
 
-        
-            
-            <div class="main-content">
-                {# empty block for custom content #}
-                {% block content %} {% endblock content %}
-
-            </div>
             <!-- Right Sidebar -->
             <div class="sidebar right-sidebar">
                 <a href=""><i class=""></i> ML Models</a>
@@ -103,6 +96,27 @@
                 </p>
                 
             </div> 
+
+
+        
+            
+            <div class="main-content">
+                {# empty block for custom content #}
+                {% block content %} {% endblock content %}
+
+            </div>
+            <!-- Right Sidebar -->
+            <!-- <div class="sidebar right-sidebar">
+                <a href=""><i class=""></i> ML Models</a>
+                <a href=""><i class=""></i> Add New Device</a>
+                <h1 class="device-status-text">Device Status</h1>
+                <p class="device-status">
+                    
+                    Air Cooler: <span class="{{ 'status-on' if air_cooler_status else 'status-off' }}">
+                    {{ 'On' if air_cooler_status else 'Off' }}</span>
+                </p>
+                
+            </div>  -->
 
     
             {# footer #}

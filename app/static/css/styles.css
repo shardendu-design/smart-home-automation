@@ -43,6 +43,7 @@
 
 .left-sidebar {
   left: 0;
+  margin-top: 60px;
 }
 .sidebar {
   position: fixed;
@@ -51,16 +52,7 @@
   width: 150px; 
   background-color: #CED2CC; 
   padding-bottom: 50px;
-  
-  /* height: 100%;
-  width: 150px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 0px; */
+
 }
 
 .main-content {
@@ -75,13 +67,17 @@
   font-size: 17px;
   color: white;
   display: block;
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: center;
   background-color: #488A99;
   border-radius: 5px;
   transition: background-color 0.3s, box-shadow 0.3s;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+.sidebar a:first-child {
+  margin-top: 0; /* Removes the margin for the first button */
+}
+
 
 .sidebar a:hover {
   background-color: #03323c;
@@ -89,7 +85,7 @@
 }
 
 .right-sidebar {
-  margin-top: 53px;
+  margin-top: 60px;
 }
 /* .sidebar a.active {
   background-color: #4CAF50;
@@ -366,3 +362,81 @@ footer {
 
 /* If your flex container is not the direct child of the body or main container,
  you may need to adjust the layout of the parent container as well. */
+
+  /* Style for the pagination navigation */
+.pagination {
+    display: flex;
+    justify-content: center; /* Center the pagination horizontally */
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 20px 0; /* Add some margin at the top and bottom */
+}
+
+.pagination li {
+    margin: 0 5px; /* Spacing between page items */
+}
+
+.pagination .page-item {
+    display: inline; /* Display page items inline */
+}
+
+.pagination .page-link {
+    text-decoration: none; /* Remove underline from links */
+    padding: 8px 15px; /* Padding inside page items */
+    border: 1px solid #ddd; /* Border for page items */
+    color: #488A99; /* Text color for page items */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.pagination .active .page-link {
+    background-color: #488A99; /* Background color for active page */
+    color: white; /* Text color for active page */
+    border-color: #488A99; /* Border color for active page */
+}
+
+.pagination .page-link:hover {
+    background-color: #ddd; /* Background color on hover */
+}
+
+/* Style for the top bar */
+.top-bar {
+  display: flex;
+  justify-content: flex-end; /* Aligns children to the end (right side) */
+  align-items: center; /* Aligns children vertically in the center */
+  padding: 10px;
+}
+
+/* Style for the search form container */
+.search-container {
+  margin-right: 150px;
+  /* Optional: additional styles if needed */
+}
+
+/* Style for the search form */
+.search-container form {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the search input field */
+.search-container input[type="text"] {
+  margin-right: 10px; /* Space between input and button */
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Style for the search button */
+.search-container button {
+  padding: 5px 10px;
+  border: 1px solid #488A99;
+  background-color: #488A99;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #488A99; /* Darker color on hover */
+}
+

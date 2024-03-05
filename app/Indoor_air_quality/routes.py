@@ -19,6 +19,8 @@ from src.WiFi_Socket import tapo_socket
 predicted_csv = os.environ.get('predicted_data')
 weather_csv_data = os.environ.get('weather_csv_data')
 CSV_FILE = os.environ.get('CSV_FILE')
+energy_cal_start_time = os.environ.get('energy_cal_start_time')
+electricity_cost = os.environ.get('electricity_cost')
 
 def suppress_warnings(): 
     warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn')
@@ -58,8 +60,7 @@ def display_dashboard():
 @main.route('/dashboard/status')
 @login_required
 def display_device_info():
-    weather_data = current_weather_outside.outdoor_weather()
-    sensor_data = sensor_api_connection.awair_api_call()
+    
     device_id = os.environ.get('device_id')
     access_token = os.environ.get('access_token_smartthings')
     is_on = tapo_socket.device_status(access_token, device_id)
@@ -106,3 +107,84 @@ def sensor_data():
     except FileNotFoundError:
         return jsonify([])  # Return empty list if file not found
     
+@main.route('/display-sensor-data')
+@login_required
+def display_sensor_data():
+
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+    
+    search_query = request.args.get('search', '')  # Get the search query
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
+
+    data = pd.read_csv(CSV_FILE)
+
+    if search_query:
+        # Filter the data based on the search query
+        # Adjust the filtering logic based on your data structure and needs
+        data = data[data['timestamp'].str.contains(search_query, case=False)]
+
+    total_rows = len(data)
+    total_pages = (total_rows - 1) // per_page + 1
+
+    data_subset = data.iloc[(page - 1) * per_page : page * per_page]
+    data_dicts = data_subset.to_dict(orient='records')
+    return render_template('awair_sensor.html', table=data_dicts, total_pages=total_pages, current_page=page, air_cooler_status=is_on)
+
+@main.route('/display-predicted-data')
+@login_required
+def display_predicted_data():
+
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+    
+    search_query = request.args.get('search', '')  # Get the search query
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
+
+    data = pd.read_csv(predicted_csv)
+
+    if search_query:
+        # Filter the data based on the search query
+        # Adjust the filtering logic based on your data structure and needs
+        data = data[data['DateTime'].str.contains(search_query, case=False)]
+
+    total_rows = len(data)
+    total_pages = (total_rows - 1) // per_page + 1
+
+    data_subset = data.iloc[(page - 1) * per_page : page * per_page]
+    data_dicts = data_subset.to_dict(orient='records')
+    return render_template('ml_prediction.html', table=data_dicts, total_pages=total_pages, current_page=page, air_cooler_status=is_on)
+
+@main.route('/display-energy-data')
+@login_required
+def display_energy_data():
+
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+    
+    search_query = request.args.get('search', '')  # Get the search query
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
+
+    data = pd.read_csv(electricity_cost)
+
+    # Create a concatenated column for searching
+    data['combined_time'] = data['Start_time'].astype(str) + '-' + data['End_time'].astype(str)
+
+    if search_query:
+        # Filter the data based on the search query
+        # Adjust the filtering logic based on your data structure and needs
+        # Filter the data based on the search query in the concatenated column
+        data = data[data['combined_time'].str.contains(search_query, case=False, na=False)]
+
+    total_rows = len(data)
+    total_pages = (total_rows - 1) // per_page + 1
+
+    data_subset = data.iloc[(page - 1) * per_page : page * per_page]
+    data_dicts = data_subset.to_dict(orient='records')
+    return render_template('energy_cost.html', table=data_dicts, total_pages=total_pages, current_page=page, air_cooler_status=is_on)

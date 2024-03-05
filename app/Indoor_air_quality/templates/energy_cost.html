@@ -1,12 +1,11 @@
 {% extends 'layout.html' %}
 
-
-    {% block content %}
-    <h1>Historical Indoor Air Quality Data</h1>  
+{% block content %}
+<h1>Historical Energy Cost Analysis Data</h1>  
     <div class="top-bar">    
           
         <div class="search-container">
-            <form action="{{ url_for('main.display_sensor_data') }}" method="get">
+            <form action="{{ url_for('main.display_energy_data') }}" method="get">
                 <input type="text" name="search" placeholder="Search...">
                 <button type="submit">Search</button>
             </form>
@@ -19,25 +18,25 @@
     <table id="iaq-table">
         <thead>
             <tr>
-                <th>Timestamp</th>
-                <th>Temperature</th>
-                <th>Humidity</th>
-                <th>CO2</th>
-                <th>VOC</th>
-                <th>PM2.5</th>
-                <th>Location</th>
+                <th>Start_time</th>
+                <th>End_time</th>
+                <th>Used_time_hrs</th>
+                <th>Price_per_kwh_cents</th>
+                <th>Transfer_per_kwh</th>
+                <th>Tax_per_kwh</th>
+                <th>Total_cost_euro</th>
             </tr>
         </thead>
         <tbody>
             {% for row in table %}
             <tr>
-                <td>{{ row['timestamp'] }}</td>
-                <td>{{ row['temp'] }}</td>
-                <td>{{ row['humid'] }}</td>
-                <td>{{ row['co2'] }}</td>
-                <td>{{ row['voc'] }}</td>
-                <td>{{ row['pm25'] }}</td>
-                <td>{{ row['location'] }}</td>
+                <td>{{ row['Start_time'] }}</td>
+                <td>{{ row['End_time'] }}</td>
+                <td>{{ row['Used_time_hrs'] }}</td>
+                <td>{{ row['Price_per_kwh_cents'] }}</td>
+                <td>{{ row['Transfer_per_kwh'] }}</td>
+                <td>{{ row['Tax_per_kwh'] }}</td>
+                <td>{{ row['Total_cost_euro'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -47,7 +46,7 @@
         <ul class="pagination">
             <!-- Previous Page Link -->
             <li class="page-item {% if current_page == 1 %}disabled{% endif %}">
-                <a class="page-link" href="{{ url_for('main.display_sensor_data', page=current_page-1) }}">Previous</a>
+                <a class="page-link" href="{{ url_for('main.display_energy_data', page=current_page-1) }}">Previous</a>
             </li>
 
             <!-- Page Number Links -->
@@ -55,19 +54,17 @@
             {% for p in range(current_page - window, current_page + window + 1) %}
                 {% if p > 0 and p <= total_pages %}
                     <li class="page-item {% if p == current_page %}active{% endif %}">
-                        <a class="page-link" href="{{ url_for('main.display_sensor_data', page=p,search=search_query) }}">{{ p }}</a>
+                        <a class="page-link" href="{{ url_for('main.display_energy_data', page=p,search=search_query) }}">{{ p }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
 
             <!-- Next Page Link -->
             <li class="page-item {% if current_page == total_pages %}disabled{% endif %}">
-                <a class="page-link" href="{{ url_for('main.display_sensor_data', page=current_page+1) }}">Next</a>
+                <a class="page-link" href="{{ url_for('main.display_energy_data', page=current_page+1) }}">Next</a>
             </li>
         </ul>
     </nav>
-
-    
 
     
 {% endblock %}
