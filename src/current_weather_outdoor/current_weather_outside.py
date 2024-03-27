@@ -5,6 +5,7 @@ import os
 import csv
 import psycopg2
 import datetime
+import pytz
 
 host = os.environ.get('CONTAINER_IP')
 port = os.environ.get('PORT')
@@ -37,9 +38,12 @@ def outdoor_weather():
             # Parse the JSON response
             data = response.json()
 
-            # Check if the required fields exist before accessing them
-            current_time = datetime.datetime.now()
-            formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+           # Retrieve the current time and convert it to Helsinki timezone
+            helsinki_timezone = pytz.timezone('Europe/Helsinki')
+            current_time_local = datetime.datetime.now().astimezone(helsinki_timezone)
+            formatted_time = current_time_local.strftime("%Y-%m-%d %H:%M:%S")
+
+            # Access the required fields from the data
             weather_main = data['weather'][0].get('main', '-')
             main_temp = data['main'].get('temp', '-')
             main_feels_like = data['main'].get('feels_like', '-')
@@ -177,5 +181,5 @@ def outdoor_weather():
      
 
    
-           
+       
         

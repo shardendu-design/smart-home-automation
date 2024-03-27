@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h1>Device Status</h1>
+    <h1>Air Cooler Connection Details</h1>
 
     <table id="device-info-table">
         <thead>
@@ -39,28 +39,33 @@
             </tr>
         </tbody>
     </table>
-    <h1>Device Information</h1>
-    <div class="flex-container">
-        <div class="tapo-smart-image">
-            <img src="https://static.tp-link.com/upload/image-line/01-1_pack_normal_20230815031857k.jpg" alt="Description of the image" width="500" height="400">
-        </div>
-        <div class="tapo-smart-info">
-            <p>
-                •	Model: Tapo P100
-                •	Current data: 230 V, 50 Hz, 10 A
-                •	Continuous switching power max. 2300 W (resistive load)
-                •	The power light indicates whether the socket is on/off.
-                •	A separate power switch enables operation without a smart device and control.
-                •	Wireless standard: Wi-Fi 802.11b/g/n (2.4GHz), Bluetooth 4.2 
-                    (only used during commissioning)
-                •	Amazon Alexa and Google Assistant compatible
-                •	The Tapo app can be downloaded for Android and iOS devices.
-                •	Dimensions: 51 x 72 x 40 mm
-                •	Operating temperature: +0°C ~ +35°C, for indoor use only
+    <h1>Air quality Sensor Integration Through Tapo Smart Plug and Air Cooler on Rapberry Pi 4</h1>
     
-            </p>
+    <div class="flex-container">
+        
+        <div class="tapo-smart-image">
+            <p style="font-weight: bold;font-size: 10px; text-align: center; color:#488A99 ;">Deeper Connect DPN</p>
+            <img src="/static/img/deeper_connect_mini.png" alt="raspberrypi">
+        </div>
+        <div class="tapo-smart-image">
+            <p style="font-weight: bold;font-size: 10px; text-align: center; color:#488A99 ;">Element Air Sensor</p>
+            <img src="/static/img/element_product.png" alt="raspberrypi">
+        </div>
+
+        <div class="tapo-smart-image">
+            <p style="font-weight: bold; text-align: center; font-size: 10px; color:#488A99 ;">Raspberry Pi 4</p>
+            <img src="/static/img/raspberrypi.png" alt="raspberrypi">
+        </div>
+        <div class="tapo-smart-image">
+            <p style="font-weight: bold; text-align: center; font-size: 10px; color:#488A99 ;">Tapo Smart Plug</p>
+            <img src="/static/img/Tapo-P100_EU_1.0_.png" alt="tapo_plug">
+        </div>
+        <div class="tapo-smart-image">
+            <p style="font-weight: bold; text-align: center; font-size: 10px; color:#488A99 ;">Nedis Air Cooler</p>
+            <img src="/static/img/nedis.png" alt="air_cooler">
         </div>
 
     </div>
+
     
 {% endblock %}

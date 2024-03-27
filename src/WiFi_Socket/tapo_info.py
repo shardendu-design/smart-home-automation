@@ -444,7 +444,7 @@ def energy_time_calculation():
             # print(electricity_cost_data)
                 # print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
         
-        time.sleep(300)
+        # time.sleep(300)
         
 
 # energy_time_calculation()

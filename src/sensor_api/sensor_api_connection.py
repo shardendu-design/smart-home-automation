@@ -10,6 +10,8 @@ import psycopg2
 import threading
 import os
 from tabulate import tabulate
+import pytz
+from dateutil import parser
 
 # avoide system sleep type in command terminal "caffeinate" press enter
 # to stop caffeinate press "Ctrl+C"
@@ -97,17 +99,28 @@ def awair_api_call():
         
         Url = url # api url path
         
-        request1 = requests.request("GET", Url,timeout=30)
-        
-            
+        request1 = requests.request("GET", Url,timeout=30)    
         data1 = request1.json()
-        add_new_col = {'location':'Janonhanta1,Vantaa,Finland'}
 
+         # Parse the timestamp using dateutil.parser
+        utc_timestamp = parser.parse(data1['timestamp'])
+
+        # Convert to Helsinki time
+        helsinki_timezone = pytz.timezone('Europe/Helsinki')
+        helsinki_timestamp = utc_timestamp.astimezone(helsinki_timezone)
+
+        # Format the timestamp to display only date and time
+        data1['timestamp'] = helsinki_timestamp.strftime("%Y-%m-%d %H:%M:%S")
+
+        add_new_col = {'location':'Janonhanta1,Vantaa,Finland'}
         add_bew_col_serial = {}
         data1.update(add_bew_col_serial)
         data1.update(add_new_col)
 
         List2.append(data1)
+
+        
+
         
 
         headers = ['timestamp','score','temp','humid','co2', \
@@ -118,7 +131,7 @@ def awair_api_call():
         # print('')
         # print('                                     Live Sensor Parameters')
         # print(tabulate(table_data, headers=headers, tablefmt='pretty'))
-        
+        # print(List2)
         # time.sleep(300)# call every 5 min
         
         
@@ -136,7 +149,7 @@ def awair_api_call():
         
         csv_file = os.environ.get('CSV_FILE')
         path = os.environ.get('CSV_PATH')
-        
+      
         
         if os.path.exists(path):
             with open(csv_file, "a+") as add_obj:
@@ -152,6 +165,7 @@ def awair_api_call():
                     
                     for data in List2:
                         writer.writerow(data)
+                    
                         
             except ValueError:
                 print("I/O error")
@@ -178,12 +192,18 @@ def awair_api_call():
                 json.dump(List2, f, sort_keys=True, indent=4)
         
         return List2
+        # print(List2)
+        # time.sleep(300)# call every 5 min
         
-# time.sleep(300)# call every 5 min
+
         
                 
 
 # if __name__ == '__main__':
 
 #     awair_api_call()
+    
+    
+        
+
 

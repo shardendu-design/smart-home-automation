@@ -19,6 +19,7 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <!-- <script src="{{ url_for('static', filename='js/msgBox.js') }}"></script> -->
     <meta http-equiv="refresh" content="300"> <!-- Refresh the page every 300 seconds (5 minutes) -->
+    
 </head>
 
     {% block body %}
@@ -39,64 +40,94 @@
             {# navigation bar #}
             {% block navbar %}
             <div class="topnav" id="myTopnav">
-
-                
-                
-                <div class="socialmedia">
-                    <a class="active" href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    <a class="active" href="{{ url_for('main.display_dashboard') }}">Home Automation System With Awair Element Air Quality Sensor</a>
-                    <!-- <a href="{{ url_for('authentication.signup') }}"><i class="fa fa-registered"></i> SignUp </a> -->
+                <div class="nav-left">
+                    <!-- Left aligned items -->
+                    <a class="active" href="{{ url_for('main.display_dashboard') }}">
+                        <i class="fa fa-fw fa-dashboard"></i> Dashboard
+                    </a>
+                </div>
+            
+                <div class="nav-center">
+                    <!-- Center aligned items -->
+                    <a href="{{ url_for('main.display_dashboard') }}">
+                        Home Automation System With Awair Element Air Quality Sensor
+                    </a>
+                </div>
+            
+                <div class="nav-right">
+                    <!-- Right aligned items -->
+                    <a href="{{ url_for('main.display_about_project') }}">About Project</a>
+                    <!-- Authentication links -->
                     {% if current_user.is_authenticated %}
-
-                        <a href="{{ url_for('authentication.log_out_user')}}"><i class="fa fa-sign-in"></i> Sign Out </a>
-                    {% else %} 
-                        <a href="{{ url_for('authentication.do_the_login')}}"><i class="fa fa-registered"></i> Sign In </a>
+                        <a href="{{ url_for('authentication.log_out_user') }}">
+                            <i class="fa fa-sign-in"></i> Sign Out
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('authentication.do_the_login') }}">
+                            <i class="fa fa-registered"></i> Sign In
+                        </a>
                     {% endif %}
-
+                    <!-- User display -->
                     <a href="">
-                        {%  if current_user.is_authenticated %}
-                        Currently logged in as <b style="color: rgb(247, 242, 242)">{{ current_user.user_name.title() }}</b>
+                        {% if current_user.is_authenticated %}
+                            Currently logged in as <b style="color: rgb(247, 242, 242)">{{ current_user.user_name.title() }}</b>
                         {% else %}
-                            Not LoggedIn
+                            Not Logged In
                         {% endif %}
                     </a>
-
-                   
-
                 </div>
-
+            
+                <!-- Hamburger menu icon -->
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
                 </a>
-                
-              </div>
-                
+            </div>
+            
+            
+
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myTopnav");
+                    if (x.className === "topnav") {
+                        x.className += " responsive";
+                    } else {
+                        x.className = "topnav";
+                    }
+                }
+            </script>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+                            
             {% endblock navbar %}
 
             {% block sidebar %}
             <div class="sidebar left-sidebar">
                 <!-- <a class="active" href="{{ url_for('main.display_dashboard')}}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a> -->
-                <a href=""><i class=""></i> Weather Data</a>
+                <a href="{{ url_for('main.display_weather_data')}}"><i class=""></i> Weather Data</a>
                 <a href="{{ url_for('main.display_sensor_data')}}"><i class=""></i> Sensor Data</a>
-                <a href="{{ url_for('main.display_predicted_data')}}"><i class=""></i> Prediction Data</a>
-                <a href="{{ url_for('main.display_energy_data')}}"><i class=""></i> Energy Data</a>
-                <a href="{{ url_for('main.display_device_info')}}">Device Details</a>
+                <a href="{{ url_for('main.display_predicted_data')}}"><i class=""></i> Predicted Data</a>
+                <a href="{{ url_for('main.display_energy_data')}}"><i class=""></i> Energy Cost Analysis</a>  
+                <a href="{{ url_for('main.display_device_info')}}">Air Cooler Integration</a>
+                <a href="{{ url_for('main.data_analysis')}}">Exploratory Data Analysis</a>
+                
+                
             </div>
             {% endblock sidebar %}
 
             <!-- Right Sidebar -->
             <div class="sidebar right-sidebar">
-                <a href=""><i class=""></i> ML Models</a>
+                <a href="{{ url_for('main.pick_model')}}"><i class=""></i> ML Models</a>
                 <a href=""><i class=""></i> Add New Device</a>
                 <h1 class="device-status-text">Device Status</h1>
                 <p class="device-status">
                     
                     Air Cooler: <span class="{{ 'status-on' if air_cooler_status else 'status-off' }}">
                     {{ 'On' if air_cooler_status else 'Off' }}</span>
-                </p>
-                
+                </p> 
+               
             </div> 
-
 
         
             
@@ -124,7 +155,7 @@
             <footer>
                 <div id="footer">
                     <hr>
-                    <p class="text-center small">Home Automation System With Awair Element Air Quality Sensor &copy;	| 2023 </p>
+                    <p class="text-center small">Home Automation System With Awair Element Air Quality Sensor &copy;	| 2024 </p>
                     <hr>
                 </div>
             </footer>

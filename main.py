@@ -1,19 +1,18 @@
 from src.sensor_api import sensor_api_connection
 from src.models import model_test_with_live_data
-from src.data_loader import data_loader
+# from src.data_loader import data_loader
 from src.air_cooler_integration import air_cooler
 from src.WiFi_Socket import tapo_info
 from src.current_weather_outdoor import current_weather_outside
-import threading
+from datetime import datetime
+
 import time
 import psycopg2
 import csv
 import os
 import pandas as pd
-import datetime
+
 from tabulate import tabulate
-
-
 
 host = os.environ.get('CONTAINER_IP')
 port = os.environ.get('PORT')
@@ -23,25 +22,23 @@ password = os.environ.get('PASS_WORD')
 
 predicted_csv = os.environ.get('predicted_data')
 
+
 def outside_weather_now():
     while True:
         current_weather_outside.outdoor_weather()
-        time.sleep(600)
+        time.sleep(300)
 
     
 def awair_row_data():
     while True:
 
         sensor_api_connection.awair_api_call()
-        time.sleep(600)
+        time.sleep(300)
+        
         
 
-def data_preprocess():
-    while True:
-
-        data_loader.data_preprocessing()
-
 def model_execution_with_live_data():
+
     while True:
 
         model_test_with_live_data.temp_test_prediction()
@@ -55,23 +52,29 @@ def model_execution_with_live_data():
         model_test_with_live_data.pm25_test_prediction()
         
         predicted_values = model_test_with_live_data.predicted_data
+        # print(predicted_values)
 
         
         pred_temp_value = predicted_values[2]
+        
         pred_temp_humid = predicted_values[5]
+        
         pred_temp_co2 = predicted_values[8]
         pred_temp_voc = predicted_values[11]
         predicted_temp_pm25 = predicted_values[14]
         
         pred_temp_value_only = []
-        for k,temp in pred_temp_value.items():
+        for k,temp in pred_temp_value.items():  
             pred_temp_value_only.append(round(temp, 2))
+
+        
 
         pred_humid_value_only = []
 
         for k,humid in pred_temp_humid.items():
             pred_humid_value_only.append(round(humid, 2))
-
+            
+        
         pred_co2_value_only = []
 
         for k,co2 in pred_temp_co2.items():
@@ -86,15 +89,7 @@ def model_execution_with_live_data():
         for k,pm25 in predicted_temp_pm25.items():
             pred_pm25_value_only.append(pm25)
 
-        headers = ['Predicted Temperature','Predicted Humidity','Predicted Co2','Predicted Voc','Predicted Pm25']
-        zipped_values = list(zip(pred_temp_value_only,pred_humid_value_only,pred_co2_value_only,pred_voc_value_only,pred_pm25_value_only))
-        
-        # print('')
-        # print('                                     Predicted Parameters')
-        # print(tabulate(zipped_values , headers=headers, tablefmt='pretty'))
-        # # print(temp,humid)
-
-
+        # Air cooler integration
         air_cooler.air_coller_integration(temp,humid)
 
         
@@ -104,7 +99,7 @@ def model_execution_with_live_data():
             database=database,
             user=user,
             password=password
-         
+        
         )
 
         conn1.autocommit=True
@@ -158,7 +153,6 @@ def model_execution_with_live_data():
             print(e)
 
         record = {}
-
         for item in predicted_values:
             key = list(item.keys())[0]
             value = item[key]
@@ -175,22 +169,19 @@ def model_execution_with_live_data():
         except psycopg2.Error as e:
             print("Error:", e)
             conn.rollback()
-       
-
-        # save data as csv file
         
-        csv_file = predicted_csv 
-        # Merge dictionaries into a single dictionary
+        # CSV file writing
         merged_data = {}
         for item in predicted_values:
             merged_data.update(item)
 
         # Check if the file exists and write data accordingly
-        with open(csv_file, 'a', newline='') as csvfile:
+        with open(predicted_csv, 'a', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=merged_data.keys())
             if csvfile.tell() == 0:  # If the file is empty, write header
                 writer.writeheader()
             writer.writerow(merged_data)
+        
         
         time.sleep(600)
         
@@ -199,6 +190,7 @@ def model_execution_with_live_data():
 def energy_consumption():
     while True:
         tapo_info.energy_time_calculation()
+        time.sleep(300)
 
 
     
@@ -214,19 +206,20 @@ if __name__ == '__main__':
     suppress_warnings()
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        # Submit both functions for execution
-        current_weather = executor.submit(outside_weather_now)
-        api_row_data = executor.submit(awair_row_data)
-        future_data = executor.submit(data_preprocess)
-        future_model = executor.submit(model_execution_with_live_data)
-       
-        energy_data = executor.submit(energy_consumption)
-       
-        # Wait for both functions to complete
-        concurrent.futures.wait([future_model, energy_data, api_row_data, future_data])
+            
+            # Submit both functions for execution as before
+            current_weather = executor.submit(outside_weather_now)
+            api_row_data = executor.submit(awair_row_data)
+            # future_data = executor.submit(data_preprocess)
+            future_model = executor.submit(model_execution_with_live_data)
+            energy_data = executor.submit(energy_consumption)
+            
+            # Wait for both functions to complete
+            concurrent.futures.wait([future_model, energy_data, api_row_data, current_weather])
         
+      
         
-       
+    #    api_row_data,future_data
 
     
 
