@@ -1,0 +1,85 @@
+
+.contact-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background: #488A99;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 25px;
+    border-radius: 15px;
+   
+    
+}
+
+h2 {
+    color: #f5f1f1;
+    text-align: center;
+}
+
+.contact-form {
+    margin-top: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: white;
+    
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.contact-form button {
+    display: block;
+    width: 40%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    margin: auto;
+    
+    
+}
+
+.contact-form button:hover {
+    background: #3b6978;
+}
+
+.contact-info {
+    margin-top: 40px;
+    padding: 20px;
+    background: #488A99;
+    border-radius: 5px; 
+    text-align: center;
+    color: white;
+    /* font-weight: bold; */
+    
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.contact-person-img {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    border-radius: 50%; /* Circular image */
+    margin-bottom: 20px;
+    display: block; /* Ensure it’s a block-level element */
+    margin-left: auto; /* Center align */
+    margin-right: auto; /* Center align */
+}

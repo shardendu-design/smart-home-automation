@@ -377,3 +377,21 @@ def data_analysis():
 
 
     return render_template('exploratory_analysis.html', plots=plots, correlation_heatmap=correlation_heatmap, air_cooler_status=is_on)
+
+@main.route('/system-design-tech')
+@login_required
+def system_design_tech():
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+
+    return render_template('system-design-tech.html', air_cooler_status=is_on)
+
+@main.route('/contact')
+@login_required
+def contact():
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+
+    return render_template('contact.html', air_cooler_status=is_on)

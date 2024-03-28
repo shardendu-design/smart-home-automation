@@ -1,82 +1,72 @@
 body {
+  margin: 0;
   background-image: url('/static/img/splash.png');
+  font-family: Arial, sans-serif;
+  padding-top: 30px; 
 }
-/* Styling for the navigation bar */
-.topnav {
-  position: fixed;
+
+/* The navbar container */
+.navbar {
   background-color: #488A99;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
+  color: white;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-.topnav a {
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  display: block; /* Ensures stacking */
-}
-
-.topnav a:hover {
-  background-color: #96abaf;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #488A99;
-  color: white;
-}
-
-.topnav .icon {
-  display: none;
-}
-
-.nav-left, .nav-center, .nav-right {
+/* Navbar links */
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
 }
 
-.nav-center {
-  justify-content: center;
-  flex-grow: 1;
+.nav-list li {
+  white-space: nowrap; /* Prevents text wrapping */
+  margin: 0 10px; /* Adjusted margin */
 }
 
-.nav-right {
-  justify-content: flex-end;
+.nav-list li a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.95em; /* Adjust font size if necessary */
 }
 
-/* Medium and smaller screens */
+/* Hamburger Menu for mobile screens */
+.navbar-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
-  .topnav a:not(.icon), .nav-left, .nav-center, .nav-right {
+  .nav-list {
     display: none;
-  }
-
-  .topnav .icon {
-    display: block;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-
-  .topnav.responsive {
-    position: relative;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .topnav.responsive a, .topnav.responsive .nav-left, .topnav.responsive .nav-center, .topnav.responsive .nav-right {
-    display: block;
+    flex-direction: column;
     width: 100%;
-    text-align: left;
-    padding: 10px 20px;
+  }
+
+  .nav-list.active {
+    display: flex;
+  }
+
+  .navbar-toggle {
+    display: block;
   }
 }
 
