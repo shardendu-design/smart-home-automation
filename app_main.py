@@ -30,30 +30,70 @@
 #         terminate_subprocesses()
 
 #     print("Launcher script completed.")
+
+# import multiprocessing
+# import os
+# import signal
+# import time
+
+# def run_app(file_name):
+#     os.system(f"python {file_name}")
+
+# def stop_processes(processes):
+#     for proc in processes:
+#         if proc.is_alive():
+#             os.kill(proc.pid, signal.SIGTERM)  # Send termination signal
+
+# if __name__ == "__main__":
+#     processes = []
+#     files = ['main.py', 'app.py']
+
+#     try:
+#         for file in files:
+#             proc = multiprocessing.Process(target=run_app, args=(file,))
+#             proc.start()
+#             processes.append(proc)
+
+#         while True:  # Keep the script running
+#             time.sleep(1)
+
+#     except KeyboardInterrupt:
+#         print("Stopping applications...")
+#         stop_processes(processes)
+
+
 import multiprocessing
 import os
 import signal
 import time
+import subprocess
 
 def run_app(file_name):
-    os.system(f"python {file_name}")
+    # Use subprocess.Popen instead of os.system
+    proc = subprocess.Popen(["python", file_name])
+    proc.wait()
 
 def stop_processes(processes):
     for proc in processes:
         if proc.is_alive():
-            os.kill(proc.pid, signal.SIGTERM)  # Send termination signal
+            # Terminate the process group
+            os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
 
 if __name__ == "__main__":
+    # Set the start method for multiprocessing
+    multiprocessing.set_start_method("spawn")
+
     processes = []
     files = ['main.py', 'app.py']
 
     try:
         for file in files:
+            # Start each process in its own process group
             proc = multiprocessing.Process(target=run_app, args=(file,))
             proc.start()
             processes.append(proc)
 
-        while True:  # Keep the script running
+        while True:
             time.sleep(1)
 
     except KeyboardInterrupt:

@@ -1,6 +1,7 @@
 body {
+  background-color: #eaf5f8;
   margin: 0;
-  background-image: url('/static/img/splash.png');
+  /* background-image: url('/static/img/splash.png'); */
   font-family: Arial, sans-serif;
   padding-top: 30px; 
 }

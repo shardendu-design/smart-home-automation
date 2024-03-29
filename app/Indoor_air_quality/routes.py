@@ -127,6 +127,18 @@ def weather_data():
     except FileNotFoundError:
         return jsonify([])  # Return empty list if file not found
 
+
+@main.route('/energy-data')
+@login_required
+def energy_data():
+    try:
+        # Replace with the actual path to your CSV file
+        df = pd.read_csv(electricity_cost) # Read entire CSV file
+        df = df.tail(100)  # Get the last 100 rows
+        return jsonify(df.to_dict(orient='records'))
+    except FileNotFoundError:
+        return jsonify([])  # Return empty list if file not found
+
 @main.route('/sensor-data')
 @login_required
 def sensor_data():
@@ -236,7 +248,7 @@ def display_energy_data():
     
     search_query = request.args.get('search', '')  # Get the search query
     page = request.args.get('page', 1, type=int)
-    per_page = 20
+    per_page = 5
 
     data = pd.read_csv(electricity_cost)
 
@@ -374,8 +386,6 @@ def data_analysis():
     # Add other variables here...
     }
     
-
-
     return render_template('exploratory_analysis.html', plots=plots, correlation_heatmap=correlation_heatmap, air_cooler_status=is_on)
 
 @main.route('/system-design-tech')
