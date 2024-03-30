@@ -8,6 +8,8 @@ from app.auth.forms import UserloginForm
 from app.auth import authentication as at
 from app.auth.models import User
 from flask_login import login_user,logout_user, login_required, current_user
+from flask_jwt_extended import create_access_token
+from flask import jsonify
 
 
 # route signup form
@@ -44,6 +46,12 @@ def do_the_login():
         if not user or not user.check_password(form.password.data):
             flash('Invalid Credentials, Please try again')
             return redirect(url_for('authentication.do_the_login'))
+
+        # # Create JWT token
+        # access_token = create_access_token(identity=user.id)
+
+        # # You can return this token as a JSON response or store it in cookies
+        # return jsonify(access_token=access_token), 200
 
         login_user(user, form.remember_me.data)
         return redirect(url_for('main.display_dashboard'))

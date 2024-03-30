@@ -1,14 +1,15 @@
-
 .contact-container {
+    position: fixed; /* Keep the container fixed in place */
+    top: 50%; /* Position at half the height of the viewport */
+    left: 50%; /* Position at half the width of the viewport */
+    transform: translate(-50%, -50%); /* Adjust the position to truly center the container */
     max-width: 400px;
     margin: auto;
     padding: 20px;
     background: #488A99;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 25px;
     border-radius: 15px;
-   
-    
+    overflow: visible;
 }
 
 h2 {
@@ -25,7 +26,6 @@ h2 {
     margin-bottom: 5px;
     font-weight: bold;
     color: white;
-    
 }
 
 .contact-form input[type="text"],
@@ -48,8 +48,6 @@ h2 {
     cursor: pointer;
     border-radius: 15px;
     margin: auto;
-    
-    
 }
 
 .contact-form button:hover {
@@ -60,11 +58,10 @@ h2 {
     margin-top: 40px;
     padding: 20px;
     background: #488A99;
-    border-radius: 5px; 
+    border-radius: 5px;
     text-align: center;
     color: white;
-    /* font-weight: bold; */
-    
+    /* Removed fixed height to allow content to determine size */
 }
 
 .contact-info p {
@@ -75,11 +72,11 @@ h2 {
 }
 
 .contact-person-img {
-    width: 100px; /* Adjust the size as needed */
-    height: 100px; /* Adjust the size as needed */
-    border-radius: 50%; /* Circular image */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     margin-bottom: 20px;
-    display: block; /* Ensure it’s a block-level element */
-    margin-left: auto; /* Center align */
-    margin-right: auto; /* Center align */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

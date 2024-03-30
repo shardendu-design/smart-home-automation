@@ -45,13 +45,14 @@
 
 .version {
     position: fixed;
-    bottom: 300px; /* Adjust this value to position the element higher from the bottom */
+    bottom: 10px; /* Closer to the bottom edge */
     width: 100%;
-    text-align: center; /* Center the content horizontally */
+    text-align: center;
     font-size: 14px;
-    color: #666; /* Adjust the color as needed */
-    background: transparent; /* Adjust the background if necessary */
-    z-index: 10; /* Ensure it's above other content */
+    color: #666;
+    background: transparent;
+    z-index: 1000; /* Higher value to ensure it's above other content */
 }
+
 
 

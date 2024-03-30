@@ -19,6 +19,7 @@ from notebook.exploratory_data_analysis import generate_base64_plot,generate_cor
 import numpy as np
 import pytz
 
+from flask_jwt_extended import jwt_required
 
 
 
@@ -35,6 +36,7 @@ def suppress_warnings():
 @main.route('/dashboard')
 @login_required
 def display_dashboard():
+    
 
     device_id = os.environ.get('device_id')
     access_token = os.environ.get('access_token_smartthings')
@@ -92,12 +94,13 @@ def display_dashboard():
 @login_required
 def display_device_info():
     
+    
     device_id = os.environ.get('device_id')
     access_token = os.environ.get('access_token_smartthings')
     is_on = tapo_socket.device_status(access_token, device_id)
 
     device_info, switch_status, switch_timestamp = process_device_info()
-    return render_template('device_info.html', device_info=device_info, switch_status=switch_status, switch_timestamp=switch_timestamp,air_cooler_status=is_on)
+    return render_template('device_info.html', device_info=device_info, switch_status=switch_status, switch_timestamp=switch_timestamp,air_cooler_status=is_on,)
 
 @main.app_errorhandler(404)
 def page_not_found(error):
