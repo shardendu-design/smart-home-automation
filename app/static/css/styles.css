@@ -330,6 +330,15 @@ footer {
   margin-right: auto;
 }
 
+.device-threshold {
+
+  font-weight: bold;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 12px;
+  
+}
+
 .flex-container {
   display: flex; /* Enables flexbox layout */
   justify-content: center; /* Center children horizontally */

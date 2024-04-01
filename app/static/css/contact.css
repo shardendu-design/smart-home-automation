@@ -3,7 +3,7 @@
     top: 50%; /* Position at half the height of the viewport */
     left: 50%; /* Position at half the width of the viewport */
     transform: translate(-50%, -50%); /* Adjust the position to truly center the container */
-    max-width: 400px;
+    max-width: 600px;
     margin: auto;
     padding: 20px;
     background: #488A99;
