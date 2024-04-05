@@ -168,11 +168,11 @@ def energy_time_calculation():
             
             
         elif switch_status == "off":
-            start_of_timestamp = switch_timestamp
-            end_times.append(start_of_timestamp)
+            end_of_timestamp = switch_timestamp
+            end_times.append(end_of_timestamp)
             csv_file = energy_cal_endtime
             path = energy_cal_endtime
-           
+            
 
             if os.path.exists(path):
                 with open(csv_file, "a+") as add_obj:
