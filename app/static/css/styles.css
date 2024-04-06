@@ -339,6 +339,21 @@ footer {
   
 }
 
+.device-stop-btn {
+  font-weight: bold;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 16px; /* Adjust the font size as needed */
+  border-radius: 10px;
+  width: 150px; /* Adjust the width of the button */
+  height: 40px; /* Adjust the height of the button */
+  line-height: 40px; /* Align the text vertically in the middle */
+  display: block; /* Ensure the button occupies its own line */
+  margin: 0 auto; /* Center the button horizontally */
+  
+
+}
+
 .flex-container {
   display: flex; /* Enables flexbox layout */
   justify-content: center; /* Center children horizontally */

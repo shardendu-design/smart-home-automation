@@ -95,9 +95,32 @@
                     Temperature >= 19 
                     Humidity <= 50
                 </p> 
-                <button class="device-stop-btn">STOP</button>  
+                <button id="stop-button" class="device-stop-btn">STOP</button>  
             </div> 
-
+            <script>
+                // Get a reference to the STOP button
+                var stopButton = document.getElementById('stop-button');
+            
+                // Add an event listener to the button
+                stopButton.addEventListener('click', function() {
+                    // Send a request to stop the device
+                    // You need to replace this with your actual code to stop the device
+                    // For example, you might use AJAX to send a request to your server
+                    // and then handle the logic to stop the device there
+                    // Once the device is stopped, update the air_cooler_status accordingly
+            
+                    // For demonstration purposes, let's assume the device is stopped successfully
+                    var isStopped = true;
+            
+                    // Update the air_cooler_status based on the result
+                    air_cooler_status = !isStopped;
+            
+                    // Update the device status display
+                    var deviceStatusElement = document.querySelector('.device-status span');
+                    deviceStatusElement.textContent = air_cooler_status ? 'On' : 'Off';
+                    deviceStatusElement.className = air_cooler_status ? 'status-on' : 'status-off';
+                });
+            </script>
         
             
             <div class="main-content">
