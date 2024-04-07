@@ -41,6 +41,7 @@ def display_dashboard():
     device_id = os.environ.get('device_id')
     access_token = os.environ.get('access_token_smartthings')
     is_on = tapo_socket.device_status(access_token, device_id)
+    
 
     filename = predicted_csv
     headers = []  # Initialize headers variable
@@ -209,7 +210,7 @@ def display_predicted_data():
 
    # Assuming your 'DateTime' column is in UTC
     local_tz = pytz.timezone('Europe/Helsinki')  # Adjust timezone as needed
-    data['DateTime'] = pd.to_datetime(data['DateTime']).dt.tz_localize('utc').dt.tz_convert(local_tz).dt.strftime('%Y-%m-%d %H:%M:%S')
+    # data['DateTime'] = pd.to_datetime(data['DateTime']).dt.tz_localize('utc').dt.tz_convert(local_tz).dt.strftime('%Y-%m-%d %H:%M:%S')
 
     
     
@@ -299,7 +300,7 @@ def display_weather_data():
     local_tz = pytz.timezone('Europe/Helsinki')  # replace with your local timezone
 
     # Convert timestamps to local timezone
-    data['Timestamp'] = pd.to_datetime(data['Timestamp']).dt.tz_localize(utc).dt.tz_convert(local_tz).dt.strftime('%Y-%m-%d %H:%M:%S')
+    # data['Timestamp'] = pd.to_datetime(data['Timestamp']).dt.tz_localize(utc).dt.tz_convert(local_tz).dt.strftime('%Y-%m-%d %H:%M:%S')
 
     if search_query:
         # Filter the data based on the search query
@@ -408,3 +409,11 @@ def contact():
     is_on = tapo_socket.device_status(access_token, device_id)
 
     return render_template('contact.html', air_cooler_status=is_on)
+
+# device turn off through dashboard button
+@main.route('/stop-device', methods=['POST'])
+@login_required
+def stop_device():
+    # Add logic here to trigger the air_cooler_power_off function
+    turn_off_device = tapo_socket.air_cooler_power_turn_off()
+    return jsonify({'message': 'Device stopped successfully'})

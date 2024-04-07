@@ -86,8 +86,8 @@
                 <h1 class="device-status-text">Device Status</h1>
                 <p class="device-status">
                     
-                    Air Cooler: <span class="{{ 'status-on' if air_cooler_status else 'status-off' }}">
-                    {{ 'On' if air_cooler_status else 'Off' }}</span>
+                    Air Cooler: <span id="air-cooler-status" class="{{ 'status-on' if air_cooler_status else 'status-off' }}">
+                        {{ 'On' if air_cooler_status else 'Off' }}</span>
                 </p> 
                 <p class="device-threshold">
                     <u>Air Coller Threshold</u> 
@@ -98,30 +98,38 @@
                 <button id="stop-button" class="device-stop-btn">STOP</button>  
             </div> 
             <script>
-                // Get a reference to the STOP button
-                var stopButton = document.getElementById('stop-button');
+                document.addEventListener("DOMContentLoaded", function() {
+                    var statusElement = document.getElementById('air-cooler-status');
+                    var stopButton = document.getElementById('stop-button');
             
-                // Add an event listener to the button
-                stopButton.addEventListener('click', function() {
-                    // Send a request to stop the device
-                    // You need to replace this with your actual code to stop the device
-                    // For example, you might use AJAX to send a request to your server
-                    // and then handle the logic to stop the device there
-                    // Once the device is stopped, update the air_cooler_status accordingly
-            
-                    // For demonstration purposes, let's assume the device is stopped successfully
-                    var isStopped = true;
-            
-                    // Update the air_cooler_status based on the result
-                    air_cooler_status = !isStopped;
-            
-                    // Update the device status display
-                    var deviceStatusElement = document.querySelector('.device-status span');
-                    deviceStatusElement.textContent = air_cooler_status ? 'On' : 'Off';
-                    deviceStatusElement.className = air_cooler_status ? 'status-on' : 'status-off';
+                    stopButton.addEventListener('click', function() {
+                        fetch('/stop-device', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({}),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Failed to stop the device');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Update the status based on the response
+                            var newStatus = data['status'];
+                            statusElement.textContent = newStatus ? 'On' : 'Off';
+                            statusElement.className = newStatus ? 'status-on' : 'status-off';
+                            alert('Device turned off successfully!')
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    });
                 });
             </script>
-        
+            
             
             <div class="main-content">
                 {# empty block for custom content #}
