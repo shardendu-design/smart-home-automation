@@ -22,7 +22,9 @@
             </div>
         {% endfor %}
         <div class="login-form">
-            <form action="/" method="POST">
+            <form id="login-form" action="/" method="POST">
+                <!-- CSRF Token -->
+                {{ form.csrf_token }}
                 {{ form.hidden_tag() }}
                 <h2 class="text-center">Home Automation Login</h2>
                 <!-- <center>

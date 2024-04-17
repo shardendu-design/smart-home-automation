@@ -147,7 +147,35 @@
                 </div>
             </footer>
             {% endblock footer %}
-    
+            
+            <!-- session expire and option to be continue -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var timeout = 10 * 60 * 1000; // 10 minutes
+            
+                setTimeout(function() {
+                    var extend = confirm("Your session is about to expire. Do you want to continue?");
+                    if (extend) {
+                        // Call to keep-alive endpoint
+                        fetch("{{ url_for('authentication.keep_alive') }}")
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert("Session extended.");
+                                }
+                            })
+                            .catch(error => console.error('Error extending session:', error));
+                    } else {
+                        alert("You will now be logged out.");
+                        window.location.href = "{{ url_for('authentication.do_the_login') }}";
+                    }
+                }, timeout);
+            });
+            </script>
+            
+            
+        
+    </body>
         </div>
         
     </body>

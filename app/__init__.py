@@ -5,8 +5,8 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_wtf.csrf import CSRFProtect
-from flask_jwt_extended import JWTManager
-
+from datetime import timedelta
+from flask_session import Session  # Import Flask-Session
 #  define all the tools that has been used
 
 db = SQLAlchemy()
@@ -25,15 +25,19 @@ def create_app(config_type):  # dev, test, or prod
 
     app.config.from_pyfile(configuration)
 
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=14)
+    app.config['SESSION_COOKIE_SECURE'] = True  # Ensure you use HTTPS
+    app.config['SESSION_TYPE'] = 'filesystem'  # Server-side session management
+    app.config['SESSION_FILE_DIR'] = '/media/shardendujha/backup1/flask_session'  # Path to store session files
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)  # Session timeout after 30 minutes of inactivity
+
     db.init_app(app) # bind database to flask app
     bootstrap.init_app(app) # initalize bootstarp
     login_manager.init_app(app) # initalize login session
     bcrypt.init_app(app) # convert password into hash
-
-    # Initialize JWTManager
-    # app.config['JWT_SECRET_KEY'] = 'bac7cf3208f01e83e3dd59bf4734bd9fcaf1a685090529649ca5304e654afd8e'  # Set a real secret key
-    # jwt = JWTManager(app)
-
+    Session(app)  # Initialize server-side session
+    
 
 # import app and register blueprint
 

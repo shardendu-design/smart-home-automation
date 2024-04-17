@@ -67,35 +67,56 @@ import os
 import signal
 import time
 import subprocess
+import sys
+
+LOCK_FILE = "app.lock"
+processes = []
+
+def acquire_lock():
+    try:
+        # Try to create the lock file
+        with open(LOCK_FILE, "x") as lock_file:
+            pass  # Lock acquired
+    except FileExistsError:
+        # Lock file already exists, another instance is running
+        print("Another instance of the application is already running.")
+        sys.exit(1)
+
+def release_lock():
+    # Remove the lock file
+    os.remove(LOCK_FILE)
 
 def run_app(file_name):
     # Use subprocess.Popen instead of os.system
     proc = subprocess.Popen(["python", file_name])
-    proc.wait()
+    processes.append(proc)
 
-def stop_processes(processes):
+def stop_processes(signum, frame):
+    print("Stopping applications...")
     for proc in processes:
-        if proc.is_alive():
-            # Terminate the process group
-            os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+        proc.terminate()
+    release_lock()
+    sys.exit(0)
 
 if __name__ == "__main__":
+    # Acquire the lock
+    acquire_lock()
     # Set the start method for multiprocessing
     multiprocessing.set_start_method("spawn")
 
-    processes = []
+    # processes = []
     files = ['main.py', 'app.py']
 
     try:
         for file in files:
-            # Start each process in its own process group
-            proc = multiprocessing.Process(target=run_app, args=(file,))
-            proc.start()
-            processes.append(proc)
+            # Start each process
+            run_app(file)
+
+        # Register signal handler for KeyboardInterrupt
+        signal.signal(signal.SIGINT, stop_processes)
 
         while True:
             time.sleep(1)
 
     except KeyboardInterrupt:
-        print("Stopping applications...")
-        stop_processes(processes)
+        stop_processes(signal.SIGINT, None)

@@ -9,7 +9,7 @@ from app.auth import authentication as at
 from app.auth.models import User
 from flask_login import login_user,logout_user, login_required, current_user
 from flask_jwt_extended import create_access_token
-from flask import jsonify
+from flask import session,jsonify
 
 
 # route signup form
@@ -36,10 +36,11 @@ def signup():
 
 @at.route('/', methods=['GET', 'POST'])
 def do_the_login():
+    form = UserloginForm()
     if current_user.is_authenticated:
         flash('You are already logged-in')
         return redirect(url_for('main.display_dashboard'))
-    form = UserloginForm()
+    
     if form.validate_on_submit():
         user = User.query.filter_by(user_name=form.name.data).first()
 
@@ -47,13 +48,9 @@ def do_the_login():
             flash('Invalid Credentials, Please try again')
             return redirect(url_for('authentication.do_the_login'))
 
-        # # Create JWT token
-        # access_token = create_access_token(identity=user.id)
-
-        # # You can return this token as a JSON response or store it in cookies
-        # return jsonify(access_token=access_token), 200
 
         login_user(user, form.remember_me.data)
+        session.permanent = True  # Activate session timeout management
         return redirect(url_for('main.display_dashboard'))
     return render_template('login.html', form=form)
 
@@ -66,3 +63,10 @@ def log_out_user():
     flash('you are loged-out')
     return redirect(url_for('authentication.do_the_login'))
 
+
+# continue session
+@at.route('/keep-alive', methods=['GET'])
+@login_required
+def keep_alive():
+    session.modified = True  # This refreshes the session timeout
+    return jsonify(success=True)
