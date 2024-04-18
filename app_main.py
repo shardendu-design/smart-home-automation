@@ -60,7 +60,7 @@
 #     except KeyboardInterrupt:
 #         print("Stopping applications...")
 #         stop_processes(processes)
-
+# ************************************************************
 
 import multiprocessing
 import os
@@ -120,3 +120,5 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         stop_processes(signal.SIGINT, None)
+
+
