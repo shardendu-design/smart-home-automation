@@ -1,8 +1,6 @@
 import time
 from flask import render_template,request,redirect
 from app.Indoor_air_quality import main  # Adjust the import based on your package structure
-# from src.current_weather_outdoor import current_weather_outside
-# from src.sensor_api import sensor_api_connection
 from main import model_execution_with_live_data
 from seperate import process_device_info
 from flask_login import login_required
@@ -19,7 +17,7 @@ from notebook.exploratory_data_analysis import generate_base64_plot,generate_cor
 import numpy as np
 import pytz
 
-from flask_jwt_extended import jwt_required
+
 
 
 
