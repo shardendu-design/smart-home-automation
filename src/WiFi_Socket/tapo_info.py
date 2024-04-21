@@ -194,8 +194,8 @@ def energy_time_calculation():
                             
                 except ValueError:
                     print("I/O error")
-        else:
-            print("Invalid timestamp")
+        # else:
+        #     print("Invalid Status")
        
         conn1 = psycopg2.connect(
                     host=host,

@@ -1,5 +1,5 @@
 
-  .container {
+  /* .container {
     max-width: 800px;
     margin: auto;
     background: white;
@@ -21,12 +21,12 @@
 
   li {
     margin-bottom: 10px;
-  }
+  } */
 
   /* Responsive design */
-  @media (max-width: 700px) {
+  /* @media (max-width: 700px) {
     .container {
       width: 95%;
       margin: 20px auto;
     }
-  }
+  } */
