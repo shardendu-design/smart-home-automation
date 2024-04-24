@@ -30,3 +30,17 @@
       margin: 20px auto;
     }
   } */
+
+
+  .container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
