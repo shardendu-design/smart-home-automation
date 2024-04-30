@@ -26,6 +26,7 @@ def air_coller_integration(prediction_temperature, prediction_humid):
                 tapo_socket.air_cooler_power_turn_off()
                 email_notification.send_email_notification_turn_off()
                 last_notification_time = current_time  # Update notification ti
+           
 
 
     # time.sleep(1200)# call every 5 min 

@@ -30,7 +30,8 @@
                         <span class="bar"></span>
                     </div>
                     <ul class="nav-list" id="nav-list">
-                        <li><a class="active" href="{{ url_for('main.display_dashboard') }}">Dashboard</a></li>
+                        <li><a class="active" href="{{ url_for('main.display_dashboard') }}">
+                            <i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                         <li><a href="{{ url_for('main.display_dashboard') }}">Home Automation System With Awair Element Air Quality Sensor</a></li>
                         <li><a href="{{ url_for('main.display_about_project') }}">Project Architecture</a></li>
                         <li><a href="{{ url_for('main.system_design_tech') }}">System Design & Technology</a></li>
@@ -80,7 +81,7 @@
             <!-- Right Sidebar -->
             <div class="sidebar right-sidebar">
                 <a href="{{ url_for('main.pick_model')}}"><i class=""></i> ML Models</a>
-                <a href=""><i class=""></i> Add New Device</a>
+                <a href="{{ url_for('main.add_new_device')}}"><i class=""></i> Integrate Device</a>
                 <h1 class="device-status-text">Device Status</h1>
                 <p class="device-status">
                     
