@@ -12,7 +12,6 @@ import pandas as pd
 import csv
 import traceback
 from src.WiFi_Socket import tapo_socket
-from src.email_notifications import email_notification
 from src.models.evaluate_models import perform_linear_regression, perform_random_forest, perform_support_vector_machine, perform_k_nearest_neighbors, perform_decision_trees
 from notebook.exploratory_data_analysis import generate_base64_plot,generate_correlation_heatmap
 import numpy as np
@@ -415,7 +414,7 @@ def contact():
 def stop_device():
     # Add logic here to trigger the air_cooler_power_off function
     turn_off_device = tapo_socket.air_cooler_power_turn_off()
-    email_notification.send_email_notification_turn_off()
+    
     return jsonify({'message': 'Device stopped successfully'})
 
 @main.route('/add-new-device')
