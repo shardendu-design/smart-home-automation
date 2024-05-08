@@ -1,95 +1,45 @@
-my_ml_project/
-│
-├── data/
-│   ├── raw_data/
-│   │   ├── dataset.csv         # Raw dataset
-│   │   └── ...
-│   ├── processed_data/
-│   │   ├── dataset_cleaned.csv # Cleaned and preprocessed dataset
-│   │   └── ...
-│   └── ...
-│
-├── notebooks/
-│   ├── exploratory_data_analysis.ipynb
-│   ├── data_preprocessing.ipynb
-│   ├── model_training.ipynb
-│   └── ...
-│
-├── src/
-│   ├── __init__.py
-│   ├── data/
-│   │   ├── __init__.py
-│   │   ├── data_loader.py     # Data loading and preprocessing
-│   │   └── ...
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── model.py           # Machine learning model definitions
-│   │   └── ...
-│   ├── train.py               # Model training script
-│   └── ...
-│
-├── tests/
-│   ├── __init__.py
-│   ├── test_data_loader.py    # Unit tests for data loading and preprocessing
-│   ├── test_model.py          # Unit tests for models
-│   └── ...
-│
-├── config/
-│   ├── config.yaml            # Configuration file for hyperparameters and settings
-│   └── ...
-│
-├── requirements.txt           # List of project dependencies
-├── README.md                  # Project documentation
-└── main.py                    # Main script to run the ML pipeline
 
-Here's a brief overview of how this structure can be used in a machine learning project:
-* 		Data Directory (data/):
-    * raw_data/: Store the raw dataset(s) in this directory.
-    * processed_data/: After preprocessing, store cleaned and processed datasets here.
-* 		Notebooks Directory (notebooks/):
-    * Use Jupyter notebooks for tasks like exploratory data analysis (exploratory_data_analysis.ipynb), data preprocessing (data_preprocessing.ipynb), and model training (model_training.ipynb).
-* 		Source Code (src/):
-    * data/: Contains modules for data loading and preprocessing, such as data_loader.py and data_preprocessing.py.
-    * models/: Houses machine learning model definitions, e.g., model.py.
-    * train.py: A script to train machine learning models using the defined modules.
-* 		Tests Directory (tests/):
-    * Write unit tests for your code, such as test_data_loader.py and test_model.py, to ensure components work as expected.
-* 		Configuration (config/):
-    * Store configuration files (e.g., config.yaml) to manage hyperparameters, settings, and other configurations.
-* 		Requirements (requirements.txt):
-    * List project dependencies here. You can install these dependencies using pip install -r requirements.txt.
-* 		README (README.md):
-    * Document your project, explaining its purpose, how to set it up, and how to use it.
-* 		Main Script (main.py):
-    * This script serves as the entry point of your project and can be used to kick off your machine learning pipeline or other project-specific tasks.
+**************
+This should prevent the screen from blanking due to inactivity on your Raspberry Pi. 
+If there are any other power management settings you need to adjust, let me know, 
+and I can provide guidance on how to do so.
 
 
-project_directory/
-├── ...
-└── flask_app/
-    ├── static/
-    │   └── ...
-    ├── templates/
-    │   └── ...
-    ├── database/
-    │   ├── __init__.py       # Database connection initialization
-    │   └── db_operations.py  # Database operations, queries, etc.
-    ├── __init__.py           # Flask app initialization
-    ├── routes.py             # Route definitions
-    └── config.py             # Configuration settings
-Database Initialization (database/__init__.py):
+sudo nano /etc/default/console-setup
 
-Set up your database connection here. This could involve importing necessary modules (like SQLAlchemy or any other database toolkit you're using) and establishing the connection within a function.
-Database Operations (database/db_operations.py):
+Find the line that starts with BLANK_TIME and POWERDOWN_TIME, and set both values to 0. 
+If these lines don't exist, you can add them at the end of the file:
 
-Define functions or classes responsible for performing database operations. This file can handle queries, inserts, updates, or any other interactions with your database.
-Flask App Initialization (__init__.py):
+BLANK_TIME=0
+POWERDOWN_TIME=0
 
-Within this file, import the database connection initialization from the database/__init__.py file.
-Initialize your Flask app here and make the database connection available throughout the app's context.
-Routes and Views (routes.py):
+After making these changes, reboot your Raspberry Pi for the settings to take effect:
 
-Define your routes and views within this file, utilizing the database operations defined in database/db_operations.py as needed.
-Configuration Settings (config.py):
+sudo reboot
+***************
 
-Store any relevant configuration settings, such as database credentials or other application settings, in this file.
+**********************
+If adjusting the console-setup configuration didn't prevent the screen from sleeping on your Raspberry Pi, 
+there may be other settings or configurations affecting the display power management. Here are some 
+additional steps you can try:
+
+Disable Screen Blanking via Terminal: In addition to adjusting the console-setup configuration file, 
+you can try disabling screen blanking directly via terminal commands. Run the following commands 
+in the terminal:
+
+sudo sh -c 'TERM=linux setterm -blank 0 >/dev/tty0'
+sudo sh -c 'TERM=linux setterm -powerdown 0 >/dev/tty0'
+
+it won't persist across reboots unless you configure them to do so
+
+sudo nano /etc/rc.local
+
+sh -c 'TERM=linux setterm -blank 0 >/dev/tty0'
+sh -c 'TERM=linux setterm -powerdown 0 >/dev/tty0'
+
+Save the file and exit the text editor.
+
+Make the script executable:
+
+sudo chmod +x /etc/rc.local
+

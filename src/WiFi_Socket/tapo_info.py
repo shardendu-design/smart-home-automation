@@ -5,11 +5,11 @@ import os
 import csv 
 import psycopg2
 
-host = os.environ.get('CONTAINER_IP')
-port = os.environ.get('PORT')
-database = os.environ.get('DATABASE')
-user = os.environ.get('USER')
-password = os.environ.get('PASS_WORD')
+host = os.environ.get("CONTAINER_IP")
+port = os.environ.get("PORT")
+database = os.environ.get("DATABASE")
+user = os.environ.get("USER")
+password = os.environ.get("PASS_WORD")
 
 smartthings_url = os.environ.get('smart_things_url')
 # deviceendpoint_smartthings = os.environ.get('device_endpoint_smartthings')
@@ -195,7 +195,7 @@ def energy_time_calculation():
                 except ValueError:
                     print("I/O error")
         # else:
-        #     print("Invalid Status")
+        #     print("Invalid timestamp")
        
         conn1 = psycopg2.connect(
                     host=host,
@@ -208,11 +208,11 @@ def energy_time_calculation():
         conn1.autocommit=True
 
         cur1 = conn1.cursor()
-        cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
+        cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'omnia_inteernship'")
         exists = cur1.fetchone()
 
         if not exists:
-            cur1.execute("CREATE DATABASE awair")
+            cur1.execute("CREATE DATABASE omnia_inteernship")
         
         conn1.set_session(autocommit=True)
 
@@ -353,11 +353,11 @@ def energy_time_calculation():
             conn1.autocommit=True
 
             cur1 = conn1.cursor()
-            cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
+            cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'omnia_inteernship'")
             exists = cur1.fetchone()
 
             if not exists:
-                cur1.execute("CREATE DATABASE awair")
+                cur1.execute("CREATE DATABASE omnia_inteernship")
             
             conn1.set_session(autocommit=True)
 
@@ -441,10 +441,10 @@ def energy_time_calculation():
             
 
 
-            # print(electricity_cost_data)
-                # print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
+#             print(electricity_cost_data)
+#             print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
         
-        # time.sleep(300)
+#         time.sleep(300)
         
 
 # energy_time_calculation()
