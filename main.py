@@ -54,14 +54,11 @@ def model_execution_with_live_data():
         predicted_values = model_test_with_live_data.predicted_data
         # print(predicted_values)
 
-        
-        pred_temp_value = predicted_values[2]
-        
-        pred_temp_humid = predicted_values[5]
-        
-        pred_temp_co2 = predicted_values[8]
-        pred_temp_voc = predicted_values[11]
-        predicted_temp_pm25 = predicted_values[14]
+        pred_temp_value = predicted_values[4]
+        pred_temp_humid = predicted_values[9]
+        pred_temp_co2 = predicted_values[14]
+        pred_temp_voc = predicted_values[19]
+        predicted_temp_pm25 = predicted_values[24]
         
         pred_temp_value_only = []
         for k,temp in pred_temp_value.items():  
@@ -137,15 +134,25 @@ def model_execution_with_live_data():
         try:
             cur.execute("CREATE TABLE IF NOT EXISTS predicted_data (id SERIAL PRIMARY KEY,\
                                             DateTime TIMESTAMP,\
-                                            Tempe_Test_S NUMERIC,\
+                                            Temp_RMSE NUMERIC,\
+                                            Temp_MAE NUMERIC,\
+                                            Temp_R2 NUMERIC,\
                                             Temp_Pred NUMERIC,\
-                                            Humid_Test_S NUMERIC,\
+                                            Humid_RMSE NUMERIC,\
+                                            Humid_MAE NUMERIC,\
+                                            Humid_R2 NUMERIC,\
                                             Humid_Pred NUMERIC,\
-                                            Co2_Test_S NUMERIC,\
+                                            Co2_RMSE NUMERIC,\
+                                            Co2_MAE NUMERIC,\
+                                            Co2_R2 NUMERIC,\
                                             Co2_Pred NUMERIC,\
-                                            VOC_Test_S NUMERIC,\
-                                            VOC_Pred NUMERIC,\
-                                            Pm25_Test_S NUMERIC,\
+                                            Voc_RMSE NUMERIC,\
+                                            Voc_MAE NUMERIC,\
+                                            Voc_R2 NUMERIC,\
+                                            Voc_Pred NUMERIC,\
+                                            Pm25_RMSE NUMERIC,\
+                                            Pm25_MAE NUMERIC,\
+                                            Pm25_R2 NUMERIC,\
                                             Pm25_Pred NUMERIC);")
         
         except psycopg2.Error as e:
@@ -190,7 +197,7 @@ def model_execution_with_live_data():
 def energy_consumption():
     while True:
         tapo_info.energy_time_calculation()
-        time.sleep(300)
+        # time.sleep(300)
 
 
     

@@ -208,11 +208,11 @@ def energy_time_calculation():
         conn1.autocommit=True
 
         cur1 = conn1.cursor()
-        cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'omnia_inteernship'")
+        cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
         exists = cur1.fetchone()
 
         if not exists:
-            cur1.execute("CREATE DATABASE omnia_inteernship")
+            cur1.execute("CREATE DATABASE awair")
         
         conn1.set_session(autocommit=True)
 

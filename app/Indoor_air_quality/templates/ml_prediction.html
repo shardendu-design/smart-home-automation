@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="static/css/prediction.css">
 <h1>Historical ML Predicted Data</h1>  
     <div class="top-bar">    
           
@@ -15,19 +16,29 @@
     
     
     
-    <table id="iaq-table">
+    <table id="prediction-history">
         <thead>
             <tr>
                 <th>DateTime</th>
-                <th>Tempe_Test_S</th>
+                <th>Temp_RMSE_S</th>
+                <th>Temp_MAE_S</th>
+                <th>Temp_R2_S</th>
                 <th>Temp_Pred</th>
-                <th>Humid_Test_S</th>
+                <th>Humid_RMSE_S</th>
+                <th>Humid_MAE_S</th>
+                <th>Humid_R2_S</th>
                 <th>Humid_Pred</th>
-                <th>Co2_Test_S</th>
+                <th>Co2_RMSE_S</th>
+                <th>Co2_MAE_S</th>
+                <th>Co2_R2_S</th>
                 <th>Co2_Pred</th>
-                <th>VOC_Test_S</th>
+                <th>VOC_RMSE_S</th>
+                <th>VOC_MAE_S</th>
+                <th>VOC_R2_S</th>
                 <th>VOC_Pred</th>
-                <th>Pm25_Test_S</th>
+                <th>Pm25_RMSE_S</th>
+                <th>Pm25_MAE_S</th>
+                <th>Pm25_R2_S</th>
                 <th>Pm25_Pred</th>
             </tr>
         </thead>
@@ -35,15 +46,25 @@
             {% for row in table %}
             <tr>
                 <td>{{ row['DateTime'] }}</td>
-                <td>{{ row['Tempe_Test_S'] }}</td>
+                <td>{{ row['Temp_RMSE'] }}</td>
+                <td>{{ row['Temp_MAE'] }}</td>
+                <td>{{ row['Temp_R2'] }}</td>
                 <td>{{ row['Temp_Pred'] }}</td>
-                <td>{{ row['Humid_Test_S'] }}</td>
+                <td>{{ row['Humid_RMSE'] }}</td>
+                <td>{{ row['Humid_MAE'] }}</td>
+                <td>{{ row['Humid_R2'] }}</td>
                 <td>{{ row['Humid_Pred'] }}</td>
-                <td>{{ row['Co2_Test_S'] }}</td>
+                <td>{{ row['Co2_RMSE'] }}</td>
+                <td>{{ row['Co2_MAE'] }}</td>
+                <td>{{ row['Co2_R2'] }}</td>
                 <td>{{ row['Co2_Pred'] }}</td>
-                <td>{{ row['VOC_Test_S'] }}</td>
+                <td>{{ row['Voc_RMSE'] }}</td>
+                <td>{{ row['Voc_MAE'] }}</td>
+                <td>{{ row['Voc_R2'] }}</td>
                 <td>{{ row['VOC_Pred'] }}</td>
-                <td>{{ row['Pm25_Test_S'] }}</td>
+                <td>{{ row['Pm25_RMSE'] }}</td>
+                <td>{{ row['Pm25_MAE'] }}</td>
+                <td>{{ row['Pm25_R2'] }}</td>
                 <td>{{ row['Pm25_Pred'] }}</td>
             </tr>
             {% endfor %}

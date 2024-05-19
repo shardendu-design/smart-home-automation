@@ -251,6 +251,8 @@ footer {
     width: 100%; /* Full width for smaller screens */
     overflow-x: scroll; /* Horizontal scrolling for smaller screens */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS devices */
+    margin: 20px auto; /* Center the table */
+    max-width: calc(100vw - 40px); /* Adjusted maximum width */
   }
 
   #prediction th, #prediction td,
@@ -261,6 +263,7 @@ footer {
     font-size: 10px; /* Smaller font size for better readability */
   }
 }
+
 
 
 

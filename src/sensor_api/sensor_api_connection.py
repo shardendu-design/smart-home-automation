@@ -2,12 +2,9 @@
 
 import pandas as pd
 import requests
-import time
 import json
-import datetime
 import csv
 import psycopg2
-import threading
 import os
 from tabulate import tabulate
 import pytz

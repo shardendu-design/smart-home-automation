@@ -66,13 +66,15 @@ def temp_test_prediction():
     # print("===========================================================")
 
     # Predict temperature for new data
-    model_temp, score = temp_pred_model()
-    predicted_data.append({"Tempe_Test_S": "{:.2f}".format(score)})
+    model_temp, rmse, mae, r2 = temp_pred_model()
+    predicted_data.append({"Temp_RMSE": "{:.2f}".format(rmse)})
+    predicted_data.append({"Temp_MAE": "{:.2f}".format(mae)})
+    predicted_data.append({"Temp_R2": "{:.2f}".format(r2)})
     temp_prediction = model_temp
     
 
     prediction_temperature = temp_prediction.predict(selected_real_time_data)
-    extracted_value = prediction_temperature[0]
+    extracted_value = round(prediction_temperature[0],2)
     # Format the extracted value to 2 decimal places
     # formatted_extracted_value = "{:.2f}".format(extracted_value)
     predicted_data.append({"Temp_Pred": extracted_value})
@@ -104,11 +106,13 @@ def humid_test_prediction():
     # print(selected_real_time_data_humid)
 
     # print("===========================================================")
-    model_humid, score = humid_pred_model()
-    predicted_data.append({"Humid_Test_S": "{:.2f}".format(score)})
+    model_humid, rmse, mae, r2 = humid_pred_model()
+    predicted_data.append({"Humid_RMSE": "{:.2f}".format(rmse)})
+    predicted_data.append({"Humid_MAE": "{:.2f}".format(mae)})
+    predicted_data.append({"Humid_R2": "{:.2f}".format(r2)})
     humid_prediction = model_humid
     prediction_humid = humid_prediction.predict(selected_real_time_data_humid)
-    extracted_value = prediction_humid[0]
+    extracted_value = round(prediction_humid[0],2)
 
     # Format the extracted value to 2 decimal places
     # formatted_extracted_value = "{:.2f}".format(extracted_value)
@@ -141,9 +145,12 @@ def co2_test_prediction():
     # print(selected_real_time_data_co2)
 
     # print("===========================================================")
-    model_co2, mse = co2_pred_model()
-    predicted_data.append({"Co2_Test_S":"{:.2f}".format(mse)})
+    model_co2, rmse, mae, r2 = co2_pred_model()
+    predicted_data.append({"Co2_RMSE": "{:.2f}".format(rmse)})
+    predicted_data.append({"Co2_MAE": "{:.2f}".format(mae)})
+    predicted_data.append({"Co2_R2": "{:.2f}".format(r2)})
     co2_prediction = model_co2
+
     prediction_co2 = co2_prediction.predict(selected_real_time_data_co2)
     extracted_value = prediction_co2[0]
     predicted_data.append({"Co2_Pred": extracted_value})
@@ -175,8 +182,10 @@ def voc_test_prediction():
     # print(selected_real_time_data_voc)
 
     # print("===========================================================")
-    model_voc, mse = voc_pred_model()
-    predicted_data.append({"VOC_Test_S": "{:.2f}".format(mse)})
+    model_voc, rmse, mae, r2 = voc_pred_model()
+    predicted_data.append({"Voc_RMSE": "{:.2f}".format(rmse)})
+    predicted_data.append({"Voc_MAE": "{:.2f}".format(mae)})
+    predicted_data.append({"Voc_R2": "{:.2f}".format(r2)})
     voc_prediction = model_voc
     prediction_voc = voc_prediction.predict(selected_real_time_data_voc)
     extracted_value = prediction_voc[0]
@@ -209,8 +218,10 @@ def pm25_test_prediction():
     # print(selected_real_time_data_pm25)
 
     # print("===========================================================")
-    model_pm25, mse = pm25_pred_model()
-    predicted_data.append({"Pm25_Test_S": "{:.2f}".format(mse)})
+    model_pm25, rmse, mae, r2 = pm25_pred_model()
+    predicted_data.append({"Pm25_RMSE": "{:.2f}".format(rmse)})
+    predicted_data.append({"Pm25_MAE": "{:.2f}".format(mae)})
+    predicted_data.append({"Pm25_R2": "{:.2f}".format(r2)})
     pm25_prediction = model_pm25
     prediction_pm25 = pm25_prediction.predict(selected_real_time_data_pm25)
     extracted_value = prediction_pm25[0]
