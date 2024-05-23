@@ -10,11 +10,8 @@ parent_dir = os.path.dirname(current_dir)
 # Add the parent directory to sys.path
 sys.path.append(parent_dir)
 from train import temp_pred_model,humid_pred_model,co2_pred_model,voc_pred_model,pm25_pred_model
-import datetime
 import pandas as pd
-import time
 import requests
-import csv
 import numpy as np
 from sklearn.impute import SimpleImputer
 import os
