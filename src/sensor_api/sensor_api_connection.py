@@ -9,6 +9,7 @@ import os
 from tabulate import tabulate
 import pytz
 from dateutil import parser
+import time
 
 # avoide system sleep type in command terminal "caffeinate" press enter
 # to stop caffeinate press "Ctrl+C"

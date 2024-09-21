@@ -32,14 +32,14 @@
                     <ul class="nav-list" id="nav-list">
                         <li><a class="active" href="{{ url_for('main.display_dashboard') }}">
                             <i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-                        <li><a href="{{ url_for('main.display_dashboard') }}">Home Automation System With Awair Element Air Quality Sensor</a></li>
+                        <li><a href="{{ url_for('main.display_dashboard') }}">Home Automation System With Air Quality Sensor</a></li>
                         <li><a href="{{ url_for('main.display_about_project') }}">Project Architecture</a></li>
                         <li><a href="{{ url_for('main.system_design_tech') }}">System Design & Technology</a></li>
                         <li><a href="{{ url_for('main.contact') }}">Feedback & Suggestions</a></li>
                         <li>
                             <a href="#">
                                 {% if current_user.is_authenticated %}
-                                    Currently logged in as <b style="color: rgb(247, 242, 242)">{{ current_user.user_name.title() }}</b>
+                                    logged in as <b style="color: rgb(247, 242, 242)">{{ current_user.user_name.title() }}</b>
                                 {% else %}
                                     Not Logged In
                                 {% endif %}  
@@ -94,39 +94,13 @@
                     Temperature >= 19 
                     Humidity <= 50
                 </p> 
-                <button id="stop-button" class="device-stop-btn">STOP</button>  
+                <button id="openMalflowButton" class="device-stop-btn">Open Malflow</button>
             </div> 
             <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    var statusElement = document.getElementById('air-cooler-status');
-                    var stopButton = document.getElementById('stop-button');
-            
-                    stopButton.addEventListener('click', function() {
-                        fetch('/stop-device', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({}),
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Failed to stop the device');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            // Update the status based on the response
-                            var newStatus = data['status'];
-                            statusElement.textContent = newStatus ? 'On' : 'Off';
-                            statusElement.className = newStatus ? 'status-on' : 'status-off';
-                            alert('Device turned off successfully!')
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
+                document.getElementById('openMalflowButton').addEventListener('click', function () {
+                        const malflowUrl = 'http://ms24.fi/mlflow'; 
+                        window.open(malflowUrl, '_blank');
                     });
-                });
             </script>
             
             

@@ -24,7 +24,7 @@
         <div class="login-form">
             <form id="login-form" action="/" method="POST">
                 <!-- CSRF Token -->
-                {{ form.csrf_token }}
+                <!-- {{ form.csrf_token }} -->
                 {{ form.hidden_tag() }}
                 <h2 class="text-center">Home Automation Login</h2>
                 <!-- <center>
@@ -53,7 +53,7 @@
                     <a href="#" class="pull-right"></a>
                 </div>
             </form>
-            <p class="text-center"><a href="{{ url_for('authentication.signup') }}">Signup</a></p>  <!-- Corrected redirection link -->
+            <!-- <p class="text-center"><a href="{{ url_for('authentication.signup') }}">Signup</a></p>  Corrected redirection link -->
 
         </div>
        

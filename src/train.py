@@ -2,21 +2,10 @@
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from sklearn.metrics import mean_squared_error,mean_absolute_error, r2_score
-from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.svm import SVR
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.linear_model import LinearRegression
 import os
-import time
-from datetime import datetime
-import schedule
-import pandas as pd
-import os
-import csv
-import time
+
+
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -74,24 +63,22 @@ def temp_pred_model():
        
 def humid_pred_model():
 
-            # Load the collected data into a DataFrame
             row_data = os.environ.get('CSV_FILE')
             awair_csv_data = pd.read_csv(row_data, low_memory=False)
             selected_required_columns = awair_csv_data[['temp', 'humid', 'co2', 'voc', 'pm25']].dropna().drop_duplicates()
-            # Split the data into input features (X) and target variable (y)
-            # Split the data into input features (X) and target variable (y)
+            
             X = selected_required_columns.drop('humid', axis=1)
             y = selected_required_columns ['humid']
 
 
-            # Split the data into training and testing sets
+           
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-            # Initialize and train the linear regression model
+           
             model_humid = RandomForestRegressor(n_estimators=100, random_state=42)
-            # # Fit the model on the training data
+           
             model_humid.fit(X_train, y_train)
 
-            #Make predictions using the trained model on the test set.
+         
 
             y_pred = model_humid.predict(X_test)
 
@@ -258,5 +245,5 @@ def pm25_pred_model():
     return model_pm25, rmse_rounded, mae_rounded, r2_rounded
 
 
-print(temp_pred_model())
+
 

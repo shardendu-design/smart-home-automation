@@ -14,6 +14,9 @@ import pandas as pd
 
 from tabulate import tabulate
 
+import mlflow
+import mlflow.sklearn
+
 host = os.environ.get('CONTAINER_IP')
 port = os.environ.get('PORT')
 database = os.environ.get('DATABASE')
@@ -40,6 +43,8 @@ def awair_row_data():
 def model_execution_with_live_data():
 
     while True:
+
+        mlflow.set_tracking_uri("http://127.0.0.1:5001")
 
         model_test_with_live_data.temp_test_prediction()
         
@@ -202,6 +207,7 @@ def energy_consumption():
 
     
 if __name__ == '__main__':
+    
     
     import concurrent.futures
     import warnings

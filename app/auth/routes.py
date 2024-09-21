@@ -33,6 +33,30 @@ def signup():
 
 
 # route landing page 
+# @at.route('/', methods=['GET', 'POST'])
+# def do_the_login():
+#     form = UserloginForm()
+#     if current_user.is_authenticated:
+#         flash('You are already logged-in')
+#         return redirect(url_for('main.display_dashboard'))
+    
+#     if form.validate_on_submit():
+#         user = User.query.filter_by(user_name=form.name.data).first()
+#         if user is None:
+#             flash('User not found')
+#             return redirect(url_for('authentication.do_the_login'))
+
+#         if not user.check_password(form.password.data):
+#             flash('Invalid Credentials, Please try again')
+#             return redirect(url_for('authentication.do_the_login'))
+
+#         login_user(user, form.remember_me.data)
+#         session.permanent = True  # Activate session timeout management
+#         return redirect(url_for('main.display_dashboard'))
+    
+#     flash('Form not submitted correctly')
+#     return render_template('login.html', form=form)
+
 
 @at.route('/', methods=['GET', 'POST'])
 def do_the_login():
