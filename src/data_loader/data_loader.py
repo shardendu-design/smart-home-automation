@@ -2,13 +2,7 @@
 
 import pandas as pd
 import os
-import csv
-import time
 current_directory = os.path.dirname(os.path.abspath(__file__))
-
-import pandas as pd
-import os
-import time
 
 def data_preprocessing():
     row_data = os.environ.get('CSV_FILE')
