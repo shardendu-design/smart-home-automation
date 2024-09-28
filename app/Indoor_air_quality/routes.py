@@ -1,24 +1,25 @@
-import time
-from flask import render_template,request,redirect
-from app.Indoor_air_quality import main  # Adjust the import based on your package structure
-from main import model_execution_with_live_data
+from flask import render_template, request
+from app.Indoor_air_quality import main
 from seperate import process_device_info
 from flask_login import login_required
 import warnings
-import csv 
+import csv
 import os
 from flask import jsonify
 import pandas as pd
-import csv
-import traceback
 from src.WiFi_Socket import tapo_socket
-from src.models.evaluate_models import perform_linear_regression, perform_random_forest, perform_support_vector_machine, perform_k_nearest_neighbors, perform_decision_trees
-from notebook.exploratory_data_analysis import generate_base64_plot,generate_correlation_heatmap
-import numpy as np
+from src.models.evaluate_models import (
+    perform_linear_regression,
+    perform_random_forest,
+    perform_support_vector_machine,
+    perform_k_nearest_neighbors,
+    perform_decision_trees,
+)
+from notebook.exploratory_data_analysis import (
+    generate_base64_plot,
+    generate_correlation_heatmap,
+)
 import pytz
-
-
-
 
 
 predicted_csv = os.environ.get('predicted_data')
@@ -30,7 +31,7 @@ processed_data = os.environ.get('load_processed_data')
 
 def suppress_warnings(): 
     warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn')
-    
+
 @main.route('/dashboard')
 @login_required
 def display_dashboard():
@@ -117,7 +118,6 @@ def latest_data():
         return jsonify([])  # Return empty list if file not found
 
 
-  
 @main.route('/weather-data')
 @login_required
 def weather_data():
@@ -153,7 +153,6 @@ def sensor_data():
         return jsonify([])  # Return empty list if file not found
 
 
-        
 @main.route('/display-sensor-data')
 @login_required
 def display_sensor_data():
@@ -408,15 +407,6 @@ def contact():
 
     return render_template('contact.html', air_cooler_status=is_on)
 
-# device turn off through dashboard button
-@main.route('/stop-device', methods=['POST'])
-@login_required
-def stop_device():
-    # Add logic here to trigger the air_cooler_power_off function
-    turn_off_device = tapo_socket.air_cooler_power_turn_off()
-    
-    return jsonify({'message': 'Device stopped successfully'})
-
 @main.route('/add-new-device')
 @login_required
 def add_new_device():
@@ -424,3 +414,42 @@ def add_new_device():
     access_token = os.environ.get('access_token_smartthings')
     is_on = tapo_socket.device_status(access_token, device_id)
     return render_template('add_new_device.html',air_cooler_status=is_on)
+
+
+# comparative analysis
+@main.route('/comparative-analysis')
+@login_required
+def comparative_analysis():
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+
+    awair_csv_data_01_03_2023 = "/media/shardendujha/backup11/comparative_data/01-03-2023.csv"
+    
+    selected_required_columns_one = pd.read_csv(awair_csv_data_01_03_2023, delimiter='\t')
+    selected_required_columns_one.drop_duplicates(inplace=True)
+    selected_required_columns_one.dropna(inplace=True)
+    
+    awair_csv_data_26_03_2023 = "/media/shardendujha/backup11/comparative_data/26-03-2023.csv"
+
+    selected_required_columns_two = pd.read_csv(awair_csv_data_26_03_2023, delimiter='\t')
+    selected_required_columns_two.drop_duplicates(inplace=True)
+    selected_required_columns_two.dropna(inplace=True)
+    
+    # Generate plots
+    plots_one = {
+    'temp': generate_base64_plot(selected_required_columns_one, 'temp', 'blue', 'Temperature Distribution', 'Temperature (°C)'),
+    'humid': generate_base64_plot(selected_required_columns_one, 'humid', 'green', 'Humidity Distribution', 'Humidity'),
+    'co2': generate_base64_plot(selected_required_columns_one, 'co2', 'pink', 'Co2 Distribution', 'Co2'),
+    
+    }
+
+    plots_two = {
+
+    'temp': generate_base64_plot(selected_required_columns_two, 'temp', 'blue', 'Temperature Distribution', 'Temperature (°C)'),
+    'humid': generate_base64_plot(selected_required_columns_two, 'humid', 'green', 'Humidity Distribution', 'Humidity'),
+    'co2': generate_base64_plot(selected_required_columns_two, 'co2', 'pink', 'Co2 Distribution', 'Co2'),
+
+    }
+    
+    return render_template('comparative_analysis.html', plots_one=plots_one,plots_two=plots_two, air_cooler_status=is_on)

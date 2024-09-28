@@ -1,4 +1,3 @@
-
 import sys
 import os
 import pandas as pd
@@ -8,6 +7,7 @@ from datetime import datetime as dt
 
 import mlflow
 import mlflow.sklearn
+
 # Get the directory of the current file
 current_dir = os.path.dirname(os.path.realpath(__file__))
 

@@ -276,3 +276,4 @@ def device_status(access_token, device_id):
 # device_id = deviceid
 # is_on = device_status(access_token, device_id)
 # print("Air cooler is on:", is_on)
+
