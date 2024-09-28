@@ -9,6 +9,7 @@ from sklearn.multioutput import MultiOutputRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import r2_score
 
 def perform_linear_regression():
 
@@ -34,10 +35,10 @@ def perform_linear_regression():
     predictions = model.predict(X_test)
     
     # Evaluate the model
-    mse = mean_squared_error(y_test, predictions)
-    
+    r2 = r2_score(y_test, predictions)
+    # model_temp, r2 = temp_pred_model()
     # Generate evaluation result
-    evaluation_result = f"Evaluation result for Linear Regression: MSE = {mse:.2f}"
+    evaluation_result = f"Evaluation result for Linear Regression: R² Score = {r2:.2f}"
 
 
     return evaluation_result
@@ -65,10 +66,10 @@ def perform_random_forest():
     predictions = model.predict(X_test)
     
     # Evaluate the model
-    mse = mean_squared_error(y_test, predictions)
+    r2 = r2_score(y_test, predictions)
     
     # Generate evaluation result
-    evaluation_result = f"Evaluation result for Random Forest: MSE = {mse:.2f}"
+    evaluation_result = f"Evaluation result for Random Forest: R² Score = {r2:.2f}"
 
     return evaluation_result
 
@@ -96,10 +97,10 @@ def perform_support_vector_machine():
     predictions = model.predict(X_test)
     
     # Evaluate the model
-    mse = mean_squared_error(y_test, predictions)
+    r2 = r2_score(y_test, predictions)
     
     # Generate evaluation result
-    evaluation_result = f"Evaluation result for Support Vector Machine: MSE = {mse:.2f}"
+    evaluation_result = f"Evaluation result for Support Vector Machine: R² Score = {r2:.2f}"
     
     return evaluation_result
 
@@ -126,10 +127,10 @@ def perform_k_nearest_neighbors():
     predictions = model.predict(X_test)
     
     # Evaluate the model
-    mse = mean_squared_error(y_test, predictions)
+    r2 = r2_score(y_test, predictions)
     
     # Generate evaluation result
-    evaluation_result = f"Evaluation result for K-Nearest Neighbors: MSE = {mse:.2f}"
+    evaluation_result = f"Evaluation result for K-Nearest Neighbors: R² Score = {r2:.2f}"
     
     return evaluation_result
 
@@ -158,9 +159,9 @@ def perform_decision_trees():
     predictions = model.predict(X_test)
     
     # Evaluate the model
-    mse = mean_squared_error(y_test, predictions)
+    r2 = r2_score(y_test, predictions)
     
     # Generate evaluation result
-    evaluation_result = f"Evaluation result for Decision Trees: MSE = {mse:.2f}"
+    evaluation_result = f"Evaluation result for Decision Trees: R² Score = {r2:.2f}"
     
     return evaluation_result
