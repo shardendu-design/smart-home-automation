@@ -83,6 +83,8 @@ This document outlines the components and architecture of a smart home automatio
 ### Home Appliances
 - **Definition**: Includes various smart devices such as thermostats, lighting, locks, sensors, TVs, and security systems.
 
+![Alt text](app/static/img/devices.png)
+
 ## Frontend
 
 ### User Interface (UI)
