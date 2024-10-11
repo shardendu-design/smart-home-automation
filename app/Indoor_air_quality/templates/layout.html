@@ -22,39 +22,91 @@
 
             {# navigation bar #}
             {% block navbar %}
-            <!-- Navbar -->
-                <div class="navbar" id="navbar">
-                    <div class="navbar-toggle" id="mobile-menu">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </div>
-                    <ul class="nav-list" id="nav-list">
-                        <li><a class="active" href="{{ url_for('main.display_dashboard') }}">
-                            <i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-                        <li><a href="{{ url_for('main.display_dashboard') }}">Home Automation System With Air Quality Sensor</a></li>
-                        <li><a href="{{ url_for('main.display_about_project') }}">Project Architecture</a></li>
-                        <li><a href="{{ url_for('main.system_design_tech') }}">System Design & Technology</a></li>
-                        <li><a href="{{ url_for('main.contact') }}">Feedback & Suggestions</a></li>
-                        <li>
-                            <a href="#">
-                                {% if current_user.is_authenticated %}
-                                    logged in as <b style="color: rgb(247, 242, 242)">{{ current_user.user_name.title() }}</b>
-                                {% else %}
-                                    Not Logged In
-                                {% endif %}  
-                            </a>
-                        </li>
-                        <li>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav navbar">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{ url_for('main.display_dashboard') }}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('main.display_dashboard') }}"></a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Data & Model Prediction
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url_for('main.display_weather_data')}}">Weather Data</a>
+                        <a class="dropdown-item" href="{{ url_for('main.display_sensor_data')}}">Sensor Data</a>
+                        <a class="dropdown-item" href="{{ url_for('main.display_predicted_data')}}">Predicted Data</a>
+                        <a class="dropdown-item" href="#"></a>
+                      </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Energy & Device Integration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="{{ url_for('main.display_energy_data')}}">Energy Cost Analysis</a>
+                          <a class="dropdown-item" href="{{ url_for('main.display_device_info')}}">Device Integration</a>
+                          <a class="dropdown-item" href="{{ url_for('main.pick_model')}}">ML Models</a>
+                          <a class="dropdown-item" href="{{ url_for('main.add_new_device')}}">Integrate Device</a>
+                        </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Data Analysis
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="{{ url_for('main.data_analysis')}}">Exploratory Data Analysis</a>
+                          <a class="dropdown-item" href="{{ url_for('main.comparative_analysis')}}">Comparative Analysis</a>
+                          <a class="dropdown-item" href="#"></a>
+                        </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Project Design
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="{{ url_for('main.display_about_project') }}">Project Architecture</a>
+                          <a class="dropdown-item" href="{{ url_for('main.system_design_tech') }}">System Design & Technology</a>
+                          <a class="dropdown-item" href="#"></a>
+                        </div>
+                      </li>
+                      <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('main.contact') }}">Feedback & Suggestions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://ms24.fi/mlflow" target="_blank" rel="noopener noreferrer">Open Mlflow</a>
+                      </li>
+                    <li>
+                        <!-- <a href="#"> -->
                             {% if current_user.is_authenticated %}
-                                <a href="{{ url_for('authentication.log_out_user') }}">Sign Out</a>
+                                logged in as <b style="color: #000">{{ current_user.user_name.title() }}</b>
                             {% else %}
-                                <a href="#">Sign In</a>
-                            {% endif %}
-                        </li>
-                    </ul>                   
+                                Not Logged In
+                            {% endif %}  
+                        <!-- </a> -->
+                    </li>
+                    <li>
+                        {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('authentication.log_out_user') }}"><b style="color: #000">Sign Out</b></a>
+                        {% else %}
+                            <a href="#">Sign In</a>
+                        {% endif %}
+                    </li>  
+                    <li>
+                            Air Cooler: <span id="air-cooler-status" class="{{ 'status-on' if air_cooler_status else 'status-off' }}">
+                                {{ 'On' if air_cooler_status else 'Off' }}</span>     
+                    </li>
                 </div>
-
+              </nav>
+            
                 <script>
                     // JavaScript for toggling the mobile menu
                     document.getElementById('mobile-menu').addEventListener('click', function () {
@@ -63,51 +115,10 @@
                 </script>
 
             {% endblock navbar %}
-
-
-            {% block sidebar %}
-            <div class="sidebar left-sidebar">
-                <a href="{{ url_for('main.display_weather_data')}}"><i class=""></i> Weather Data</a>
-                <a href="{{ url_for('main.display_sensor_data')}}"><i class=""></i> Sensor Data</a>
-                <a href="{{ url_for('main.display_predicted_data')}}"><i class=""></i> Predicted Data</a>
-                <a href="{{ url_for('main.display_energy_data')}}"><i class=""></i> Energy Cost Analysis</a>  
-                <a href="{{ url_for('main.display_device_info')}}">Device Integration</a>
-                <a href="{{ url_for('main.data_analysis')}}">Exploratory Data Analysis</a>
-                <a href="{{ url_for('main.comparative_analysis')}}">Comparative Analysis</a>
-                
-                
-            </div>
-            {% endblock sidebar %}
-
-            <!-- Right Sidebar -->
-            <div class="sidebar right-sidebar">
-                <a href="{{ url_for('main.pick_model')}}"><i class=""></i> ML Models</a>
-                <a href="{{ url_for('main.add_new_device')}}"><i class=""></i> Integrate Device</a>
-                <h1 class="device-status-text">Device Status</h1>
-                <p class="device-status">
-                    
-                    Air Cooler: <span id="air-cooler-status" class="{{ 'status-on' if air_cooler_status else 'status-off' }}">
-                        {{ 'On' if air_cooler_status else 'Off' }}</span>
-                </p> 
-                <p class="device-threshold">
-                    <u>Air Coller Threshold</u> 
-                    <br/><br/>
-                    Temperature >= 19 
-                    Humidity <= 50
-                </p> 
-                <button id="openMalflowButton" class="device-stop-btn">Open Malflow</button>
-            </div> 
-            <script>
-                document.getElementById('openMalflowButton').addEventListener('click', function () {
-                        const malflowUrl = 'http://ms24.fi/mlflow'; 
-                        window.open(malflowUrl, '_blank');
-                    });
-            </script>
-            
-            
             <div class="main-content">
                 {# empty block for custom content #}
-                {% block content %} {% endblock content %}
+                {% block content %}  
+                {% endblock content %}
 
             </div>
     
