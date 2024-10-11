@@ -1,153 +1,34 @@
 body {
   background-color: #eaf5f8;
-  margin: 0;
+  /* margin: 0; */
   /* background-image: url('/static/img/splash.png'); */
   font-family: Arial, sans-serif;
-  padding-top: 30px; 
+  /* padding-top: 30px;  */
 }
 
 /* CSS Styles */
-/* The navbar container */
+
 .navbar {
-  background-color: #488A99;
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: flex-start; /* Align items from the left */
-  align-items: center;
-  position: fixed;
-  top: 0;
+  background-color: #eaf5f8;
+  color: #000;
   width: 100%;
-  z-index: 1000;
+  font-weight: bold;
+  
 }
 
-/* Navbar links */
-.nav-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap */
+ .navbar-nav .nav-link {
+  color: black !important;
 }
 
-.nav-list li {
-  margin: 0 10px; /* Adjusted margin */
+.dropdown-menu .dropdown-item {
+  color: black !important;
 }
-
-.nav-list li a {
-  text-decoration: none;
-  color: white;
-  font-size: 0.95em; /* Adjust font size if necessary */
+.navbar-nav .nav-link:hover,
+.dropdown-menu .dropdown-item:hover {
+  color: gray !important; 
 }
-
-/* Hamburger Menu for mobile screens */
-.navbar-toggle {
-  display: none;
-  cursor: pointer;
-}
-
-.bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px auto;
-  background-color: #fff;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .nav-list {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-  }
-
-  .nav-list.active {
-      display: flex;
-  }
-
-  .navbar-toggle {
-      display: block;
-  }
-}
-
-
-
-
-
-/* Styling for the sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 50px;
-  width: 150px; /* Original width */
-  background-color: #e1f5fe;
-  padding-bottom: 50px;
-  z-index: 2; /* Adjust as needed to stack properly */
-}
-
-.left-sidebar {
-  left: 0;
-  margin-top: 54px; /* Adjust if necessary for your layout */
-}
-
-.right-sidebar {
-  right: 0;
-  margin-top: 54px; /* Adjust if necessary for your layout */
-}
-
-.sidebar a {
-  padding: 10px 16px;
-  text-decoration: none;
-  font-size: 15px;
-  color: white;
-  display: block;
-  margin-top: 15px;
-  text-align: center;
-  background-color: #488A99;
-  border-radius: 5px;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.sidebar a:hover {
-  background-color: #03323c;
-  box-shadow: 0 4px 8px rgba(227, 214, 214, 0.3);
-}
-
-/* Responsive adjustment for medium screens like tablets */
-@media screen and (max-width: 768px) {
-  .sidebar {
-    width: 60px; /* Reduced width */
-    padding-top: 20px;
-  }
-
-  .sidebar a {
-    padding: 5px;
-    font-size: 12px; /* Smaller font size */
-    text-align: center;
-  }
-
-  .left-sidebar, .right-sidebar {
-    width: 100%;
-    position: relative;
-    display: block; /* Make sidebar horizontal */
-  }
-}
-
-/* Additional adjustment for very small screens like mobile phones */
-@media screen and (max-width: 480px) {
-  .sidebar {
-    display: none; /* Hide the sidebar on very small screens */
-  }
-  /* Add any additional styles for mobile layout here */
-}
-  /* If you want to show a toggle button for sidebars, add styles and JavaScript for that */
-
 .main-content {
-  margin-bottom: 50px; /* Same as the footer height */
-  /* Other styles for main content */
+  margin-bottom: 50px; 
   padding: 20px;
 }
 
@@ -308,20 +189,22 @@ footer {
 
 
 
-.sidebar .status-on {
+.status-on {
   color: green;
 }
-.sidebar .status-off {
+.status-off {
   color: red;
 }
 
 .device-status {
   font-weight: bold;
-  margin-top: 25px;
+  margin-top: 30px;
   text-align: center;
 
 }
-
+.cooler {
+  
+}
 .device-status-text {
 
   text-align: center;

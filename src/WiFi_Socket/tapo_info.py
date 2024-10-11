@@ -287,7 +287,9 @@ def energy_time_calculation():
                     
                 if key == 'end_time':
                     end_time_vlaue.append(value)      
-
+        # print(start_time_value)
+        # print(end_time_vlaue)
+        # time.sleep(300)
         electricity_cost_data = []
 
         for start, end in zip(start_time_value, end_time_vlaue):
@@ -295,6 +297,7 @@ def energy_time_calculation():
             endtime = datetime.fromisoformat(end[:-1])
             duration = (endtime - starttime).total_seconds() / 60
             # print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
+            # time.sleep(2)
 
             device_capacity = 65 # in watts, device_consume_electricity
             min_in_hrs= round(duration/60,2) #calculate_total_min_in_hours_in_day
@@ -353,11 +356,11 @@ def energy_time_calculation():
             conn1.autocommit=True
 
             cur1 = conn1.cursor()
-            cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'omnia_inteernship'")
+            cur1.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = 'awair'")
             exists = cur1.fetchone()
 
             if not exists:
-                cur1.execute("CREATE DATABASE omnia_inteernship")
+                cur1.execute("CREATE DATABASE awair")
             
             conn1.set_session(autocommit=True)
 
@@ -441,10 +444,11 @@ def energy_time_calculation():
             
 
 
-#             print(electricity_cost_data)
-#             print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
+        #     print(electricity_cost_data)
+        #     print(f"Start time: {starttime}, End time: {endtime}, Used time: {duration} minutes")
         
 #         time.sleep(300)
         
 
 # energy_time_calculation()
+# time.sleep(300)
