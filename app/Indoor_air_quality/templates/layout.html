@@ -38,7 +38,7 @@
                     
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Data & Model Prediction
+                        Model Prediction
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ url_for('main.display_weather_data')}}">Weather Data</a>
@@ -49,13 +49,13 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Energy & Device Integration
+                          Device Integration
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                           <a class="dropdown-item" href="{{ url_for('main.display_energy_data')}}">Energy Cost Analysis</a>
                           <a class="dropdown-item" href="{{ url_for('main.display_device_info')}}">Device Integration</a>
                           <a class="dropdown-item" href="{{ url_for('main.pick_model')}}">ML Models</a>
-                          <a class="dropdown-item" href="{{ url_for('main.add_new_device')}}">Integrate Device</a>
+                          <a class="dropdown-item" href="{{ url_for('main.add_new_device')}}">Add New Device</a>
                         </div>
                       </li>
                       <li class="nav-item dropdown">
@@ -79,7 +79,7 @@
                         </div>
                       </li>
                       <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('main.contact') }}">Feedback & Suggestions</a>
+                      <a class="nav-link" href="{{ url_for('main.contact') }}">Feedback</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://ms24.fi/mlflow" target="_blank" rel="noopener noreferrer">Open Mlflow</a>

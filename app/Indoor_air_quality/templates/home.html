@@ -18,17 +18,19 @@
             </tr>
         </thead>
         <tbody>
+          
             {% for data in weather_data %}
+            
                 <tr>
-                    <td>{{ data['Timestamp'] }}</td>
-                    <td>{{ data['Temperature'] }}</td>
-                    <td>{{ data['Feels like'] }}</td>
-                    <td>{{ data['Pressure'] }}</td>
-                    <td>{{ data['Humidity'] }}</td>
-                    <td>{{ data['Visibility'] }}</td>
-                    <td>{{ data['Wind Speed'] }}</td>
-                    <td>{{ data['City Name'] }}</td>
-                    <td>{{ data['Country Code'] }}</td>
+                    <td>{{ data[0] }}</td>
+                    <td>{{ data[1] }}</td>
+                    <td>{{ data[2] }}</td>
+                    <td>{{ data[3] }}</td>
+                    <td>{{ data[4] }}</td>
+                    <td>{{ data[5] }}</td>
+                    <td>{{ data[6] }}</td>
+                    <td>{{ data[7] }}</td>
+                    <td>{{ data[8] }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -54,13 +56,13 @@
         <tbody>
             {% for data in sensor_data %}
             <tr>
-                <td>{{ data['timestamp'] }}</td>
-                <td>{{ data['temp'] }}</td>
-                <td>{{ data['humid'] }}</td>
-                <td>{{ data['co2'] }}</td>
-                <td>{{ data['voc'] }}</td>
-                <td>{{ data['pm25'] }}</td>
-                <td>{{ data['location'] }}</td>
+                <td>{{ data[0] }}</td>
+                <td>{{ data[3] }}</td>
+                <td>{{ data[4] }}</td>
+                <td>{{ data[6] }}</td>
+                <td>{{ data[9] }}</td>
+                <td>{{ data[13] }}</td>
+                <td>{{ data[15] }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -72,24 +74,39 @@
 
     <h1>Machine Learning Prediction</h1>
     <table id="prediction" border="1">
-        <tr>
-            {% for header in headers %}
-                <th>{{ header }}</th>
+        <thead>
+            <tr>
+                <th>DateTime</th>
+                <th>Temp_R2_S</th>
+                <th>Temp_Pred</th>
+                <th>Humid_R2_S</th>
+                <th>Humid_Pred</th>
+                <th>Co2_R2_S</th>
+                <th>Co2_Pred</th>
+                <th>VOC_R2_S</th>
+                <th>VOC_Pred</th>
+                <th>Pm25_R2_S</th>
+                <th>Pm25_Pred</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in predicted_data %}
+            <tr>
+                <td>{{ data[0] }}</td>
+                <td>{{ data[3] }}</td>
+                <td>{{ data[4] }}</td>
+                <td>{{ data[7] }}</td>
+                <td>{{ data[8] }}</td>
+                <td>{{ data[11] }}</td>
+                <td>{{ data[12] }}</td>
+                <td>{{ data[15] }}</td>
+                <td>{{ data[16] }}</td>
+                <td>{{ data[19] }}</td>
+                <td>{{ data[20] }}</td>
+            </tr>
             {% endfor %}
-        </tr>
-        <tr>
-            {% for value in recent_row %}
-                {% if loop.index in [0, 2, 3, 4, 5, 6, 7, 8, 9, 10] %}
-                    {% if value|float is defined %}
-                        <td>{{ '%.2f'|format(value|float) }}</td>
-                    {% else %}
-                        <td>{{ value }}</td>
-                    {% endif %}
-                {% else %}
-                    <td>{{ value }}</td>
-                {% endif %}
-            {% endfor %}
-        </tr>
+        </tbody>
+        
     </table>
 
     <div class="graph-container"> <!-- Adjust size here -->
