@@ -1,14 +1,15 @@
 # import all necessary libraries
 
 from app.Indoor_air_quality.routes import display_dashboard
-from flask import render_template, redirect,request, flash, redirect, url_for
-from wtforms.widgets.core import CheckboxInput
+import random
+import string
+from flask import render_template, redirect, flash, url_for
+
 from app.auth.forms import RegistrationForm
 from app.auth.forms import UserloginForm
 from app.auth import authentication as at
 from app.auth.models import User
 from flask_login import login_user,logout_user, login_required, current_user
-from flask_jwt_extended import create_access_token
 from flask import session,jsonify
 
 
@@ -57,6 +58,10 @@ def signup():
 #     flash('Form not submitted correctly')
 #     return render_template('login.html', form=form)
 
+def rand_pass(length=6):
+    generate_pass=''.join([random.choice(string.ascii_uppercase+string.ascii_lowercase+string.digits)for n in range(length)])    
+    return generate_pass 
+
 
 @at.route('/', methods=['GET', 'POST'])
 def do_the_login():
@@ -65,18 +70,28 @@ def do_the_login():
         flash('You are already logged-in')
         return redirect(url_for('main.display_dashboard'))
     
+    # Generate an OTP and store it in session for verification
+    if 'rand_pass' not in session:
+        session['rand_pass'] = rand_pass()
+
     if form.validate_on_submit():
         user = User.query.filter_by(user_name=form.name.data).first()
 
-        if not user or not user.check_password(form.password.data):
-            flash('Invalid Credentials, Please try again')
+        if user and form.password.data == session.get('rand_pass'):
+            login_user(user)  # Log in the user
+            session.pop('rand_pass', None)
+            # flash('Invalid Credentials, Please try again')
+            return redirect(url_for('main.display_dashboard'))
+        else:
+            flash('Invalid username or OTP')
             return redirect(url_for('authentication.do_the_login'))
 
 
-        login_user(user, form.remember_me.data)
-        session.permanent = True  # Activate session timeout management
-        return redirect(url_for('main.display_dashboard'))
-    return render_template('login.html', form=form)
+
+        # login_user(user, form.remember_me.data)
+        # session.permanent = True  
+        # return redirect(url_for('main.display_dashboard'))
+    return render_template('login.html', form=form,rand_pass=session['rand_pass'])
 
 # route lagout page
 

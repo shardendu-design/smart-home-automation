@@ -18,10 +18,10 @@ def flask_runner():
     flask_app = create_app('dev')
     with flask_app.app_context():
         db.create_all()
-        if not User.query.filter_by(user_name='admin').first():
-            User.create_user(user='admin',
-                             email='admin@admin.com',
-                             password='admin')
+        # if not User.query.filter_by(user_name='admin').first():
+        #     User.create_user(user='admin',
+        #                      email='admin@admin.com',
+        #                      password='ticktock')
     flask_app.run(host="0.0.0.0", port=5000, debug=True)
     
 

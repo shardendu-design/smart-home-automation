@@ -1,6 +1,6 @@
 body {
-  background-color: #eaf5f8;
-  /* margin: 0; */
+  background-color: transparent;
+  margin: 0;
   /* background-image: url('/static/img/splash.png'); */
   font-family: Arial, sans-serif;
   /* padding-top: 30px;  */
@@ -9,7 +9,7 @@ body {
 /* CSS Styles */
 
 .navbar {
-  background-color: #eaf5f8;
+  background-color: transparent;
   color: #000;
   width: 100%;
   font-weight: bold;
@@ -18,6 +18,7 @@ body {
 
  .navbar-nav .nav-link {
   color: black !important;
+  
 }
 
 .dropdown-menu .dropdown-item {
@@ -26,6 +27,7 @@ body {
 .navbar-nav .nav-link:hover,
 .dropdown-menu .dropdown-item:hover {
   color: gray !important; 
+  
 }
 .main-content {
   margin-bottom: 50px; 

@@ -56,10 +56,8 @@ def calculate_total_used_time(time_data):
     return total_used_time
 
 
-
 def energy_time_calculation():
     while True:
-
 
         # Usage: Call the function with your access token and device ID to check the status
         access_token = accesstoken_smarttings
