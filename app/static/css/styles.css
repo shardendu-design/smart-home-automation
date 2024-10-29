@@ -23,7 +23,6 @@ body {
 
 .dropdown-menu .dropdown-item {
   color: black !important;
-
 }
 .navbar-nav .nav-link:hover,
 .dropdown-menu .dropdown-item:hover {
@@ -205,7 +204,9 @@ footer {
   text-align: center;
 
 }
-
+.cooler {
+  
+}
 .device-status-text {
 
   text-align: center;
