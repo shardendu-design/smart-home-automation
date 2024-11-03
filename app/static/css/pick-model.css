@@ -9,14 +9,14 @@
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
-  background: #488A99;
+  background: #ede6dc;
   height: 250px;
   padding: 10px;
 }
 
 h1 {
   text-align: center;
-  color: white;
+  color: black;
   margin-bottom: 30px;
   margin-top: 10px;
 }
@@ -24,7 +24,7 @@ h1 {
 .model-label {
   font-weight: bold;
   font-size: 25px;
-  color: white;
+  color: black;
   margin-left: 100px; /* Adjust this for smaller screens */
   font-family: 'Sansita', sans-serif;
   padding-right: 10px;
@@ -44,7 +44,7 @@ h1 {
   width: 125px; /* Adjust this for smaller screens */
   margin-left: 230px; /* Adjust this for smaller screens */
   font-size: 25px;
-  background: rgb(140, 207, 148);
+  background: #857259;
   color: white;
   margin-top: 10px;
   border: 2px solid white;
