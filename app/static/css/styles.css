@@ -1,7 +1,8 @@
 body {
   background-color: transparent;
   margin: 0;
-  /* background-image: url('/static/img/splash.png'); */
+  /* background-image: '/static/img/IMG_4613.jpg'; */
+  
   font-family: Arial, sans-serif;
   /* padding-top: 30px;  */
 }
@@ -59,8 +60,8 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #488A99;
-  color: #f6f4f4;
+  background-color: #ede6dc;
+  color: black;
   text-align: center;
   height: 50px;
   padding: 3px 0;
@@ -109,7 +110,7 @@ footer {
   padding: 0px; /* Original padding */
   white-space: nowrap; /* Keep data in single line */
   text-align: center;
-  background: #9fc6ce;
+  background: #ede6dc;
   font-size: 12px; /* Original font size */
 }
 
@@ -204,9 +205,7 @@ footer {
   text-align: center;
 
 }
-.cooler {
-  
-}
+
 .device-status-text {
 
   text-align: center;
@@ -312,14 +311,14 @@ footer {
     text-decoration: none; /* Remove underline from links */
     padding: 8px 15px; /* Padding inside page items */
     border: 1px solid #ddd; /* Border for page items */
-    color: #488A99; /* Text color for page items */
+    color: #857259; /* Text color for page items */
     border-radius: 5px; /* Rounded corners */
 }
 
 .pagination .active .page-link {
-    background-color: #488A99; /* Background color for active page */
+    background-color: #857259; /* Background color for active page */
     color: white; /* Text color for active page */
-    border-color: #488A99; /* Border color for active page */
+    border-color: #857259; /* Border color for active page */
 }
 
 .pagination .page-link:hover {
@@ -357,15 +356,15 @@ footer {
 /* Style for the search button */
 .search-container button {
   padding: 5px 10px;
-  border: 1px solid #488A99;
-  background-color: #488A99;
+  border: 1px solid #857259;
+  background-color: #857259;
   color: white;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .search-container button:hover {
-  background-color: #488A99; /* Darker color on hover */
+  background-color: #ede6dc; /* Darker color on hover */
 }
 
 .project-title {
