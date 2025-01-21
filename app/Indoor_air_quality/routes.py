@@ -386,3 +386,31 @@ def comparative_analysis():
     }
     
     return render_template('comparative_analysis.html', plots_one=plots_one,plots_two=plots_two, air_cooler_status=is_on)
+
+# display train and test score
+@main.route('/display-train-test-score')
+@login_required
+def display_train_test_score():
+
+    device_id = os.environ.get('device_id')
+    access_token = os.environ.get('access_token_smartthings')
+    is_on = tapo_socket.device_status(access_token, device_id)
+    
+    search_query = request.args.get('search', '')  # Get the search query
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
+
+    data = pd.read_csv("/media/shardendujha/backup11/traind_models_score/trained_models.csv")
+
+    
+    
+    if search_query:
+      
+        data = data[data['date'].str.contains(search_query, case=False)]
+
+    total_rows = len(data)
+    total_pages = (total_rows - 1) // per_page + 1
+
+    data_subset = data.iloc[(page - 1) * per_page : page * per_page]
+    data_dicts = data_subset.to_dict(orient='records')
+    return render_template('train_test_score.html', table=data_dicts, total_pages=total_pages, current_page=page, air_cooler_status=is_on)
