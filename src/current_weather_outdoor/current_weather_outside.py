@@ -1,6 +1,4 @@
 import requests
-from tabulate import tabulate
-import time
 import os
 import csv
 import psycopg2

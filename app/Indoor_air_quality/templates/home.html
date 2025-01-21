@@ -77,15 +77,14 @@
         <thead>
             <tr>
                 <th>DateTime</th>
-                <th>Temp_R2_S</th>
                 <th>Temp_Pred</th>
-                <th>Humid_R2_S</th>
+                
                 <th>Humid_Pred</th>
-                <th>Co2_R2_S</th>
+                
                 <th>Co2_Pred</th>
-                <th>VOC_R2_S</th>
-                <th>VOC_Pred</th>
-                <th>Pm25_R2_S</th>
+                
+                <th>Voc_Pred</th>
+               
                 <th>Pm25_Pred</th>
             </tr>
         </thead>
@@ -93,16 +92,12 @@
             {% for data in predicted_data %}
             <tr>
                 <td>{{ data[0] }}</td>
+                <td>{{ data[1] }}</td>
+                <td>{{ data[2] }}</td>
                 <td>{{ data[3] }}</td>
                 <td>{{ data[4] }}</td>
-                <td>{{ data[7] }}</td>
-                <td>{{ data[8] }}</td>
-                <td>{{ data[11] }}</td>
-                <td>{{ data[12] }}</td>
-                <td>{{ data[15] }}</td>
-                <td>{{ data[16] }}</td>
-                <td>{{ data[19] }}</td>
-                <td>{{ data[20] }}</td>
+                <td>{{ data[5] }}</td>
+                
             </tr>
             {% endfor %}
         </tbody>

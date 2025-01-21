@@ -209,3 +209,5 @@ def awair_api_call():
 # if __name__ == '__main__':
 
 #     awair_api_call()
+#     time.sleep(300)
+    
