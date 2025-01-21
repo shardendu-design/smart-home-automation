@@ -2,7 +2,7 @@
 
 This project integrates various technologies to enhance network security, data management, and user experience in a home automation environment.
 
-![Alt text](app/static/img/sensor_setup.png)
+![Alt text](app/static/img/Picture1.png)
 
 
 ## Table of Contents
